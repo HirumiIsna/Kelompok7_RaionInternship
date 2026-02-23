@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!context.started) return;
 
-        Debug.Log("Mouse Position: " + GetMousePosition());
+        // Debug.Log("Mouse Position: " + GetMousePosition());
 
         StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
         attackParent.TryAttack();

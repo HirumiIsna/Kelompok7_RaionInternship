@@ -6,6 +6,7 @@ public class AttackParent : MonoBehaviour
     public Transform castOrigin;
     public Vector2 mousePosition;
     public LayerMask enemyLayer;
+    public int damage;
 
     // Update is called once per frame
     void Update()
@@ -25,5 +26,13 @@ public class AttackParent : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(castOrigin.position, attackRadius, enemyLayer);
         if(hitEnemies.Length == 0) return; // Kalo ga kena enemy, gak kenapa-napa
         Debug.Log("Succesfully hit an Enemy!");
+        foreach (Collider2D enemy in hitEnemies) // Ubah menggunakan Unity Event System kalo udah di testing, ntar pas pulang kuliah
+        {
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+            if (enemyController != null)
+            {
+                enemyController.TakeDamage(damage);
+            }
+        }
     }
 }
