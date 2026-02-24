@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
         // Debug.Log("Distance to Player: " + distanceToPlayer); // Buat ngecek jaraknya biar ngatur if nya gampang
 
-        if(distanceToPlayer < 8.5f)
+        if(distanceToPlayer < 8.5f && bulletPrefab != null)
         {
             _shootTimer += Time.deltaTime;
             
