@@ -7,6 +7,7 @@ public class AttackParent : MonoBehaviour
     public Vector2 mousePosition;
     public LayerMask enemyLayer;
     public int damage;
+    public float knockbackForce;
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,7 @@ public class AttackParent : MonoBehaviour
             if (enemyController != null)
             {
                 enemyController.TakeDamage(damage);
+                enemyController.Knockback(transform, knockbackForce);
             }
         }
     }

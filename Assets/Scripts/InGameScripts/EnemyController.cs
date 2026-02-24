@@ -4,10 +4,11 @@ using System.Collections;
 public class EnemyController : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int _currentHealth;
+    public int currentHealth;
     private SpriteRenderer _spriteRenderer;
     private Color _baseColor;
     private GameObject _player;
+    private Rigidbody2D _rb;
 
     // Range Enemy
     private float _shootTimer;
@@ -22,7 +23,9 @@ public class EnemyController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _baseColor = _spriteRenderer.color;
 
-        _currentHealth = maxHealth;
+        currentHealth = maxHealth;
+
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class EnemyController : MonoBehaviour
         {
             _shootTimer += Time.deltaTime;
             
-            if(_shootTimer > 2f)
+            if(_shootTimer > 1.5f)
             {
                 _shootTimer = 0f;
                 Shoot();
@@ -48,10 +51,10 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Debug.Log("Damaged an Enemy");
-        _currentHealth -= damage;
+        currentHealth -= damage;
         StartCoroutine(FlashDamage());
 
-        if(_currentHealth <= 0)
+        if(currentHealth <= 0)
         {
             Debug.Log("Killed an Enemy");
             StartCoroutine(Dead());
@@ -61,7 +64,9 @@ public class EnemyController : MonoBehaviour
     public IEnumerator FlashDamage()
     {
         _spriteRenderer.color = Color.white;
+        Time.timeScale = 0.2f;
         yield return new WaitForSeconds(0.1f); 
+        Time.timeScale = 1f;
         _spriteRenderer.color = _baseColor; 
     }
 
@@ -75,5 +80,12 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("Enemy Shoots!");
         GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
+    }
+
+    public void Knockback(Transform playerTransform, float knockbackForce)
+    {
+        Debug.Log("Enemy Knockbacked!");
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+        _rb.linearVelocity = direction * knockbackForce;
     }
 }
