@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private AttackParent attackParent;
     public GameObject slashEffect;
+    private bool isAttacking = false;
 
 
     void Awake()
@@ -38,9 +39,20 @@ public class PlayerController : MonoBehaviour
         if (!context.started) return;
 
         // Debug.Log("Mouse Position: " + GetMousePosition());
+        if (isAttacking) return;
+        else
+        {
+            StartCoroutine(AttackDebounce());
+            StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
+            attackParent.TryAttack();
+        }
+    }
 
-        StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
-        attackParent.TryAttack();
+    private IEnumerator AttackDebounce()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(0.5f); 
+        isAttacking = false;
     }
 
     private IEnumerator SlashEffect()

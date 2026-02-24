@@ -30,9 +30,9 @@ public class EnemyController : MonoBehaviour
     {
 
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
-        Debug.Log("Distance to Player: " + distanceToPlayer); // Buat ngecek jaraknya biar ngatur if nya gampang
+        // Debug.Log("Distance to Player: " + distanceToPlayer); // Buat ngecek jaraknya biar ngatur if nya gampang
 
-        if(distanceToPlayer < 7f)
+        if(distanceToPlayer < 8.5f)
         {
             _shootTimer += Time.deltaTime;
             
@@ -54,15 +54,21 @@ public class EnemyController : MonoBehaviour
         if(_currentHealth <= 0)
         {
             Debug.Log("Killed an Enemy");
-            Destroy(gameObject);
+            StartCoroutine(Dead());
         }
     }
 
     public IEnumerator FlashDamage()
     {
-        _spriteRenderer.color = Color.red; 
+        _spriteRenderer.color = Color.white;
         yield return new WaitForSeconds(0.1f); 
         _spriteRenderer.color = _baseColor; 
+    }
+
+    public IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 
     public void Shoot()
