@@ -8,8 +8,6 @@ public class GameObjective : MonoBehaviour
     public int maxHerb;
     public int currentHerb;
 
-    public GameObject herbal;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

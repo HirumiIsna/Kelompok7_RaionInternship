@@ -79,7 +79,7 @@ public class EnemyController : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("Enemy Shoots!");
+        // Debug.Log("Enemy Shoots!");
         GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
