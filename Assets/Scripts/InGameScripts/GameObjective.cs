@@ -7,7 +7,6 @@ public class GameObjective : MonoBehaviour
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
     public int currentHerb;
-
     public GameObject herbal;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,14 +52,5 @@ public class GameObjective : MonoBehaviour
     public void UpdateCounter()
     {
         _objectiveText.text = currentHerb + "/" + maxHerb;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Herbal"))
-        {
-            Debug.Log("Herb Collected!");
-            IncreaseHerb();
-        }
     }
 }
