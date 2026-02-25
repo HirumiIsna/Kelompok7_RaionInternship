@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private AttackParent attackParent;
+    public GameObject playerGFX;
     public GameObject slashEffect;
     private bool isAttacking = false;
     public int maxHealth = 100;
     public int currentHealth;
-
+    private bool isKnockback = false;
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isKnockback)
         rb.linearVelocity = moveInput * moveSpeed;
         attackParent.mousePosition = GetMousePosition();
     }
@@ -71,15 +73,42 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        Debug.Log("Player got hit by an Enemy");
         currentHealth -= damage;
+        StartCoroutine(FlashDamage());
 
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Player is Dead");
-            Destroy(gameObject);
-            // Tambahin animasi mati atau game over disini
+            StartCoroutine(Dead());
         }
+    }
+
+    private IEnumerator FlashDamage()
+    {
+        SpriteRenderer spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+        spriteRenderer.color = Color.red; // Ganti warna jadi merah saat kena damage
+        yield return new WaitForSeconds(0.1f); // Tunggu sebentar
+        spriteRenderer.color = originalColor; // Kembalikan warna asli
+    }
+
+    public void PlayerKnockback(Transform enemyTransform, float knockbackForce)
+    {
+        Vector2 knockbackDirection = (transform.position - enemyTransform.position).normalized;
+        StartCoroutine(KnockbackCoroutine(knockbackDirection, knockbackForce));
+    }
+
+    private IEnumerator KnockbackCoroutine(Vector2 direction, float knockbackForce)
+    {
+        isKnockback = true;
+        rb.linearVelocity = direction * knockbackForce;
+        yield return new WaitForSeconds(0.2f); // Durasi knockback
+        isKnockback = false;
+    }
+
+    private IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 }

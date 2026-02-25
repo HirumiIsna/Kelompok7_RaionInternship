@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     private Color _baseColor;
     private GameObject _player;
     private Rigidbody2D _rb;
+    // Melee Enemy
+    public int bodyDamage = 10;
 
     // Range Enemy
     private float _shootTimer;
@@ -48,6 +50,24 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            DealDamage();
+        }
+    }
+
+    public void DealDamage()
+    {
+        PlayerController playerController = _player.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.PlayerKnockback(transform, 7f);
+            playerController.TakeDamage(bodyDamage);
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         Debug.Log("Damaged an Enemy");
@@ -65,9 +85,7 @@ public class EnemyController : MonoBehaviour
     public IEnumerator FlashDamage()
     {
         _spriteRenderer.color = Color.white;
-        Time.timeScale = 0.2f;
         yield return new WaitForSeconds(0.1f); 
-        Time.timeScale = 1f;
         _spriteRenderer.color = _baseColor; 
     }
 
@@ -83,10 +101,10 @@ public class EnemyController : MonoBehaviour
         GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
-    // public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
-    // {
-    //     Debug.Log("Enemy Knockbacked!");
-    //     Vector2 direction = (transform.position - playerTransform.position).normalized;
-    //     _rb.linearVelocity = direction * knockbackForce;
-    // }
+    public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    {
+        Debug.Log("Enemy Knockbacked!");
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+        _rb.linearVelocity = direction * knockbackForce;
+    }
 }

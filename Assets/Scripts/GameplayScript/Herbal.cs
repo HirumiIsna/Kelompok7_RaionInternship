@@ -18,7 +18,7 @@ public class Herbal : MonoBehaviour, IInteractable
     public void CollectHerb()
     {
         Debug.Log("Herb Collected!");
-        GameObject.FindObjectOfType<GameObjective>().IncreaseHerb();
+        GameObject.FindFirstObjectByType<GameObjective>().IncreaseHerb();
         Destroy(gameObject); 
     }
 
