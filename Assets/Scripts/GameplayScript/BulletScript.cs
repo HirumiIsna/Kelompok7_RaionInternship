@@ -6,6 +6,7 @@ public class BulletScript : MonoBehaviour
     public float bulletSpeed;
     private Rigidbody2D _rb;
     private float _bulletLifetime;
+    public int bulletDamage = 5;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +35,7 @@ public class BulletScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player got hit by a Bullet");
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(5); // Damage yang diterima player
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(bulletDamage); // Damage yang diterima player
             Destroy(gameObject);
         }
     }

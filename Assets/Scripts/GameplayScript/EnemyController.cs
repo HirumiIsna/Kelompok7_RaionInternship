@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_player == null) return;
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
         // Debug.Log("Distance to Player: " + distanceToPlayer); // Buat ngecek jaraknya biar ngatur if nya gampang
 
