@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private AttackParent attackParent;
     public GameObject slashEffect;
     private bool isAttacking = false;
-
+    public int maxHealth = 100;
+    public int currentHealth;
 
     void Awake()
     {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -67,5 +69,17 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return mousePos;
     }
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("Player got hit by an Enemy");
+        currentHealth -= damage;
 
+        if(currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Debug.Log("Player is Dead");
+            Destroy(gameObject);
+            // Tambahin animasi mati atau game over disini
+        }
+    }
 }
