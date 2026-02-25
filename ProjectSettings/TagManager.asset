@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - ObjectiveManager
+  - Herbal
   layers:
   - Default
   - TransparentFX
