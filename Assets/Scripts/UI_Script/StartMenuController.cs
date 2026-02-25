@@ -11,9 +11,14 @@ public class StartMenuController : MonoBehaviour
 
     public void OnExitClick()
     {
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif        
+        #endif        
         Application.Quit();
+    }
+
+    public void BasecampScene()
+    {
+        SceneManager.LoadScene("Basecamp");
     }
 }

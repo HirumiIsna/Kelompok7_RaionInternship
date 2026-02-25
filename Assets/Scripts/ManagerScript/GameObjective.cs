@@ -7,7 +7,6 @@ public class GameObjective : MonoBehaviour
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
     public int currentHerb;
-    public GameObject herbal;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
