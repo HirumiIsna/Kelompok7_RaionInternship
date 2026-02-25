@@ -15,7 +15,7 @@ public class ObjectSpawner : MonoBehaviour
 
             do
             {
-                spawnPosition = new Vector2(Random.Range(-16.5f, 16.5f), Random.Range(-16.5f, 16.5f));
+                spawnPosition = new Vector2(Random.Range(-16f, 16f), Random.Range(-16f, 16f));
             } 
             while (spawnPosition.magnitude < 5f);
 
@@ -28,7 +28,7 @@ public class ObjectSpawner : MonoBehaviour
 
             do
             {
-                spawnPosition = new Vector2(Random.Range(-16.5f, 16.5f), Random.Range(-16.5f, 16.5f));
+                spawnPosition = new Vector2(Random.Range(-16f, 16f), Random.Range(-16f, 16f));
             } 
             while (spawnPosition.magnitude < 5f);
 

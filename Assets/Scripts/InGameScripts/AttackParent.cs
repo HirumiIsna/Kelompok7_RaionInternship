@@ -7,7 +7,7 @@ public class AttackParent : MonoBehaviour
     public Vector2 mousePosition;
     public LayerMask enemyLayer;
     public int damage;
-    public float knockbackForce;
+    // public float knockbackForce; // knockback bug, kalo pathfindingnya udah bener baru kubenerin
 
     // Update is called once per frame
     void Update()
@@ -33,7 +33,7 @@ public class AttackParent : MonoBehaviour
             if (enemyController != null)
             {
                 enemyController.TakeDamage(damage);
-                enemyController.Knockback(transform, knockbackForce);
+                // enemyController.Knockback(transform, knockbackForce); // knockback bug, kalo pathfindingnya udah bener baru kubenerin
             }
         }
     }

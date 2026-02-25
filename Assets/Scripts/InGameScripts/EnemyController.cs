@@ -82,10 +82,10 @@ public class EnemyController : MonoBehaviour
         GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
-    public void Knockback(Transform playerTransform, float knockbackForce)
-    {
-        Debug.Log("Enemy Knockbacked!");
-        Vector2 direction = (transform.position - playerTransform.position).normalized;
-        _rb.linearVelocity = direction * knockbackForce;
-    }
+    // public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    // {
+    //     Debug.Log("Enemy Knockbacked!");
+    //     Vector2 direction = (transform.position - playerTransform.position).normalized;
+    //     _rb.linearVelocity = direction * knockbackForce;
+    // }
 }
