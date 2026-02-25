@@ -29,4 +29,13 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player got hit by a Bullet");
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(5); // Damage yang diterima player
+            Destroy(gameObject);
+        }
+    }
 }
