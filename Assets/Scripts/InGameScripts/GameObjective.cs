@@ -54,13 +54,4 @@ public class GameObjective : MonoBehaviour
     {
         _objectiveText.text = currentHerb + "/" + maxHerb;
     }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Herbal"))
-        {
-            Debug.Log("Herb Collected!");
-            IncreaseHerb();
-        }
-    }
 }
