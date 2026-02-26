@@ -22,17 +22,9 @@ public class Herbal : MonoBehaviour, IInteractable
         Destroy(gameObject); 
     }
 
-    public bool CanInteract()
-    {
-        return true;
-    }
-
     public void Interact()
     {
-        if (CanInteract())
-        {
-            Debug.Log("Interact Herb");
-            CollectHerb();
-        }
+        Debug.Log("Interact Herb");
+        CollectHerb();
     }
 }

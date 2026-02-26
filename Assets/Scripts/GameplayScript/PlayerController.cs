@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject slashEffect;
     private bool isAttacking = false;
     public int maxHealth = 100;
-    public int currentHealth;
+    private int currentHealth;
     private bool isKnockback = false;
     void Awake()
     {
