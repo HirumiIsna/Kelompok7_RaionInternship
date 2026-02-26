@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;  
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class EnemyController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletPos;
 
+    //LootTable
+    [Header("Loot)]")]
+    public List<LootItem> lootTable = new List<LootItem>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,14 +54,12 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Damaged an Enemy");
         currentHealth -= damage;
         StartCoroutine(FlashDamage());
 
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Killed an Enemy");
             StartCoroutine(Dead());
         }
     }
@@ -73,7 +75,16 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.2f);
+        foreach (LootItem lootItem in lootTable)
+        {
+           if (Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
+                InstantiateLoot(lootItem.itemPrefab);
+            }
+            break; // Hanya drop 1 loot, jadi setelah nemu loot yang ke-drop, langsung break loop 
+        }
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 
@@ -89,4 +100,12 @@ public class EnemyController : MonoBehaviour
     //     Vector2 direction = (transform.position - playerTransform.position).normalized;
     //     _rb.linearVelocity = direction * knockbackForce;
     // }
+    void InstantiateLoot(GameObject loot)
+    {
+        if (loot)
+        {
+            Debug.Log("Instantiating loot: " + loot.name);
+            GameObject droppedLoot= Instantiate(loot, transform.position, Quaternion.identity);
+        }
+    }
 }
