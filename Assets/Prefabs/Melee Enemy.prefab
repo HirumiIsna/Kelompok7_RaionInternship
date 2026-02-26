@@ -187,10 +187,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   bulletPos: {fileID: 0}
   lootTable:
-  - lootPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
-    dropChance: 70
-  - lootPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
-    dropChance: 30
+  - itemPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
+    dropChance: 50
+  - itemPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
+    dropChance: 50
 --- !u!114 &-7185691480328742528
 MonoBehaviour:
   m_ObjectHideFlags: 0

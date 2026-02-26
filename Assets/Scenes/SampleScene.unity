@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffcc0f6c72b53546a79493928e9d1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
-  _sumMeleeEnemies: 0
+  _sumMeleeEnemies: 2
   _sumRangeEnemies: 3
   _sumHerb: 3
   prefabs:
@@ -2220,6 +2220,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1420351580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2331183162383320555, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
+  m_PrefabInstance: {fileID: 3164981557946266001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1420351586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420351580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f51b21667de53540b466bf00222ccf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Collector
 --- !u!1 &1446037996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,6 +3162,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4652144099275760747, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5002268278440916093, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -3218,7 +3239,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7327618776958983018, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 760644944}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2331183162383320555, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1420351586}
   m_SourcePrefab: {fileID: 100100000, guid: 026fbe20ac556cc46aff70a8aa7f2e8f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
