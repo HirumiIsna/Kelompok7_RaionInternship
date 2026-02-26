@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;  
 
 public class EnemyController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class EnemyController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletPos;
 
+    //LootTable
+    [Header("Loot)]")]
+    public List<LootItem> lootTable = new List<LootItem>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -74,8 +78,6 @@ public class EnemyController : MonoBehaviour
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            Debug.Log("Killed an Enemy");
-            StartCoroutine(HitStop(1f));
             StartCoroutine(Dead());
         }
 
@@ -100,7 +102,16 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator Dead()
     {
-        yield return new WaitForSeconds(5f);
+        foreach (LootItem lootItem in lootTable)
+        {
+           if (Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
+                InstantiateLoot(lootItem.itemPrefab);
+            }
+            break; // Hanya drop 1 loot, jadi setelah nemu loot yang ke-drop, langsung break loop 
+        }
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 
@@ -110,10 +121,18 @@ public class EnemyController : MonoBehaviour
         GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
-    public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    // public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    // {
+    //     Debug.Log("Enemy Knockbacked!");
+    //     Vector2 direction = (transform.position - playerTransform.position).normalized;
+    //     _rb.linearVelocity = direction * knockbackForce;
+    // }
+    void InstantiateLoot(GameObject loot)
     {
-        Debug.Log("Enemy Knockbacked!");
-        Vector2 direction = (transform.position - playerTransform.position).normalized;
-        _rb.linearVelocity = direction * knockbackForce;
+        if (loot)
+        {
+            Debug.Log("Instantiating loot: " + loot.name);
+            GameObject droppedLoot= Instantiate(loot, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -346,8 +346,13 @@ MonoBehaviour:
   currentHealth: 0
   bodyDamage: 5
   bulletPrefab: {fileID: 1868840185954588162, guid: e6b148240879e08448951f80f15758d8, type: 3}
-  bulletPos: {fileID: 5529208884335290081}
---- !u!114 &1274570660312815187
+  bulletPos: {fileID: 5463926348043101671}
+  lootTable:
+  - itemPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
+    dropChance: 100
+  - itemPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
+    dropChance: 100
+--- !u!114 &-101139848081574681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
