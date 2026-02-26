@@ -70,16 +70,25 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Damaged an Enemy");
         currentHealth -= damage;
-        StartCoroutine(FlashDamage());
-
         if(currentHealth <= 0)
         {
             currentHealth = 0;
             Debug.Log("Killed an Enemy");
+            StartCoroutine(HitStop(1f));
             StartCoroutine(Dead());
         }
+
+        StartCoroutine(FlashDamage());
+        StartCoroutine(HitStop(1f));
+
+    }
+
+    private IEnumerator HitStop(float Duration)
+    {
+        Time.timeScale = 0.1f;
+        yield return new WaitForSeconds(Duration);
+        Time.timeScale = 1f;
     }
 
     public IEnumerator FlashDamage()
@@ -91,7 +100,7 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject);
     }
 

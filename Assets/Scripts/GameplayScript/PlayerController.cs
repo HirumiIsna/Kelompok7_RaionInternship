@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private int currentHealth;
     private bool isKnockback = false;
     public TMP_Text healthText;
+    private bool isIFrame = false;
 
     void Awake()
     {
@@ -88,14 +89,18 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        UpdateHealthUI();
-        StartCoroutine(FlashDamage());
-
-        if(currentHealth <= 0)
+        if (!isIFrame)
         {
-            currentHealth = 0;
-            StartCoroutine(Dead());
+            currentHealth -= damage;
+            UpdateHealthUI();
+            StartCoroutine(FlashDamage());
+            // StartCoroutine(InvincibilityFrame());
+
+            if(currentHealth <= 0)
+            {
+                currentHealth = 0;
+                StartCoroutine(Dead());
+            }
         }
     }
 
@@ -121,6 +126,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.2f); // Durasi knockback
         isKnockback = false;
     }
+
+    // private IEnumerator InvincibilityFrame()
+    // {
+    //     isIFrame = true;
+    //     SpriteRenderer spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+    //     Color originalColor = spriteRenderer.color;
+    //     spriteRenderer.color = Color.cyan;
+    //     yield return new WaitForSeconds(1f);
+    //     spriteRenderer.color = originalColor;
+    //     isIFrame = false;
+    // }
 
     private IEnumerator Dead()
     {
