@@ -1,20 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitBasecamp : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject startMenuController;
-    public int lastSceneIndex;
+    public int lastSceneIndex = 1;
 
     void Start()
     {
-        if (startMenuController == null)
-        {
-            startMenuController = GameObject.Find("StartMenuController");
-        }
+    
     }
 
     public void Interact()
     {
-        startMenuController.GetComponent<StartMenuController>().NextDay(lastSceneIndex);
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.NextDay();
     }
 }

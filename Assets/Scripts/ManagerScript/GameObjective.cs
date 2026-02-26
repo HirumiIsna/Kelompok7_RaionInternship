@@ -7,21 +7,11 @@ public class GameObjective : MonoBehaviour, IInteractable
 
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
-    public GameObject basecamp;
     public int currentHerb;
 
     void Start()
     {
         _objectiveText.text = currentHerb + "/" + maxHerb;
-        basecamp = GameObject.FindGameObjectWithTag("Basecamp");
-        if (basecamp != null)
-        {
-            ExitBasecamp exitBasecamp = basecamp.GetComponent<ExitBasecamp>();
-        }
-        else
-        {
-            return;
-        }
     }
 
     public void IncreaseHerb()
@@ -42,13 +32,7 @@ public class GameObjective : MonoBehaviour, IInteractable
             Debug.Log("Objective Completed!");
             currentHerb = 0;
             UpdateCounter();
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            ExitBasecamp exitBasecamp = basecamp.GetComponent<ExitBasecamp>();
-            if (exitBasecamp != null)
-            {
-                exitBasecamp.lastSceneIndex = currentSceneIndex;
-            }
-            SceneManager.LoadScene("Basecamp");
+            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
         {

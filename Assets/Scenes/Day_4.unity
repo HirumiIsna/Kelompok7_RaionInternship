@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 59443098}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.094385535, w: 0.99553573}
-  m_LocalPosition: {x: -10.31, y: -0.44, z: 0}
+  m_LocalPosition: {x: -17.57, y: 17.54, z: 0}
   m_LocalScale: {x: 0.7890266, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1676,23 +1676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorem Ipsum
-
-    "Neque porro quisquam est qui dolorem ipsum quia dolor
-    sit amet, consectetur, adipisci velit..."
-
-    "There is no one who loves pain
-    itself, who seeks after it and wants to have it, simply because it is pain..."
-
-    Lorem
-    ipsum dolor sit amet, consectetur adipiscing elit. Quisque non posuere nisl.
-    Praesent et nulla nec magna pulvinar mattis eu vitae sapien. Nulla nec molestie
-    mi. Curabitur nisi nisl, imperdiet nec pharetra ac, lobortis hendrerit lectus.
-    Aliquam interdum a velit a maximus. Praesent eu ornare nisi, a consectetur velit.
-    Cras viverra arcu lorem, non tempor metus malesuada sit amet. Maecenas consectetur
-    urna mollis ligula pulvinar accumsan. Donec rhoncus est metus, quis accumsan
-    quam rhoncus nec. Vivamus non iaculis enim. Donec orci justo, fermentum ut velit
-    sed, finibus rhoncus sapien.'
+  m_text: awkoawkwoako nemu jir di pojokan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -20119,7 +20103,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1914645318}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
