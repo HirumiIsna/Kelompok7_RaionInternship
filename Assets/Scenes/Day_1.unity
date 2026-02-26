@@ -1661,8 +1661,8 @@ MonoBehaviour:
   _sumRangeEnemies: 3
   _sumHerb: 3
   prefabs:
-  - {fileID: 1006862332915210809, guid: b338fe6faec268440a16cbebaa816d50, type: 3}
-  - {fileID: 1667566796328049292, guid: 29ca66994b345a345b0e01d84ebb8945, type: 3}
+  - {fileID: 8134783105310356049, guid: 870e18f7529ccc347914e6fd9bcc64a0, type: 3}
+  - {fileID: 6551322613191375890, guid: 3a37011c89c56014eb2d3aa31a10df1c, type: 3}
   - {fileID: 7897192249006146423, guid: 283274bb6aae7684ca4ae4fe72f91c99, type: 3}
 --- !u!4 &1085958565
 Transform:
