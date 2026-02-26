@@ -6,7 +6,7 @@ public class StartMenuController : MonoBehaviour
 {
     public void OnStartClick()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Basecamp");
     }
 
     public void OnExitClick()
@@ -20,5 +20,12 @@ public class StartMenuController : MonoBehaviour
     public void BasecampScene()
     {
         SceneManager.LoadScene("Basecamp");
+    }
+
+    public void NextDay(int lastSceneIndex)
+    {
+        string previousDay = SceneManager.GetActiveScene().name;
+        Debug.Log("Returning to " + previousDay);
+        SceneManager.LoadScene(lastSceneIndex + 1);
     }
 }

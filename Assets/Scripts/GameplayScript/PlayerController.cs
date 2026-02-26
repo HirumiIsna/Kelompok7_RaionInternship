@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     private bool isKnockback = false;
+    public TMP_Text healthText;
+
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     // Update is called once per frame
@@ -31,6 +35,17 @@ public class PlayerController : MonoBehaviour
         if(!isKnockback)
         rb.linearVelocity = moveInput * moveSpeed;
         attackParent.mousePosition = GetMousePosition();
+    }
+
+    public void UpdateHealthUI()
+    {
+        if(healthText == null) return;
+        
+        healthText.text = "Health: " + currentHealth;
+        if(currentHealth <= 0)
+        {
+            healthText.text = "Health: 0";
+        }
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -74,6 +89,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        UpdateHealthUI();
         StartCoroutine(FlashDamage());
 
         if(currentHealth <= 0)

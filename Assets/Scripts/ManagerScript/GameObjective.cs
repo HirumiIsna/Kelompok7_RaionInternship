@@ -2,23 +2,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameObjective : MonoBehaviour
+public class GameObjective : MonoBehaviour, IInteractable
 {
 
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
+    public GameObject basecamp;
     public int currentHerb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _objectiveText.text = currentHerb + "/" + maxHerb;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        basecamp = GameObject.FindGameObjectWithTag("Basecamp");
+        if (basecamp != null)
+        {
+            ExitBasecamp exitBasecamp = basecamp.GetComponent<ExitBasecamp>();
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void IncreaseHerb()
@@ -27,12 +30,9 @@ public class GameObjective : MonoBehaviour
         UpdateCounter();
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public void Interact()
     {
-        if(other.CompareTag("Player"))
-        {
-            EnterBasecamp();
-        }
+        EnterBasecamp();
     }
 
     public void EnterBasecamp()
@@ -42,6 +42,13 @@ public class GameObjective : MonoBehaviour
             Debug.Log("Objective Completed!");
             currentHerb = 0;
             UpdateCounter();
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            ExitBasecamp exitBasecamp = basecamp.GetComponent<ExitBasecamp>();
+            if (exitBasecamp != null)
+            {
+                exitBasecamp.lastSceneIndex = currentSceneIndex;
+            }
+            SceneManager.LoadScene("Basecamp");
         }
         else
         {
