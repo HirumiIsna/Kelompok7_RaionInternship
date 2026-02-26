@@ -1,23 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameObjective : MonoBehaviour
+public class GameObjective : MonoBehaviour, IInteractable
 {
 
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
     public int currentHerb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _objectiveText.text = currentHerb + "/" + maxHerb;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void IncreaseHerb()
@@ -26,12 +20,9 @@ public class GameObjective : MonoBehaviour
         UpdateCounter();
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public void Interact()
     {
-        if(other.CompareTag("Player"))
-        {
-            EnterBasecamp();
-        }
+        EnterBasecamp();
     }
 
     public void EnterBasecamp()
@@ -41,6 +32,7 @@ public class GameObjective : MonoBehaviour
             Debug.Log("Objective Completed!");
             currentHerb = 0;
             UpdateCounter();
+            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
         {

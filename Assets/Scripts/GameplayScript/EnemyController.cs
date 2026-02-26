@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     private Color _baseColor;
     private GameObject _player;
     private Rigidbody2D _rb;
+    // Melee Enemy
+    public int bodyDamage = 10;
 
     // Range Enemy
     private float _shootTimer;
@@ -35,7 +37,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_player == null) return;
         float distanceToPlayer = Vector2.Distance(transform.position, _player.transform.position);
         // Debug.Log("Distance to Player: " + distanceToPlayer); // Buat ngecek jaraknya biar ngatur if nya gampang
 
@@ -52,24 +54,49 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            DealDamage();
+        }
+    }
+
+    public void DealDamage()
+    {
+        PlayerController playerController = _player.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.PlayerKnockback(transform, 7f);
+            playerController.TakeDamage(bodyDamage);
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        StartCoroutine(FlashDamage());
-
         if(currentHealth <= 0)
         {
             currentHealth = 0;
             StartCoroutine(Dead());
         }
+
+        StartCoroutine(FlashDamage());
+        StartCoroutine(HitStop(1f));
+
+    }
+
+    private IEnumerator HitStop(float Duration)
+    {
+        Time.timeScale = 0.1f;
+        yield return new WaitForSeconds(Duration);
+        Time.timeScale = 1f;
     }
 
     public IEnumerator FlashDamage()
     {
         _spriteRenderer.color = Color.white;
-        Time.timeScale = 0.2f;
         yield return new WaitForSeconds(0.1f); 
-        Time.timeScale = 1f;
         _spriteRenderer.color = _baseColor; 
     }
 
