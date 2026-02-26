@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3084600393488469875}
   - component: {fileID: 8092624935919354830}
   - component: {fileID: 8249836731526825319}
-  - component: {fileID: 4275314163969850435}
   - component: {fileID: 436086593380007081}
+  - component: {fileID: -7185691480328742528}
   m_Layer: 6
   m_Name: Melee Enemy
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1006862332915210809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 629.2004, y: 599.4254, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -188,10 +188,25 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   bulletPos: {fileID: 0}
   lootTable:
-  - lootPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
+  - itemPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
     dropChance: 70
-  - lootPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
+  - itemPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
     dropChance: 30
+--- !u!114 &436086593380007081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006862332915210809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baafdcd61d5687a45a502d0482e1d963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  speed: 125
+  nextWaypointDistance: 3
 --- !u!114 &-7185691480328742528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,21 +235,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &436086593380007081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1006862332915210809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baafdcd61d5687a45a502d0482e1d963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  player: {fileID: 0}
-  speed: 125
-  nextWaypointDistance: 3
 --- !u!1 &4709278887656318026
 GameObject:
   m_ObjectHideFlags: 0

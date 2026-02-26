@@ -82,7 +82,7 @@ public class EnemyController : MonoBehaviour
         }
 
         StartCoroutine(FlashDamage());
-        StartCoroutine(HitStop(1f));
+        StartCoroutine(HitStop(0.01f));
 
     }
 

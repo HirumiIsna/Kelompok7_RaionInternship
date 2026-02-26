@@ -32,7 +32,7 @@ public class AttackParent : MonoBehaviour
             if (enemyController != null)
             {
                 enemyController.TakeDamage(damage);
-                enemyController.Knockback(transform, knockbackForce); // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+                // enemyController.Knockback(transform, knockbackForce); // knockback bug, kalo pathfindingnya udah bener baru kubenerin
             }
         }
     }
