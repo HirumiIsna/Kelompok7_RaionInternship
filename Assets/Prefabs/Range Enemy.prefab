@@ -349,9 +349,9 @@ MonoBehaviour:
   bulletPos: {fileID: 5463926348043101671}
   lootTable:
   - itemPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
-    dropChance: 100
+    dropChance: 50
   - itemPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
-    dropChance: 100
+    dropChance: 50
 --- !u!114 &-101139848081574681
 MonoBehaviour:
   m_ObjectHideFlags: 0

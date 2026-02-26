@@ -108,10 +108,10 @@ public class EnemyController : MonoBehaviour
             {
                 Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
                 InstantiateLoot(lootItem.itemPrefab);
+                break; // Hanya drop 1 item, jadi setelah nemu yang ke-drop, langsung break loop
             }
-            break; // Hanya drop 1 loot, jadi setelah nemu loot yang ke-drop, langsung break loop 
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
 
