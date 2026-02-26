@@ -79,6 +79,12 @@ public class EnemyController : MonoBehaviour
         {
             currentHealth = 0;
             StartCoroutine(Dead());
+            StartCoroutine(HitStop(.01f));   
+        }
+        else
+        {
+            StartCoroutine(FlashDamage());
+            StartCoroutine(HitStop(.009f));   
         }
 
         StartCoroutine(FlashDamage());
@@ -104,11 +110,11 @@ public class EnemyController : MonoBehaviour
     {
         foreach (LootItem lootItem in lootTable)
         {
-           if (Random.Range(0f, 100f) <= lootItem.dropChance)
+           if (Random.Range(0f, 100f) <= lootItem.dropChance) //for some reason it doesn't appear on the second array
             {
                 Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
                 InstantiateLoot(lootItem.itemPrefab);
-                break; // Hanya drop 1 item, jadi setelah nemu yang ke-drop, langsung break loop
+                break; // Hanya drop 1 loot, jadi setelah nemu loot yang ke-drop, langsung break loop 
             }
         }
         yield return new WaitForSeconds(0.2f);
