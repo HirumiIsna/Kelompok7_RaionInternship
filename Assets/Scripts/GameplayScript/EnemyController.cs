@@ -9,7 +9,10 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _baseColor;
     private GameObject _player;
+    public GameObject enemyGFX;
     private Rigidbody2D _rb;
+    public bool isKnockback = false;
+
     // Melee Enemy
     public int bodyDamage = 10;
 
@@ -26,7 +29,7 @@ public class EnemyController : MonoBehaviour
     {
         _player = GameObject.FindGameObjectWithTag("Player");
 
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = enemyGFX.GetComponent<SpriteRenderer>();
         _baseColor = _spriteRenderer.color;
 
         currentHealth = maxHealth;
@@ -45,7 +48,7 @@ public class EnemyController : MonoBehaviour
         {
             _shootTimer += Time.deltaTime;
             
-            if(_shootTimer > 1.5f)
+            if(_shootTimer > 2f)
             {
                 _shootTimer = 0f;
                 Shoot();
@@ -67,8 +70,7 @@ public class EnemyController : MonoBehaviour
         PlayerController playerController = _player.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            playerController.PlayerKnockback(transform, 7f);
-            playerController.TakeDamage(bodyDamage);
+            playerController.TakeDamage(bodyDamage, transform, 7f);
         }
     }
 
@@ -101,7 +103,7 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator FlashDamage()
     {
-        _spriteRenderer.color = Color.white;
+        _spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.1f); 
         _spriteRenderer.color = _baseColor; 
     }
@@ -110,11 +112,11 @@ public class EnemyController : MonoBehaviour
     {
         foreach (LootItem lootItem in lootTable)
         {
-           if (Random.Range(0f, 100f) <= lootItem.dropChance) //for some reason it doesn't appear on the second array
+           if (Random.Range(0f, 100f) <= lootItem.dropChance) 
             {
                 Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
                 InstantiateLoot(lootItem.itemPrefab);
-                break; // Hanya drop 1 loot, jadi setelah nemu loot yang ke-drop, langsung break loop 
+                break; 
             }
         }
         yield return new WaitForSeconds(0.2f);
@@ -124,15 +126,17 @@ public class EnemyController : MonoBehaviour
     public void Shoot()
     {
         // Debug.Log("Enemy Shoots!");
-        GameObject bullet =Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
-    // public void Knockback(Transform playerTransform, float knockbackForce) // knockback bug, kalo pathfindingnya udah bener baru kubenerin
-    // {
-    //     Debug.Log("Enemy Knockbacked!");
-    //     Vector2 direction = (transform.position - playerTransform.position).normalized;
-    //     _rb.linearVelocity = direction * knockbackForce;
-    // }
+    public void Knockback(Transform playerTransform, float knockbackForce) 
+    {
+        isKnockback = true;
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+        _rb.linearVelocity = direction * knockbackForce;
+        StartCoroutine(KnockbackDebounce());
+    }
+
     void InstantiateLoot(GameObject loot)
     {
         if (loot)
@@ -140,5 +144,11 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Instantiating loot: " + loot.name);
             GameObject droppedLoot= Instantiate(loot, transform.position, Quaternion.identity);
         }
+    }
+
+    private IEnumerator KnockbackDebounce()
+    {
+        yield return new WaitForSeconds(.25f);
+        isKnockback = false;
     }
 }

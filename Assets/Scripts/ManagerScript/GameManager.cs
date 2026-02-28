@@ -1,3 +1,4 @@
+using System.Resources;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int lastSceneBuildIndex = 1;
+    private bool isPlayerDead = false;
+    private GameObject _player;
 
     private void Awake()
     {
@@ -19,9 +22,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start() {
+        lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
+        ResourceManager.SetBahanSave();
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     public void OnStartClick()
     {
+        AudioManager.instance.PlaySFX();
         SceneManager.LoadScene("Basecamp");
+        PlayerPrefs.DeleteAll();
+        ResourceManager.NewGameReset();
+        lastSceneBuildIndex = 1;
+    }
+
+    public void Continue()
+    {
+        AudioManager.instance.PlaySFX();
+        if(lastSceneBuildIndex == 1) return;
+        SceneManager.LoadScene("Basecamp");
+        lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
     }
 
     public void OnExitClick()
@@ -32,10 +53,17 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void BasecampScene(int lastSceneIndex)
+    public void BasecampScene(int lastSceneIndex, bool respawn)
     {
+        SaveDay(lastSceneIndex);
         lastSceneBuildIndex = lastSceneIndex;
+        isPlayerDead = respawn;
         SceneManager.LoadScene("Basecamp");
+    }
+
+    public void SaveDay(int lastSceneIndex)
+    {
+        PlayerPrefs.SetInt("LastSceneIndex", lastSceneIndex);
     }
 
     public void NextDay()
@@ -44,14 +72,24 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Day_1");
         }
+        else if (isPlayerDead)
+        {
+            SceneManager.LoadScene(lastSceneBuildIndex);
+        }
         else
         {
+            if(lastSceneBuildIndex + 1 == 6)
+            {
+                AudioManager.instance.PlaySewage();
+                AudioManager.instance.PlayPolice();
+            }
             SceneManager.LoadScene(lastSceneBuildIndex + 1);
         }
     }
 
     public void BackToMenu()
     {
+        AudioManager.instance.StopSFX();
         SceneManager.LoadScene("StartScene");
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -14,9 +15,12 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     public int maxHealth = 100;
     private int currentHealth;
+    public static int damage = 35;
     private bool isKnockback = false;
     public TMP_Text healthText;
+    public int iFrameDuration;
     private bool isIFrame = false;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
@@ -26,16 +30,18 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
+        SetDamageSave();
         UpdateHealthUI();
     }
 
     // Update is called once per frame
     void Update()
     {
+        attackParent.mousePosition = GetMousePosition();
         if(!isKnockback)
         rb.linearVelocity = moveInput * moveSpeed;
-        attackParent.mousePosition = GetMousePosition();
     }
 
     public void UpdateHealthUI()
@@ -54,6 +60,19 @@ public class PlayerController : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 
+    public void SetDamageSave()
+    {
+        if(!PlayerPrefs.HasKey("UpgradedDamage")) return;
+        damage = PlayerPrefs.GetInt("UpgradedDamage");
+    }
+
+    public void IncreaseDamage()
+    {
+        damage += 15;
+        PlayerPrefs.SetInt("UpgradedDamage",damage);
+    }
+
+
     public void Attack(InputAction.CallbackContext context)
     {
         if (!context.started) return;
@@ -62,9 +81,10 @@ public class PlayerController : MonoBehaviour
         if (isAttacking) return;
         else
         {
+            AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
-            attackParent.TryAttack();
+            attackParent.TryAttack(damage);
         }
     }
 
@@ -87,14 +107,15 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return mousePos;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform enemyTransform, float knockbackForce)
     {
-        if (!isIFrame)
+        if (isIFrame) return;
         {
             currentHealth -= damage;
             UpdateHealthUI();
-            StartCoroutine(FlashDamage());
-            // StartCoroutine(InvincibilityFrame());
+            StartCoroutine(InvincibilityFrame());
+
+            PlayerKnockback(enemyTransform, knockbackForce);
 
             if(currentHealth <= 0)
             {
@@ -104,17 +125,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator FlashDamage()
-    {
-        SpriteRenderer spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
-        Color originalColor = spriteRenderer.color;
-        spriteRenderer.color = Color.red; // Ganti warna jadi merah saat kena damage
-        yield return new WaitForSeconds(0.1f); // Tunggu sebentar
-        spriteRenderer.color = originalColor; // Kembalikan warna asli
-    }
-
     public void PlayerKnockback(Transform enemyTransform, float knockbackForce)
     {
+        if (!enemyTransform) return;
         Vector2 knockbackDirection = (transform.position - enemyTransform.position).normalized;
         StartCoroutine(KnockbackCoroutine(knockbackDirection, knockbackForce));
     }
@@ -127,20 +140,33 @@ public class PlayerController : MonoBehaviour
         isKnockback = false;
     }
 
-    // private IEnumerator InvincibilityFrame()
-    // {
-    //     isIFrame = true;
-    //     SpriteRenderer spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
-    //     Color originalColor = spriteRenderer.color;
-    //     spriteRenderer.color = Color.cyan;
-    //     yield return new WaitForSeconds(1f);
-    //     spriteRenderer.color = originalColor;
-    //     isIFrame = false;
-    // }
+    private IEnumerator InvincibilityFrame()
+    {
+        spriteRenderer.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f); 
+
+        isIFrame = true;
+
+        float elapsed = 0f;
+
+        while(elapsed < iFrameDuration)
+        {
+            spriteRenderer.color = new Color(255.0f, 255.0f, 255.0f, .3f);
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = new Color(255.0f, 255.0f, 255.0f, .5f);
+            yield return new WaitForSeconds(0.1f);
+
+            elapsed += 0.2f; 
+        }
+
+        spriteRenderer.color = Color.white;
+        isIFrame = false;
+    }
 
     private IEnumerator Dead()
     {
-        yield return new WaitForSeconds(0.2f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(0.5f);
+        GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, true);
     }
 }

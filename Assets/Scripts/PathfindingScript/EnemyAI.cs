@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     private Transform target;
     public float speed = 200f;
     public float nextWaypointDistance = 0.5f;
+    public EnemyController enemyController;
 
 
     Path path;
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour
         target = player.transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+        enemyController = GetComponent<EnemyController>();
 
         InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
@@ -66,8 +68,11 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        rb.linearVelocity = direction * speed * Time.fixedDeltaTime;
+        if (enemyController.isKnockback == false)
+        {
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            rb.linearVelocity = direction * speed * Time.fixedDeltaTime;
+        }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
