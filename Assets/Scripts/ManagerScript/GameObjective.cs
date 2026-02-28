@@ -32,7 +32,7 @@ public class GameObjective : MonoBehaviour, IInteractable
             Debug.Log("Objective Completed!");
             currentHerb = 0;
             UpdateCounter();
-            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, false);
         }
         else
         {
