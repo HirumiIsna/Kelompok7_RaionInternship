@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
         ResourceManager.SetBahanSave();
-        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void OnStartClick()

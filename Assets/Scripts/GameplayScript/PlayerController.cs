@@ -32,8 +32,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
-        SetDamageSave();
         UpdateHealthUI();
+        if (!PlayerPrefs.HasKey("UpgradedDamage"))
+        {
+            damage = 35;
+        }
+        else SetDamageSave();
     }
 
     // Update is called once per frame
@@ -62,7 +66,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetDamageSave()
     {
-        if(!PlayerPrefs.HasKey("UpgradedDamage")) return;
         damage = PlayerPrefs.GetInt("UpgradedDamage");
     }
 
