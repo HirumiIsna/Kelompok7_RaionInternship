@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public float nextWaypointDistance = 0.5f;
     public EnemyController enemyController;
     private bool isChasing = false;
-    public GameObject rangeArea;
+    public Transform rangeArea;
     private float xPos;
     private Vector2 circlePoint;
 
@@ -28,16 +28,20 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         enemyController = GetComponent<EnemyController>();
-        
         InvokeRepeating("UpdatePath", 0f, 1f);
+        rangeArea = target.Find("RangeArea");
+        if(rangeArea != null)
+        {
+            Debug.Log("Found the RangeArea: " + rangeArea);
+        }
 
         switch (gameObject.name)
         {
-            case "MeleeEnemy":
-            return;
-            case "RangeEnemy":
-            xPos = rangeArea.transform.localScale.x;
-            break;
+            case "MeleeEnemy(Clone)":
+                return;
+            case "RangeEnemy(Clone)":
+                xPos = rangeArea.transform.localScale.x;
+                break;
         }
     }
 
@@ -54,10 +58,10 @@ public class EnemyAI : MonoBehaviour
         {
             switch (gameObject.name)
             {
-                case "MeleeEnemy":
+                case "MeleeEnemy(Clone)":
                     seeker.StartPath(rb.position, target.position, OnPathComplete);
                     break;
-                case "RangeEnemy":
+                case "RangeEnemy(Clone)":
                     seeker.StartPath(rb.position, circlePoint, OnPathComplete);
                     break;
             }
