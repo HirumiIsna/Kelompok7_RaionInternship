@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,13 @@ public class PlayerController : MonoBehaviour
     public int iFrameDuration;
     private bool isIFrame = false;
     private SpriteRenderer spriteRenderer;
-
+    public float runSpeed = 8f;
+    private bool runPressed = false;
+    public Image StaminaBar;
+    public float maxStamina, Stamina;
+    public float RunCost;
+    public float ChargeRate;
+    private Coroutine recharge;
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -38,14 +45,32 @@ public class PlayerController : MonoBehaviour
             damage = 35;
         }
         else SetDamageSave();
+        Stamina = maxStamina;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float currentMoveSpeed = runPressed ? runSpeed : moveSpeed;
         attackParent.mousePosition = GetMousePosition();
         if(!isKnockback)
-        rb.linearVelocity = moveInput * moveSpeed;
+        {
+            if (runPressed)
+            {
+            Stamina -= RunCost * Time.deltaTime;
+            if(Stamina < 0)
+            {
+                Stamina = 0;
+                runPressed = false;
+            }
+            if(recharge != null) StopCoroutine(recharge);
+            recharge = StartCoroutine(RechargeStamina());
+            StaminaBar.fillAmount = Stamina / maxStamina;
+            }
+        rb.linearVelocity = moveInput * currentMoveSpeed;
+        }
+
+
     }
 
     public void UpdateHealthUI()
@@ -62,6 +87,28 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void onRun (InputAction.CallbackContext context)
+    {
+        runPressed =  true;
+        if(context.canceled) runPressed = false;
+        Debug.Log("Run Pressed: " + runPressed);
+    }
+
+    private IEnumerator RechargeStamina()
+    {
+       yield return new WaitForSeconds(1f); // Delay sebelum mulai recharge
+        while (Stamina < maxStamina)
+        {
+            Stamina += ChargeRate / 10f; // Menambahkan stamina secara bertahap
+            if (Stamina > maxStamina)
+            {
+                Stamina = maxStamina;
+            }
+            StaminaBar.fillAmount = Stamina / maxStamina;
+            yield return new WaitForSeconds(0.1f); // Interval antara setiap penambahan stamina
+        } 
     }
 
     public void SetDamageSave()
