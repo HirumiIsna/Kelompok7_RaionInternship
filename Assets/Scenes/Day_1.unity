@@ -8651,7 +8651,19 @@ MonoBehaviour:
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8900848247109042112}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: onRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -23951,12 +23963,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8004a1e0149c31e4593c7a875bdb1e7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
+  moveSpeed: 2
   playerGFX: {fileID: 6334759510460993082}
   slashEffect: {fileID: 6111554311892182728}
   maxHealth: 100
   healthText: {fileID: 4000281104439927523}
   iFrameDuration: 1
+  runSpeed: 4
 --- !u!114 &9076988880054698272
 MonoBehaviour:
   m_ObjectHideFlags: 0

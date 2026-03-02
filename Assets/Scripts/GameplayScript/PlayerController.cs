@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public int iFrameDuration;
     private bool isIFrame = false;
     private SpriteRenderer spriteRenderer;
+    public float runSpeed = 8f;
+    private bool runPressed = false;
 
     void Awake()
     {
@@ -43,9 +45,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float currentMoveSpeed = runPressed ? runSpeed : moveSpeed;
         attackParent.mousePosition = GetMousePosition();
         if(!isKnockback)
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * currentMoveSpeed;
     }
 
     public void UpdateHealthUI()
@@ -62,6 +65,13 @@ public class PlayerController : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+
+    public void onRun (InputAction.CallbackContext context)
+    {
+        runPressed =  true;
+        if(context.canceled) runPressed = false;
+        Debug.Log("Run Pressed: " + runPressed);
     }
 
     public void SetDamageSave()
