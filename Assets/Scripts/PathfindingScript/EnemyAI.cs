@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     public float speed = 200f;
     public float nextWaypointDistance = 0.5f;
     public EnemyController enemyController;
-    private bool isChasing = false;
+    public bool isChasing = false;
     public Transform rangeArea;
     private float xPos;
     private Vector2 circlePoint;

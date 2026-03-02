@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 4992159072760098729}
   - component: {fileID: 5768105335819509327}
   - component: {fileID: 8646926688545652748}
+  - component: {fileID: 6332504243702440896}
   m_Layer: 6
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -482,4 +483,20 @@ MonoBehaviour:
   speed: 200
   nextWaypointDistance: 0.5
   enemyController: {fileID: 0}
+  isChasing: 0
   rangeArea: {fileID: 0}
+--- !u!114 &6332504243702440896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333287796265290939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87eb76e8454ce4e45a9735623b141a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPC
+  patrolPoints: []
+  speed: 2
+  pauseDuration: 1.5
