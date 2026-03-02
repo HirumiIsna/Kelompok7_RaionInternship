@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D _rb;
     public bool isKnockback = false;
 
-    // Melee Enemy
     public int bodyDamage = 10;
 
     // Range Enemy
@@ -54,15 +53,13 @@ public class EnemyController : MonoBehaviour
                 Shoot();
             }
         }
-
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+    private void OnCollisionStay2D(Collision2D other) {
+      if (other.gameObject.name == "Player")
         {
             DealDamage();
-        }
+        }  
     }
 
     public void DealDamage()
