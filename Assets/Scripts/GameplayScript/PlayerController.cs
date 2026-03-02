@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking) return;
         else
         {
-            AudioManager.instance.PlaySlash();
+            // AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
             attackParent.TryAttack(damage);

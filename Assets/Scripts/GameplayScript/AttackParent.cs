@@ -28,16 +28,16 @@ public class AttackParent : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies) // Ubah menggunakan Unity Event System kalo udah di testing, ntar pas pulang kuliah
         {
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
-            Arrow arrow = enemy.GetComponent<Arrow>();
+            BulletController bulletController = enemy.GetComponent<BulletController>();
             if (enemyController != null)
             {
                 enemyController.TakeDamage(damage);
                 enemyController.Knockback(transform, knockbackForce); // knockback bug, kalo pathfindingnya udah bener baru kubenerin
             }
-            else if (arrow)
+            else if (bulletController)
             {
-                AudioManager.instance.PlayDeflect();
-                arrow.DeflectArrow();
+                // AudioManager.instance.PlayDeflect();
+                bulletController.DeflectArrow();
             }
         }
     }
