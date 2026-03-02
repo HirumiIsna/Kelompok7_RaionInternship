@@ -29,6 +29,8 @@ public class AttackParent : MonoBehaviour
         {
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
             BulletController bulletController = enemy.GetComponent<BulletController>();
+            if(enemy.isTrigger) continue;
+
             if (enemyController != null)
             {
                 enemyController.TakeDamage(damage);

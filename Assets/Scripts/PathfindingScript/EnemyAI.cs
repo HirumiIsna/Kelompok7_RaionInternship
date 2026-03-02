@@ -8,7 +8,10 @@ public class EnemyAI : MonoBehaviour
     public float speed = 200f;
     public float nextWaypointDistance = 0.5f;
     public EnemyController enemyController;
-
+    public bool isChasing = false;
+    public Transform rangeArea;
+    private float xPos;
+    private Vector2 circlePoint;
 
     Path path;
     int currentWaypoint = 0;
@@ -25,17 +28,44 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         enemyController = GetComponent<EnemyController>();
+        InvokeRepeating("UpdatePath", 0f, 1f);
+        rangeArea = target.Find("RangeArea");
+        if(rangeArea != null)
+        {
+            Debug.Log("Found the RangeArea: " + rangeArea);
+        }
 
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        switch (gameObject.name)
+        {
+            case "MeleeEnemy(Clone)":
+                return;
+            case "RangeEnemy(Clone)":
+                xPos = rangeArea.transform.localScale.x;
+                break;
+        }
     }
 
     void UpdatePath()
     {
         if (target == null) return;
-        
-        if(seeker.IsDone())
+             
+        Vector2 dir = (rb.position - (Vector2)target.position).normalized;
+
+        circlePoint = (Vector2)target.position + dir * (xPos/2);
+
+        if (seeker.IsDone())
         seeker.StartPath(rb.position, target.position, OnPathComplete);
-        
+        {
+            switch (gameObject.name)
+            {
+                case "MeleeEnemy(Clone)":
+                    seeker.StartPath(rb.position, target.position, OnPathComplete);
+                    break;
+                case "RangeEnemy(Clone)":
+                    seeker.StartPath(rb.position, circlePoint, OnPathComplete);
+                    break;
+            }
+        }
     }
 
     void OnPathComplete(Path p)
@@ -43,7 +73,14 @@ public class EnemyAI : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            currentWaypoint = 0;
+            currentWaypoint = 1;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.CompareTag("Player"))
+        {
+            isChasing = true;
         }
     }
 
@@ -62,15 +99,16 @@ public class EnemyAI : MonoBehaviour
             reachedEndOfPath = false;
         }
 
-        if (reachedEndOfPath)
+        if (reachedEndOfPath) //gak akan nyampe sini methodnya
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
 
-        if (enemyController.isKnockback == false)
+        if (enemyController.isKnockback == false && isChasing)
         {
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+         
             rb.linearVelocity = direction * speed * Time.fixedDeltaTime;
         }
 
