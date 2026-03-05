@@ -29,17 +29,22 @@ public class AttackParent : MonoBehaviour
         {
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
             BulletController bulletController = enemy.GetComponent<BulletController>();
-            if(enemy.isTrigger) continue;
+            BossScript bossScript = enemy.GetComponent<BossScript>();
 
-            if (enemyController != null)
+            if (enemyController != null && !enemy.isTrigger)
             {
                 enemyController.TakeDamage(damage);
-                enemyController.Knockback(transform, knockbackForce); // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+                enemyController.Knockback(transform, knockbackForce); 
+                // enemyController.Particle(transform);
             }
             else if (bulletController)
             {
                 // AudioManager.instance.PlayDeflect();
                 bulletController.DeflectArrow();
+            }
+            else if (bossScript)
+            {
+                bossScript.DecreaseHealthUI();
             }
         }
     }
