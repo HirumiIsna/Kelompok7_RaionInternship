@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private AttackParent attackParent;
+    public Transform attackPoint;
     public GameObject playerGFX;
     public GameObject slashEffect;
     private bool isAttacking = false;
@@ -29,6 +31,10 @@ public class PlayerController : MonoBehaviour
     public float RunCost;
     public float ChargeRate;
     private Coroutine recharge;
+    private CinemachineImpulseSource impulseSource;
+    public GameObject flameSlash;
+    private bool flameBoost = false;
+
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -39,6 +45,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         UpdateHealthUI();
         if (!PlayerPrefs.HasKey("UpgradedDamage"))
         {
@@ -134,6 +141,10 @@ public class PlayerController : MonoBehaviour
             // AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
+            // if(flameBoost)
+            // {
+            //     FlameSlashs();
+            // }
             attackParent.TryAttack(damage);
         }
     }
@@ -152,6 +163,15 @@ public class PlayerController : MonoBehaviour
         slashEffect.SetActive(false);
     }
 
+    public void FlameSlashs()
+    {
+        Debug.Log("Instantiated Flame");
+        Quaternion slashPoint = attackPoint.rotation * Quaternion.Euler(0, 0, 90);
+        GameObject fireSlash = Instantiate(flameSlash, attackPoint.position, slashPoint);
+        Rigidbody2D rb = fireSlash.GetComponent<Rigidbody2D>();
+        rb.AddForce(attackPoint.up * 9f, ForceMode2D.Impulse);   
+    }
+
     private Vector2 GetMousePosition() // Ngerubah posisi mouse dari layar jadi vector2 di world space
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -164,8 +184,14 @@ public class PlayerController : MonoBehaviour
             currentHealth -= damage;
             UpdateHealthUI();
             StartCoroutine(InvincibilityFrame());
-
+            ScreenShakeManager.instance.ScreenShake(impulseSource);
             PlayerKnockback(enemyTransform, knockbackForce);
+
+            if(currentHealth/maxHealth <= 0.7f)
+            {
+                Debug.Log("FlameBoost ON!");
+                flameBoost = true;
+            }
 
             if(currentHealth <= 0)
             {

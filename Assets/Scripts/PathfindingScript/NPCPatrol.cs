@@ -59,7 +59,7 @@ public class NPC : MonoBehaviour
 
         currentPatrolIndex = (currentPatrolIndex + 1)%patrolPoints.Length;
         target = patrolPoints[currentPatrolIndex];
-        Debug.Log("Patrolling to: " + target);
+        // Debug.Log("Patrolling to: " + target);
         isPaused = false;
     }
 }

@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public GameObject enemyGFX;
     private Rigidbody2D _rb;
     public bool isKnockback = false;
+    public GameObject particle;
 
     public int bodyDamage = 10;
 
@@ -65,6 +66,7 @@ public class EnemyController : MonoBehaviour
     public void DealDamage()
     {
         PlayerController playerController = _player.GetComponent<PlayerController>();
+    
         if (playerController != null)
         {
             playerController.TakeDamage(bodyDamage, transform, 7f);
@@ -73,7 +75,11 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        BossScript bossScript = GetComponent<BossScript>();
+        if(bossScript) bossScript.DecreaseHealthUI();
+
         currentHealth -= damage;
+    
         if(currentHealth <= 0)
         {
             currentHealth = 0;
@@ -126,8 +132,18 @@ public class EnemyController : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
     }
 
+    public void Particle(Transform playerTransform)
+    {
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, direction);
+
+        Instantiate(particle, transform.position, rotation);
+    }
+
     public void Knockback(Transform playerTransform, float knockbackForce) 
     {
+        if(gameObject.name == "Boss") return;
         isKnockback = true;
         Vector2 direction = (transform.position - playerTransform.position).normalized;
         _rb.linearVelocity = direction * knockbackForce;

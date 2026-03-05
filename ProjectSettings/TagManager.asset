@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ObjectiveManager
   - Herbal
+  - Boss
   layers:
   - Default
   - TransparentFX

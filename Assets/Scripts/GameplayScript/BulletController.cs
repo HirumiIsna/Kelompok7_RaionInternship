@@ -36,7 +36,7 @@ public class BulletController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player got hit by a Bullet");
+            // Debug.Log("Player got hit by a Bullet");
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(bulletDamage, emptyTransform, 0f); // Damage yang diterima player
             Destroy(gameObject);
         }
