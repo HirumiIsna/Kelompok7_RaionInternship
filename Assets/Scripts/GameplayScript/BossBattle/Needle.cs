@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Needle : MonoBehaviour
 {
-    public float speed = 15f;
+    public float speed = 100f;
     private Vector2 moveDir;
 
     public void Initialize(Vector2 dir)
     {
-        moveDir = dir;
+        moveDir = dir.normalized;
         Destroy(gameObject, 3f);
     }
 
@@ -20,7 +20,7 @@ public class Needle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerController>().TakeDamage(10, null, 0);
+            other.GetComponent<PlayerController>().TakeDamage(20, null, 0);
         }
     }
 }

@@ -75,9 +75,6 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        BossScript bossScript = GetComponent<BossScript>();
-        if(bossScript) bossScript.DecreaseHealthUI();
-
         currentHealth -= damage;
     
         if(currentHealth <= 0)
@@ -89,12 +86,11 @@ public class EnemyController : MonoBehaviour
         else
         {
             StartCoroutine(FlashDamage());
-            StartCoroutine(HitStop(.009f));   
+            StartCoroutine(HitStop(.008f));   
         }
 
         StartCoroutine(FlashDamage());
         StartCoroutine(HitStop(0.01f));
-
     }
 
     private IEnumerator HitStop(float Duration)
@@ -143,7 +139,6 @@ public class EnemyController : MonoBehaviour
 
     public void Knockback(Transform playerTransform, float knockbackForce) 
     {
-        if(gameObject.name == "Boss") return;
         isKnockback = true;
         Vector2 direction = (transform.position - playerTransform.position).normalized;
         _rb.linearVelocity = direction * knockbackForce;

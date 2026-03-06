@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false;
     public int maxHealth = 100;
     private int currentHealth;
-    public static int damage = 35;
+    public static int damage = 15;
     private bool isKnockback = false;
     public TMP_Text healthText;
     public int iFrameDuration;
@@ -141,10 +141,10 @@ public class PlayerController : MonoBehaviour
             // AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
-            // if(flameBoost)
-            // {
-            //     FlameSlashs();
-            // }
+            if(flameBoost)
+            {
+                FlameSlashs();
+            }
             attackParent.TryAttack(damage);
         }
     }
