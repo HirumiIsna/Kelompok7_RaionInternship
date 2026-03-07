@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     private SpriteRenderer _spriteRenderer;
-    private Color _baseColor;
+    [SerializeField] private Material flashMaterial;
+    private Material originalMaterial;
     private GameObject _player;
     public GameObject enemyGFX;
     private Rigidbody2D _rb;
@@ -30,7 +31,7 @@ public class EnemyController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _spriteRenderer = enemyGFX.GetComponent<SpriteRenderer>();
-        _baseColor = _spriteRenderer.color;
+        originalMaterial = _spriteRenderer.material;
 
         currentHealth = maxHealth;
 
@@ -75,9 +76,6 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        BossScript bossScript = GetComponent<BossScript>();
-        if(bossScript) bossScript.DecreaseHealthUI();
-
         currentHealth -= damage;
     
         if(currentHealth <= 0)
@@ -89,12 +87,11 @@ public class EnemyController : MonoBehaviour
         else
         {
             StartCoroutine(FlashDamage());
-            StartCoroutine(HitStop(.009f));   
+            StartCoroutine(HitStop(.008f));   
         }
 
         StartCoroutine(FlashDamage());
         StartCoroutine(HitStop(0.01f));
-
     }
 
     private IEnumerator HitStop(float Duration)
@@ -106,9 +103,9 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator FlashDamage()
     {
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.material = flashMaterial;
         yield return new WaitForSeconds(0.1f); 
-        _spriteRenderer.color = _baseColor; 
+        _spriteRenderer.material = originalMaterial; 
     }
 
     public IEnumerator Dead()
@@ -143,7 +140,6 @@ public class EnemyController : MonoBehaviour
 
     public void Knockback(Transform playerTransform, float knockbackForce) 
     {
-        if(gameObject.name == "Boss") return;
         isKnockback = true;
         Vector2 direction = (transform.position - playerTransform.position).normalized;
         _rb.linearVelocity = direction * knockbackForce;

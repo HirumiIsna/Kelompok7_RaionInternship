@@ -67,23 +67,24 @@ public class GameManager : MonoBehaviour
 
     public void NextDay()
     {
-        if(lastSceneBuildIndex == 0)
-        {
-            SceneManager.LoadScene("Day_1");
-        }
-        else if (isPlayerDead)
-        {
-            SceneManager.LoadScene(lastSceneBuildIndex);
-        }
-        else
-        {
-            if(lastSceneBuildIndex + 1 == 6)
-            {
-                AudioManager.instance.PlaySewage();
-                AudioManager.instance.PlayPolice();
-            }
-            SceneManager.LoadScene(lastSceneBuildIndex + 1);
-        }
+        SceneManager.LoadScene("Day_1");
+        // if(lastSceneBuildIndex == 0)
+        // {
+        //     SceneManager.LoadScene("Day_1");
+        // }
+        // else if (isPlayerDead)
+        // {
+        //     SceneManager.LoadScene(lastSceneBuildIndex);
+        // }
+        // else
+        // {
+        //     if(lastSceneBuildIndex + 1 == 6)
+        //     {
+        //         AudioManager.instance.PlaySewage();
+        //         AudioManager.instance.PlayPolice();
+        //     }
+        //     SceneManager.LoadScene(lastSceneBuildIndex + 1);
+        // }
     }
 
     public void BackToMenu()

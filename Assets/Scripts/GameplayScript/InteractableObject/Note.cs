@@ -7,7 +7,13 @@ public class Note : MonoBehaviour, IInteractable
     public void OpenNote()
     {
         noteUI.SetActive(true);
-        Destroy(gameObject);
+        Time.timeScale = 0f;
+        gameObject.SetActive(false);
+    }
+
+    public void CloseNote()
+    {
+        Time.timeScale = 1f;
     }
 
     public void Interact()

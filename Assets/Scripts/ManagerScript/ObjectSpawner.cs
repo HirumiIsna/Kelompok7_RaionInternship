@@ -2,57 +2,65 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-    [SerializeField] private int _sumMeleeEnemies;
-    [SerializeField] private int _sumRangeEnemies;
-    [SerializeField] private int _sumHerb;
-    public GameObject[] prefabs;
+    [System.Serializable]
+    public class SpawnAreaData
+    {
+        public GameObject spawnArea;
+        public int meleeEnemies;
+        public int rangeEnemies;
+    }
+
+    public SpawnAreaData[] spawnAreas;
+    public GameObject meleePrefab;
+    public GameObject rangePrefab;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-        for (int i = 0; i < _sumMeleeEnemies; i++) // Melee Enemy 
+        foreach (SpawnAreaData areaData in spawnAreas)
         {
-            Vector2 spawnPosition;
+            BoxCollider2D box = areaData.spawnArea.GetComponent<BoxCollider2D>();
 
-            do
+            // Spawn Melee
+            for (int i = 0; i < areaData.meleeEnemies; i++)
             {
-                spawnPosition = new Vector2(Random.Range(-16f, 16f), Random.Range(-16f, 16f));
-            } 
-            while (spawnPosition.magnitude < 5f);
+                Vector2 pos = GetRandomPointInBounds(box);
+                Instantiate(meleePrefab, pos, Quaternion.identity);
+            }
 
-            Instantiate(prefabs[0], spawnPosition, Quaternion.identity);
-        }
-
-        for (int i = 0; i < _sumRangeEnemies; i++) // Range Enemy 
-        {
-            Vector2 spawnPosition;
-
-            do
+            // Spawn Range
+            for (int i = 0; i < areaData.rangeEnemies; i++)
             {
-                spawnPosition = new Vector2(Random.Range(-16f, 16f), Random.Range(-16f, 16f));
-            } 
-            while (spawnPosition.magnitude < 5f);
-
-            Instantiate(prefabs[1], spawnPosition, Quaternion.identity);
-        }
-
-        for (int i = 0; i < _sumHerb; i++) // Herb
-        {
-            Vector2 spawnPosition;
-
-            do
-            {
-                spawnPosition = new Vector2(Random.Range(-16f, 16f), Random.Range(-16f, 16f));
-            } 
-            while (spawnPosition.magnitude < 5f);
-
-            Instantiate(prefabs[2], spawnPosition, Quaternion.identity);
+                Vector2 pos = GetRandomPointInBounds(box);
+                Instantiate(rangePrefab, pos, Quaternion.identity);
+            }
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    // void SpawnEnemies(int amount, GameObject enemyPrefab)
+    // {
+    //     foreach (var spawnArea in spawnAreas)
+    //     {
+    //         BoxCollider2D box = spawnArea.GetComponent<BoxCollider2D>();
+            
+    //         for (int i = 0; i < amount; i++)
+    //         {
+    //             Vector2 spawnPosition = GetRandomPointInBounds(box);
+                
+    //             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+    //         }
+    //     }
+    // }
+
+    Vector2 GetRandomPointInBounds(BoxCollider2D box) //minggu ketiga kurevisi lagi
     {
-        
+        Bounds bounds = box.bounds;
+
+        float randomX = Random.Range(bounds.min.x, bounds.max.x);
+        float randomY = Random.Range(bounds.min.y, bounds.max.y);
+
+        return new Vector2(randomX, randomY);
     }
 }

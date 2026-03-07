@@ -44,7 +44,7 @@ public class AttackParent : MonoBehaviour
             }
             else if (bossScript)
             {
-                bossScript.DecreaseHealthUI();
+                bossScript.TakeDamage(damage);
             }
         }
     }

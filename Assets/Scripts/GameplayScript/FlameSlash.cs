@@ -8,7 +8,7 @@ public class FlameSlash : MonoBehaviour
         if(other.CompareTag("Boss"))
         {
             BossScript boss = other.GetComponent<BossScript>();
-            boss.DecreaseHealthUI();
+            boss.TakeDamage(10); //ubah biar nyesuaiin scaling damagenya
         }
     }
 

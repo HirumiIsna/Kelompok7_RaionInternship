@@ -21,7 +21,7 @@ public class UI_Resource : MonoBehaviour
     private void UpdateResourceText()
     {
         _bahan1Text.text = "Stick: " + ResourceManager.GetBahan1Amount();
-        _bahan2Text.text = "Twig: " + ResourceManager.GetBahan2Amount();
+        _bahan2Text.text = "Iron: " + ResourceManager.GetBahan2Amount();
         _bahan3Text.text = "Leaf: " + ResourceManager.GetBahan3Amount();
     }
 
