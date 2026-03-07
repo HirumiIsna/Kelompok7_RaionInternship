@@ -52,9 +52,9 @@ public static class ResourceManager
         if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
     }
 
-    public static void DecBahan2Amount()
+    public static void DecBahan2Amount(int sum)
     {
-        bahan2Amount--;
+        bahan2Amount-=sum;
         if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
     }
 

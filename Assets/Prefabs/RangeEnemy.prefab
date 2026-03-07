@@ -484,8 +484,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   maxHealth: 100
   currentHealth: 0
+  flashMaterial: {fileID: 2100000, guid: 35c7787dcf4fdbe4da271e65ec608273, type: 2}
   enemyGFX: {fileID: 6451696097481380559}
   isKnockback: 0
+  particle: {fileID: 0}
   bodyDamage: 5
   bulletPrefab: {fileID: 1868840185954588162, guid: f9c61df009b05ac43b7ae28eee2ae56b, type: 3}
   bulletPos: {fileID: 3219182141052128688}

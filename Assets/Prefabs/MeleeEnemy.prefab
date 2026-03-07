@@ -57,9 +57,9 @@ Transform:
   m_GameObject: {fileID: 4530382804274811611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: -0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5316395122339224949}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1820289977299953570, guid: f88c58b3605b8bb4785d1ab889b6a5ac, type: 3}
+  m_Sprite: {fileID: 5267910599364223841, guid: f34358af01f0b3048846489f4e6eb434, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -355,8 +355,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   maxHealth: 100
   currentHealth: 0
+  flashMaterial: {fileID: 2100000, guid: 35c7787dcf4fdbe4da271e65ec608273, type: 2}
   enemyGFX: {fileID: 4530382804274811611}
   isKnockback: 0
+  particle: {fileID: 0}
   bodyDamage: 10
   bulletPrefab: {fileID: 0}
   bulletPos: {fileID: 0}

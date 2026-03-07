@@ -9,12 +9,24 @@ public class Upgrade : MonoBehaviour, IInteractable
         upgradeCanvas.SetActive(true);
     }
 
-    public static bool TrySpendResource()
+    public static bool TrySpendResourceDamage(int sum)
     {
-        if(ResourceManager.GetBahan1Amount() >= 1 && ResourceManager.GetBahan2Amount() >= 1)
+        if(ResourceManager.GetBahan2Amount() >= 2)
         {
-            ResourceManager.DecBahan1Amount();
-            ResourceManager.DecBahan2Amount();
+            ResourceManager.DecBahan2Amount(sum);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool TrySpendResourceHealth()
+    {
+        if(ResourceManager.GetBahan3Amount() >= 1)
+        {
+            ResourceManager.DecBahan3Amount();
             return true;
         }
         else

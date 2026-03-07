@@ -7,7 +7,8 @@ public class EnemyController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     private SpriteRenderer _spriteRenderer;
-    private Color _baseColor;
+    [SerializeField] private Material flashMaterial;
+    private Material originalMaterial;
     private GameObject _player;
     public GameObject enemyGFX;
     private Rigidbody2D _rb;
@@ -30,7 +31,7 @@ public class EnemyController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _spriteRenderer = enemyGFX.GetComponent<SpriteRenderer>();
-        _baseColor = _spriteRenderer.color;
+        originalMaterial = _spriteRenderer.material;
 
         currentHealth = maxHealth;
 
@@ -102,9 +103,9 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator FlashDamage()
     {
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.material = flashMaterial;
         yield return new WaitForSeconds(0.1f); 
-        _spriteRenderer.color = _baseColor; 
+        _spriteRenderer.material = originalMaterial; 
     }
 
     public IEnumerator Dead()

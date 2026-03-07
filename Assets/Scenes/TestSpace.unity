@@ -1396,8 +1396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffcc0f6c72b53546a79493928e9d1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
-  _sumMeleeEnemies: 0
-  _sumRangeEnemies: 0
+  _sumMeleeEnemies: 5
+  _sumRangeEnemies: 5
   _sumHerb: 0
   prefabs:
   - {fileID: 7333287796265290939, guid: 870e18f7529ccc347914e6fd9bcc64a0, type: 3}
@@ -23114,6 +23114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 4
+  attackPoint: {fileID: 0}
   playerGFX: {fileID: 6334759510460993082}
   slashEffect: {fileID: 6111554311892182728}
   maxHealth: 1000
@@ -23125,6 +23126,7 @@ MonoBehaviour:
   Stamina: 0
   RunCost: 30
   ChargeRate: 15
+  flameSlash: {fileID: 0}
 --- !u!114 &9076988880054698272
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerGFX;
     public GameObject slashEffect;
     private bool isAttacking = false;
-    public int maxHealth = 100;
+    public static int maxHealth = 100;
     private int currentHealth;
     public static int damage = 15;
     private bool isKnockback = false;
@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 8f;
     private bool runPressed = false;
     public Image StaminaBar;
+    public GameObject StaminaCanvas;
     public float maxStamina, Stamina;
     public float RunCost;
     public float ChargeRate;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private CinemachineImpulseSource impulseSource;
     public GameObject flameSlash;
     private bool flameBoost = false;
-
+    private bool isAbilityUnlock = false;
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -47,12 +48,13 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         impulseSource = GetComponent<CinemachineImpulseSource>();
         UpdateHealthUI();
-        if (!PlayerPrefs.HasKey("UpgradedDamage"))
+        if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth"))
         {
             damage = 35;
         }
-        else SetDamageSave();
+        else SetPlayerSave();
         Stamina = maxStamina;
+        StaminaCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,15 +66,16 @@ public class PlayerController : MonoBehaviour
         {
             if (runPressed)
             {
-            Stamina -= RunCost * Time.deltaTime;
-            if(Stamina < 0)
-            {
-                Stamina = 0;
-                runPressed = false;
-            }
-            if(recharge != null) StopCoroutine(recharge);
-            recharge = StartCoroutine(RechargeStamina());
-            StaminaBar.fillAmount = Stamina / maxStamina;
+                StaminaCanvas.SetActive(true);
+                Stamina -= RunCost * Time.deltaTime;
+                if(Stamina < 0)
+                {
+                    Stamina = 0;
+                    runPressed = false;
+                }
+                if(recharge != null) StopCoroutine(recharge);
+                recharge = StartCoroutine(RechargeStamina());
+                StaminaBar.fillAmount = Stamina / maxStamina;
             }
         rb.linearVelocity = moveInput * currentMoveSpeed;
         }
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateHealthUI()
     {
         if(healthText == null) return;
-        
+
         healthText.text = "Health: " + currentHealth;
         if(currentHealth <= 0)
         {
@@ -112,23 +115,32 @@ public class PlayerController : MonoBehaviour
             if (Stamina > maxStamina)
             {
                 Stamina = maxStamina;
+                StaminaCanvas.SetActive(false);
             }
             StaminaBar.fillAmount = Stamina / maxStamina;
             yield return new WaitForSeconds(0.1f); // Interval antara setiap penambahan stamina
         } 
     }
 
-    public void SetDamageSave()
+    public void SetPlayerSave()
     {
         damage = PlayerPrefs.GetInt("UpgradedDamage");
+        maxHealth = PlayerPrefs.GetInt("UpgradedHealth");
     }
 
     public void IncreaseDamage()
     {
         damage += 15;
-        PlayerPrefs.SetInt("UpgradedDamage",damage);
+        PlayerPrefs.SetInt("UpgradedDamage", damage);
     }
 
+    public void IncreaseMaxHealth()
+    {
+        maxHealth += 15;
+        PlayerPrefs.SetInt("UpgradedHealth", maxHealth);
+        currentHealth = maxHealth;
+        UpdateHealthUI();
+    }
 
     public void Attack(InputAction.CallbackContext context)
     {
@@ -141,11 +153,12 @@ public class PlayerController : MonoBehaviour
             // AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
+            attackParent.TryAttack(damage);
             if(flameBoost)
             {
+                if(!isAbilityUnlock) return;
                 FlameSlashs();
             }
-            attackParent.TryAttack(damage);
         }
     }
 
@@ -177,6 +190,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         return mousePos;
     }
+
     public void TakeDamage(int damage, Transform enemyTransform, float knockbackForce)
     {
         if (isIFrame) return;
@@ -184,7 +198,7 @@ public class PlayerController : MonoBehaviour
             currentHealth -= damage;
             UpdateHealthUI();
             StartCoroutine(InvincibilityFrame());
-            ScreenShakeManager.instance.ScreenShake(impulseSource);
+            // ScreenShakeManager.instance.ScreenShake(impulseSource);
             PlayerKnockback(enemyTransform, knockbackForce);
 
             if(currentHealth/maxHealth <= 0.7f)

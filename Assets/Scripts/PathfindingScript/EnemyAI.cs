@@ -37,11 +37,14 @@ public class EnemyAI : MonoBehaviour
 
         switch (gameObject.name)
         {
-            case "MeleeEnemy(Clone)":
-                return;
+            case "RangeEnemy":
+                xPos = rangeArea.transform.localScale.x;
+                break;
             case "RangeEnemy(Clone)":
                 xPos = rangeArea.transform.localScale.x;
                 break;
+            default:
+                return;
         }
     }
 
@@ -58,11 +61,14 @@ public class EnemyAI : MonoBehaviour
         {
             switch (gameObject.name)
             {
-                case "MeleeEnemy(Clone)":
-                    seeker.StartPath(rb.position, target.position, OnPathComplete);
+                case "RangeEnemy":
+                    seeker.StartPath(rb.position, circlePoint, OnPathComplete);
                     break;
                 case "RangeEnemy(Clone)":
                     seeker.StartPath(rb.position, circlePoint, OnPathComplete);
+                    break;
+                default:
+                    seeker.StartPath(rb.position, target.position, OnPathComplete);
                     break;
             }
         }
@@ -108,7 +114,8 @@ public class EnemyAI : MonoBehaviour
         if (enemyController.isKnockback == false && isChasing)
         {
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-         
+            if(direction.x < 0 && transform.localScale.x > 0 || direction.x > 0 && transform.localScale.x < 0)
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
             rb.linearVelocity = direction * speed * Time.fixedDeltaTime;
         }
 
