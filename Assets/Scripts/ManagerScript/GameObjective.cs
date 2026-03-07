@@ -8,10 +8,11 @@ public class GameObjective : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
     public int currentHerb;
+    private bool isComplete = false;
 
     void Start()
     {
-        _objectiveText.text = currentHerb + "/" + maxHerb;
+        _objectiveText.text = "Collect Herb: " + currentHerb + "/" + maxHerb;
     }
 
     public void IncreaseHerb()
@@ -20,8 +21,14 @@ public class GameObjective : MonoBehaviour, IInteractable
         UpdateCounter();
     }
 
+    public bool CanInteract()
+    {
+        return isComplete;
+    }
+
     public void Interact()
     {
+        if(!CanInteract()) return;
         EnterBasecamp();
     }
 
@@ -29,7 +36,6 @@ public class GameObjective : MonoBehaviour, IInteractable
     {
         if(currentHerb == maxHerb)
         {
-            Debug.Log("Objective Completed!");
             currentHerb = 0;
             UpdateCounter();
             GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, false);
@@ -42,6 +48,11 @@ public class GameObjective : MonoBehaviour, IInteractable
 
     public void UpdateCounter()
     {
-        _objectiveText.text = currentHerb + "/" + maxHerb;
+        _objectiveText.text = "Collect Herb: " + currentHerb + "/" + maxHerb;
+        if (currentHerb == maxHerb) 
+        {
+            _objectiveText.text = "Return to The Cabin";
+            isComplete = true;
+        }
     }
 }

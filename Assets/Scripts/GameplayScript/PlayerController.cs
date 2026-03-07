@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
     public GameObject flameSlash;
     private bool flameBoost = false;
     private bool isAbilityUnlock = false;
+
+    //animasi
+    private Animator animator;
+
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -44,6 +48,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         impulseSource = GetComponent<CinemachineImpulseSource>();
@@ -96,7 +101,15 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        animator.SetBool("isWalking", true);
+
+        if(context.canceled)
+        {
+            animator.SetBool("isWalking", false);
+        }
         moveInput = context.ReadValue<Vector2>();
+        animator.SetFloat("InputX", moveInput.x);
+        animator.SetFloat("InputY", moveInput.y);
     }
 
     public void onRun (InputAction.CallbackContext context)

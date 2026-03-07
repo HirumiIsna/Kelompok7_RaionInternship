@@ -20,9 +20,9 @@ public class UI_Resource : MonoBehaviour
 
     private void UpdateResourceText()
     {
-        _bahan1Text.text = "Stick: " + ResourceManager.GetBahan1Amount();
-        _bahan2Text.text = "Iron: " + ResourceManager.GetBahan2Amount();
-        _bahan3Text.text = "Leaf: " + ResourceManager.GetBahan3Amount();
+        _bahan1Text.text = ResourceManager.GetBahan1Amount().ToString();
+        _bahan2Text.text = ResourceManager.GetBahan2Amount().ToString();
+        _bahan3Text.text = ResourceManager.GetBahan3Amount().ToString();
     }
 
     public void PauseMenu()
