@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b0c65b659202f40854b0739a4796d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  lastSceneBuildIndex: 1
+  lastSceneBuildIndex: 0
 --- !u!1 &158302366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,11 +2405,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'This version of the build is primarily used for adjusting the level design
+  m_text: This version of the build is primarily used for adjusting the level design
     (game difficulty, progression, etc.). The map layout has started to be organized
     and some assets used are original and created by the Game Artist. The game lore
     itself is nearing its FINAL but there are still several aspects that can be developed.
-    This build MAY contain bugs, either visually or those that affect the gameplay. '
+    This build WILL contain bugs, either visually or those that affect the gameplay.
+    (btw yang buat versi Alpha v0.1.0 cuma demo map sama UI nya aja jadi gameplaynya
+    masi kosongan (boss, dll blom ku masukkin soalnya banyak bugnya))
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6202,7 +6204,7 @@ MonoBehaviour:
   startMenu: {fileID: 1471430983}
   noticeScreen: {fileID: 2006996164}
   beforeMenu: {fileID: 940814310}
-  fadeDuration: 4
+  fadeDuration: 3
   canvasGroup: {fileID: 2006996167}
 --- !u!225 &2006996167
 CanvasGroup:

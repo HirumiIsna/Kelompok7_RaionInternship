@@ -35,7 +35,7 @@ public class ScreenFader : MonoBehaviour
 
         canvasGroup.alpha = 1;
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
         // Fade Out
         t = fadeDuration;

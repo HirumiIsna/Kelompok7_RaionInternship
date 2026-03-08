@@ -30,11 +30,6 @@ public class EnemyAI : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         InvokeRepeating("UpdatePath", 0f, 1f);
         rangeArea = target.Find("RangeArea");
-        if(rangeArea != null)
-        {
-            Debug.Log("Found the RangeArea: " + rangeArea);
-        }
-
         switch (gameObject.name)
         {
             case "RangeEnemy":

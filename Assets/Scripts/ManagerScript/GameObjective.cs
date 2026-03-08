@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameObjective : MonoBehaviour, IInteractable
@@ -36,9 +35,10 @@ public class GameObjective : MonoBehaviour, IInteractable
     {
         if(currentHerb == maxHerb)
         {
-            currentHerb = 0;
             UpdateCounter();
-            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, false);
+            Debug.Log("Entering Basecamp");
+            GameManager.instance.BasecampScene(GameManager.instance.GetCurrentSceneIndex(), false);
+            currentHerb = 0;
         }
         else
         {

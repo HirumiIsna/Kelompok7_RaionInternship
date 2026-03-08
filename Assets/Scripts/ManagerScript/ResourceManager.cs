@@ -30,7 +30,6 @@ public static class ResourceManager
     public static void AddBahan1Amount()
     {
         bahan1Amount++;
-        PlayerPrefs.SetInt("bahan1save", GetBahan1Amount());
         if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
     }
 

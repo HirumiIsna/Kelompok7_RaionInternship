@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int lastSceneBuildIndex = 1;
+    public int lastSceneBuildIndex = 0;
     private bool isPlayerDead = false;
     private GameObject _player;
 
@@ -29,17 +29,17 @@ public class GameManager : MonoBehaviour
 
     public void OnStartClick()
     {
-        AudioManager.instance.PlaySFX();
+        // AudioManager.instance.PlaySFX();
         SceneManager.LoadScene("Basecamp");
         PlayerPrefs.DeleteAll();
         ResourceManager.NewGameReset();
-        lastSceneBuildIndex = 1;
+        lastSceneBuildIndex = 0;
     }
 
     public void Continue()
     {
-        AudioManager.instance.PlaySFX();
-        if(lastSceneBuildIndex == 1) return;
+        // AudioManager.instance.PlaySFX();
+        if(lastSceneBuildIndex == 0) return;
         SceneManager.LoadScene("Basecamp");
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
     }
@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
 
     public void BasecampScene(int lastSceneIndex, bool respawn)
     {
+        SceneManager.LoadScene("Basecamp");
         SaveDay(lastSceneIndex);
         lastSceneBuildIndex = lastSceneIndex;
         isPlayerDead = respawn;
-        SceneManager.LoadScene("Basecamp");
     }
 
     public void SaveDay(int lastSceneIndex)
@@ -65,31 +65,34 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("LastSceneIndex", lastSceneIndex);
     }
 
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void NextDay()
     {
-        SceneManager.LoadScene("Day_1");
-        // if(lastSceneBuildIndex == 0)
-        // {
-        //     SceneManager.LoadScene("Day_1");
-        // }
-        // else if (isPlayerDead)
-        // {
-        //     SceneManager.LoadScene(lastSceneBuildIndex);
-        // }
-        // else
-        // {
-        //     if(lastSceneBuildIndex + 1 == 6)
-        //     {
-        //         AudioManager.instance.PlaySewage();
-        //         AudioManager.instance.PlayPolice();
-        //     }
-        //     SceneManager.LoadScene(lastSceneBuildIndex + 1);
-        // }
+        if(lastSceneBuildIndex == 0)
+        {
+            SceneManager.LoadScene("Day_1");
+        }
+        else if (isPlayerDead)
+        {
+            SceneManager.LoadScene(lastSceneBuildIndex);
+        }
+        else
+        {
+            if(lastSceneBuildIndex + 1 == 7)
+            {
+                Debug.Log("Normal Ending");
+            }
+            SceneManager.LoadScene(lastSceneBuildIndex + 1);
+        }
     }
 
     public void BackToMenu()
     {
-        AudioManager.instance.StopSFX();
+        // AudioManager.instance.StopSFX();
         SceneManager.LoadScene("StartScene");
     }
 }

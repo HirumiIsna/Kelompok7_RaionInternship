@@ -48,18 +48,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+        animator = playerGFX.GetComponent<Animator>();
+        Debug.Log(animator);
         currentHealth = maxHealth;
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        UpdateHealthUI();
-        if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth"))
-        {
-            damage = 35;
-        }
-        else SetPlayerSave();
         Stamina = maxStamina;
         StaminaCanvas.SetActive(false);
+        UpdateHealthUI();
+        if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth")) //ganti ke logika kalo mencet new game baru reset
+        {
+            damage = 35;
+            maxHealth = 100;
+        }
+        else SetPlayerSave();
     }
 
     // Update is called once per frame
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("InputY", moveInput.y);
     }
 
-    public void onRun (InputAction.CallbackContext context)
+    public void OnRun (InputAction.CallbackContext context)
     {
         runPressed =  true;
         if(context.canceled) runPressed = false;
@@ -141,18 +143,18 @@ public class PlayerController : MonoBehaviour
         maxHealth = PlayerPrefs.GetInt("UpgradedHealth");
     }
 
-    public void IncreaseDamage()
+    public int IncreaseDamage()
     {
         damage += 15;
-        PlayerPrefs.SetInt("UpgradedDamage", damage);
+        return damage;
     }
 
-    public void IncreaseMaxHealth()
+    public int IncreaseMaxHealth()
     {
         maxHealth += 15;
-        PlayerPrefs.SetInt("UpgradedHealth", maxHealth);
         currentHealth = maxHealth;
         UpdateHealthUI();
+        return maxHealth;
     }
 
     public void Attack(InputAction.CallbackContext context)
