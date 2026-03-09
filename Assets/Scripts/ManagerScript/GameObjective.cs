@@ -11,7 +11,7 @@ public class GameObjective : MonoBehaviour, IInteractable
 
     void Start()
     {
-        _objectiveText.text = "Collect Herb: " + currentHerb + "/" + maxHerb;
+        _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
     }
 
     public void IncreaseHerb()
@@ -48,10 +48,10 @@ public class GameObjective : MonoBehaviour, IInteractable
 
     public void UpdateCounter()
     {
-        _objectiveText.text = "Collect Herb: " + currentHerb + "/" + maxHerb;
+        _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
         if (currentHerb == maxHerb) 
         {
-            _objectiveText.text = "Return to The Cabin";
+            _objectiveText.text = " - Return to The Cabin";
             isComplete = true;
         }
     }

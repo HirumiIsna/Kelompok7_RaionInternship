@@ -8,7 +8,6 @@ TagManager:
   - Herbal
   - Boss
   - BasecampObjective
-  - SpawnArea
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public static int damage = 15;
     private bool isKnockback = false;
     public TMP_Text healthText;
+    public Image healthBar;
     public int iFrameDuration;
     private bool isIFrame = false;
     private SpriteRenderer spriteRenderer;
@@ -95,9 +96,11 @@ public class PlayerController : MonoBehaviour
         if(healthText == null) return;
 
         healthText.text = "Health: " + currentHealth;
+        healthBar.fillAmount = (float)currentHealth/maxHealth;
         if(currentHealth <= 0)
         {
             healthText.text = "Health: 0";
+            healthBar.fillAmount = 0;
         }
     }
 
