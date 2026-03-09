@@ -11,10 +11,22 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
 
     [Header("Audio Clip")]
-    public AudioClip background;
+    [Header("Music")]
+    public AudioClip background1;
+    public AudioClip background2;
+    public AudioClip background3;
+
+    [Header("Sound Effect")]
+    [Header("Character")]
     public AudioClip slash;
     public AudioClip deflect;
-    public AudioClip sewage;
+    public AudioClip pickup;
+    public AudioClip bushes;
+
+    [Header("Monster")]
+    public AudioClip slimeDeath;
+
+    [Header("Misc")]
     public AudioClip police;
     public AudioClip rain;
 
@@ -34,13 +46,13 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlayMusic();
+        
     }
 
     public void PlayMusic()
     {
         musicSource.volume = 0.5f;
-        musicSource.clip = background;
+        musicSource.clip = background1;
         musicSource.Play();
     }
 
@@ -54,10 +66,19 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(deflect);
     }
 
-    public void PlaySewage()
+    public void PlayPickup()
     {
-        musicSource.Pause();
-        sfxSource.PlayOneShot(sewage);
+        sfxSource.PlayOneShot(pickup);
+    }
+
+    public void PlayBush()
+    {
+        sfxSource.PlayOneShot(bushes);
+    }
+
+    public void PlaySlimeDeath()
+    {
+        sfxSource.PlayOneShot(slimeDeath);
     }
 
     public void PlayPolice()

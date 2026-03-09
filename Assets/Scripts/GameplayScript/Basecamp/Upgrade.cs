@@ -3,9 +3,16 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour, IInteractable
 {
     public GameObject upgradeCanvas;
+    private bool isUpgraded = false;
+
+    public bool CanInteract()
+    {
+        return !isUpgraded;
+    }
 
     public void Interact()
     {
+        if(!CanInteract()) return;
         upgradeCanvas.SetActive(true);
     }
 

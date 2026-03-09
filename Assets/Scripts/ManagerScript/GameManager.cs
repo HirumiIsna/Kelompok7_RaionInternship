@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public int lastSceneBuildIndex = 0;
     private bool isPlayerDead = false;
     private GameObject _player;
+    private bool isGoodEnding = false;
+    private int deadCount = 1;
 
     private void Awake()
     {
@@ -52,12 +54,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void BasecampScene(int lastSceneIndex, bool respawn)
+    public void BasecampScene(int lastSceneIndex, bool respawn, bool goodEnding)
     {
         SceneManager.LoadScene("Basecamp");
         SaveDay(lastSceneIndex);
         lastSceneBuildIndex = lastSceneIndex;
         isPlayerDead = respawn;
+        Debug.Log(goodEnding);
+        Debug.Log(deadCount);
+        isGoodEnding = goodEnding;
     }
 
     public void SaveDay(int lastSceneIndex)
@@ -72,19 +77,29 @@ public class GameManager : MonoBehaviour
 
     public void NextDay()
     {
-        if(lastSceneBuildIndex == 0)
+        if(deadCount>=3)
+        {
+            SceneManager.LoadScene("BadEnding");
+        }
+        else if(lastSceneBuildIndex == 0)
         {
             SceneManager.LoadScene("Day_1");
         }
         else if (isPlayerDead)
         {
+            deadCount++;
             SceneManager.LoadScene(lastSceneBuildIndex);
+        }
+        else if (isGoodEnding)
+        {
+            SceneManager.LoadScene("GoodEnding");
         }
         else
         {
+            deadCount = 0;
             if(lastSceneBuildIndex + 1 == 7)
             {
-                Debug.Log("Normal Ending");
+                SceneManager.LoadScene("NormalEnding");
             }
             SceneManager.LoadScene(lastSceneBuildIndex + 1);
         }

@@ -65,8 +65,8 @@ public class SleepSaving : MonoBehaviour, IInteractable
         PlayerPrefs.SetInt("bahan1save", ResourceManager.GetBahan1Amount());
         PlayerPrefs.SetInt("bahan2save", ResourceManager.GetBahan2Amount());
         PlayerPrefs.SetInt("bahan3save", ResourceManager.GetBahan3Amount());
-        PlayerPrefs.SetInt("UpgradedDamage", playerController.IncreaseDamage());
-        PlayerPrefs.SetInt("UpgradedHealth", playerController.IncreaseMaxHealth());
+        PlayerPrefs.SetInt("UpgradedDamage", playerController.damage);
+        PlayerPrefs.SetFloat("UpgradedHealth", playerController.maxHealth);
 
     }
 

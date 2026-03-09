@@ -218,6 +218,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   knockbackForce: 5
+  screenFlash: {fileID: 0}
 --- !u!1 &3215399279155445697
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +761,7 @@ MonoBehaviour:
   playerGFX: {fileID: 6032711589382770140}
   slashEffect: {fileID: 492279140723911335}
   healthText: {fileID: 0}
+  healthBar: {fileID: 0}
   iFrameDuration: 1
   runSpeed: 6
   StaminaBar: {fileID: 8043439519872760457}
@@ -945,6 +947,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6ddd76af-daa8-4d9d-90a2-a4616e2fd6c1
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1086,7 +1092,7 @@ MonoBehaviour:
     DissipationMode: 2
     DissipationDistance: 100
     PropagationSpeed: 343
-  DefaultVelocity: {x: 0, y: -0.125, z: 0}
+  DefaultVelocity: {x: 0, y: -0.25, z: 0}
 --- !u!1 &7250960771030240101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &527864162191434781
 Transform:
   m_ObjectHideFlags: 0
@@ -1113,7 +1119,7 @@ Transform:
   m_GameObject: {fileID: 7250960771030240101}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []

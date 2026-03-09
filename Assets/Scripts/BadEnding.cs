@@ -22,13 +22,6 @@ public class BadEnding : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         CreditPanel.SetActive(true);
-
-        yield return new WaitForSeconds(2f);
         CreditText.SetActive(true);
-        while (rectTransform.anchoredPosition.y < stopY)
-        {
-            rectTransform.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
-            yield return null;
-        }
     }
 }

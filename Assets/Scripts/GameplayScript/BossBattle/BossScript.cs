@@ -7,7 +7,7 @@ public class BossScript : MonoBehaviour, IInteractable
     public Transform player;
     public Transform centerPoint;
 
-    public GameObject bossCanvas;
+    public GameObject bossHealthCanvas;
     public GameObject dialogueObject;
     public GameObject bossGFX;
     private SpriteRenderer _spriteRenderer;
@@ -31,6 +31,9 @@ public class BossScript : MonoBehaviour, IInteractable
     private bool isDashing;
     private bool hitPlayer;
     private bool bossStart = false;
+    private bool canInteract = false;
+
+    public GameObject potion;
 
     void Start()
     {
@@ -41,14 +44,14 @@ public class BossScript : MonoBehaviour, IInteractable
 
     public bool CanInteract()
     {
-        return !bossStart;
+        return !canInteract;
     }
 
     public void Interact()
     {
         if (!CanInteract()) return;
         dialogueObject.SetActive(true);
-        StartCoroutine(StartBoss());
+        canInteract = true;
     }
 
     public enum BossState
@@ -60,12 +63,11 @@ public class BossScript : MonoBehaviour, IInteractable
         Recover
     }
 
-    private IEnumerator StartBoss()
+    public void StartBoss()
     {
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(StateLoop());
-        bossCanvas.SetActive(true);
         bossStart = true;
+        bossHealthCanvas.SetActive(true);
+        StartCoroutine(StateLoop());
     }
 
     IEnumerator StateLoop()
@@ -88,7 +90,7 @@ public class BossScript : MonoBehaviour, IInteractable
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (!bossStart) return;
         
@@ -98,19 +100,15 @@ public class BossScript : MonoBehaviour, IInteractable
 
         if(currentHealth <= 0)
         {
-            Debug.Log("Is The Boss Dead?");
             currentHealth = 0;
             BossDead();
-            StartCoroutine(HitStop(.05f));   
+            StartCoroutine(HitStop(0.05f));   
         }
         else
         {
             StartCoroutine(FlashDamage());
-            StartCoroutine(HitStop(.008f));   
+            StartCoroutine(HitStop(0.01f));   
         }
-
-        StartCoroutine(FlashDamage());
-        StartCoroutine(HitStop(0.01f));
     }
 
     public void UpdateHealthUI()
@@ -136,8 +134,9 @@ public class BossScript : MonoBehaviour, IInteractable
     private void BossDead()
     {
         Debug.Log("Boss Defeated!");
-        bossCanvas.SetActive(false);
-        Destroy(gameObject, 2f);
+        bossHealthCanvas.SetActive(false);
+        Instantiate(potion, transform.position, Quaternion.identity);
+        Destroy(gameObject, 1f);
     }
 
     IEnumerator ChaseAttack()
@@ -183,45 +182,44 @@ public class BossScript : MonoBehaviour, IInteractable
 
     IEnumerator NeedleAttack()
     {
-        Debug.Log("Needle Attack");
+        Debug.Log("Needle Attack"); //ntar ku revisi lagi paling klo ku tambahin phase2
 
         int needleDirection = Random.Range(0,2);
 
         Vector2 moveNeedle = Vector2.up;
         int needlePos = 0;
         Quaternion needleRotation = Quaternion.Euler(0,0,0);
-        int defaultX = 18;
-        int xPos = defaultX;
+        int defaultXPos = (int)centerPoint.position.x - 4;
+        int defaultYPos = (int)centerPoint.position.y;
+        int currentXPos = defaultXPos;
 
         switch (needleDirection)
         {
             case 0: //spawn dibawah trus keatas
-                needlePos = -10;
+                needlePos = defaultYPos - 10;
                 needleRotation = Quaternion.Euler(0,0,0);
-                xPos = defaultX;
                 break;
             case 1: //spawn diatas trus kebawah
-                needlePos = 10;
+                needlePos = defaultYPos + 20;
                 needleRotation = Quaternion.Euler(0,0,180);
-                xPos = 16;
-                defaultX = xPos;
                 break;
         } 
 
         for(int i = 0; i < 3; i++)
         {
-            GameObject warn = Instantiate(warningPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            xPos += 5;
+            GameObject warn = Instantiate(warningPrefab, new Vector3(currentXPos, defaultYPos, 0), Quaternion.identity);
+            currentXPos += 5;
             Destroy(warn, 1f);
             yield return new WaitForSeconds(.25f);
         }
 
-        xPos = defaultX;
+        currentXPos = defaultXPos;
         yield return new WaitForSeconds(.5f);
+
         for(int i = 0; i < 3; i++)
         {
-            GameObject needle = Instantiate(needlePrefab, new Vector3(xPos, needlePos, 0), needleRotation);
-            xPos += 5;
+            GameObject needle = Instantiate(needlePrefab, new Vector3(currentXPos, needlePos - 10, 0), needleRotation);
+            currentXPos += 5;
             needle.GetComponent<Needle>().Initialize(moveNeedle);
             yield return new WaitForSeconds(.25f);
         }

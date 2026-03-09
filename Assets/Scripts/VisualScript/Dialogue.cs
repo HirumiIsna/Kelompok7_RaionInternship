@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
+
 public class Dialogue : MonoBehaviour
 {
 
@@ -9,16 +11,23 @@ public class Dialogue : MonoBehaviour
     public string[] lines;
     public float textSpeed;
     private int index;
+
+    private bool canSkip = false; //buat fix interact e sama skip dialog
+    public UnityEvent dialogueEnd;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         textComponent.text = string.Empty;
         StartDialogue();
+        StartCoroutine(EnableSkip());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!canSkip) return;
+
         if (Input.GetKeyDown("e") || Input.GetMouseButtonDown(0))
         {
             if (textComponent.text == lines[index])
@@ -59,6 +68,13 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            dialogueEnd.Invoke();
         }
+    }
+
+    IEnumerator EnableSkip()
+    {
+        yield return new WaitForSeconds(0.25f);
+        canSkip = true;
     }
 }

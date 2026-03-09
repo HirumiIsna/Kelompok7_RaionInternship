@@ -8,10 +8,31 @@ public class GameObjective : MonoBehaviour, IInteractable
     public int maxHerb;
     public int currentHerb;
     private bool isComplete = false;
+    public bool goodEnding = false;
 
     void Start()
     {
-        _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+        switch(GameManager.instance.GetCurrentSceneIndex())
+        {
+            case 2:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 3:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 4:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 5:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 6:
+                _objectiveText.text = " - Find The Doctor";
+                break;
+            case 7:
+                _objectiveText.text = " - Find Your Brother";
+                break;
+        }
     }
 
     public void IncreaseHerb()
@@ -28,22 +49,7 @@ public class GameObjective : MonoBehaviour, IInteractable
     public void Interact()
     {
         if(!CanInteract()) return;
-        EnterBasecamp();
-    }
-
-    public void EnterBasecamp()
-    {
-        if(currentHerb == maxHerb)
-        {
-            UpdateCounter();
-            Debug.Log("Entering Basecamp");
-            GameManager.instance.BasecampScene(GameManager.instance.GetCurrentSceneIndex(), false);
-            currentHerb = 0;
-        }
-        else
-        {
-            Debug.Log("I need to collect more herbs! Current: " + currentHerb + "/" + maxHerb);
-        }
+        EnterBasecamp(goodEnding);
     }
 
     public void UpdateCounter()
@@ -51,8 +57,20 @@ public class GameObjective : MonoBehaviour, IInteractable
         _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
         if (currentHerb == maxHerb) 
         {
-            _objectiveText.text = " - Return to The Cabin";
-            isComplete = true;
+            ObjectiveFinish();
         }
+        goodEnding = false;
+    }
+
+    public void ObjectiveFinish()
+    {
+        _objectiveText.text = " - Return to The Cabin";
+        isComplete = true;
+    }
+
+    public void EnterBasecamp(bool goodEnding)
+    {
+        GameManager.instance.BasecampScene(GameManager.instance.GetCurrentSceneIndex(), false, goodEnding);
     }
 }
+

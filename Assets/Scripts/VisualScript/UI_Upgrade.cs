@@ -25,6 +25,7 @@ public class UI_Upgrade : MonoBehaviour
         {
             PlayerController playerController = _player.GetComponent<PlayerController>();
             playerController.IncreaseMaxHealth();
+            playerController.UpdateHealthUI();
         };
     }
 }
