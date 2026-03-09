@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class AttackParent : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class AttackParent : MonoBehaviour
     public Vector2 mousePosition;
     public LayerMask enemyLayer;
     public float knockbackForce; // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    public GameObject screenFlash;
 
     // Update is called once per frame
     void Update()
@@ -41,11 +43,19 @@ public class AttackParent : MonoBehaviour
             {
                 // AudioManager.instance.PlayDeflect();
                 bulletController.DeflectArrow();
+                StartCoroutine(DeflectFlash());
             }
             else if (bossScript)
             {
                 bossScript.TakeDamage(damage);
             }
         }
+    }
+
+    private IEnumerator DeflectFlash()
+    {
+        screenFlash.SetActive(true);
+        yield return new WaitForSeconds(0.125f);
+        screenFlash.SetActive(false);
     }
 }

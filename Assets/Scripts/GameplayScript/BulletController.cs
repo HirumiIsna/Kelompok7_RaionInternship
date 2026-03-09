@@ -49,9 +49,9 @@ public class BulletController : MonoBehaviour
 
     private IEnumerator Deflect()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0f;
         Destroy(gameObject.GetComponent<BoxCollider2D>());
-        yield return new WaitForSeconds(.125f);
+        yield return new WaitForSecondsRealtime(.25f);
         Time.timeScale = 1f;
         Destroy(gameObject);
     }

@@ -13,6 +13,7 @@ public class ObjectSpawner : MonoBehaviour
     public SpawnAreaData[] spawnAreas;
     public GameObject meleePrefab;
     public GameObject rangePrefab;
+    private NPCPatrol npcPatrol;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,14 +28,18 @@ public class ObjectSpawner : MonoBehaviour
             for (int i = 0; i < areaData.meleeEnemies; i++)
             {
                 Vector2 pos = GetRandomPointInBounds(box);
-                Instantiate(meleePrefab, pos, Quaternion.identity);
+                GameObject melee = Instantiate(meleePrefab, pos, Quaternion.identity);
+                NPCPatrol npcPatrol = melee.GetComponent<NPCPatrol>();
+                npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
             }
 
             // Spawn Range
             for (int i = 0; i < areaData.rangeEnemies; i++)
             {
                 Vector2 pos = GetRandomPointInBounds(box);
-                Instantiate(rangePrefab, pos, Quaternion.identity);
+                GameObject range = Instantiate(rangePrefab, pos, Quaternion.identity);
+                NPCPatrol npcPatrol = range.GetComponent<NPCPatrol>();
+                npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
             }
         }
     }

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private CinemachineImpulseSource impulseSource;
     public GameObject flameSlash;
     private bool flameBoost = false;
-    private bool isAbilityUnlock = false;
+    private bool isAbilityUnlock = false; //jangan lupa diganti klo mau nyalain
 
     //animasi
     private Animator animator;

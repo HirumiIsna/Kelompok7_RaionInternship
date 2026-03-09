@@ -17,15 +17,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Day_2.unity
     guid: bfa2b8a785790a04e81599c51a8d069e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Day_3.unity
-    guid: 7871fb80195fb0b4c8c9e85898fc0239
-  - enabled: 0
-    path: Assets/Scenes/Day_5 BossBattle.unity
-    guid: 41ae9add072f5c34b98b350ec6aa94e7
+    guid: 25bdccf215eb106429bc4e8423249a0c
+  - enabled: 1
+    path: Assets/Scenes/Day_4.unity
+    guid: dbb4debee24e332439cc21e2e3bc61ea
+  - enabled: 1
+    path: Assets/Scenes/Day_5.unity
+    guid: 25f01782b0ce2854f9424dbb39831ff4
   - enabled: 0
     path: Assets/Scenes/Hospital.unity
     guid: fcb288422c9a35542816892714390661
+  - enabled: 0
+    path: Assets/Scenes/Day_5 BossBattle.unity
+    guid: 41ae9add072f5c34b98b350ec6aa94e7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
