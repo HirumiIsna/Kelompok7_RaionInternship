@@ -8,7 +8,8 @@ using Unity.Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [Header("Player")] 
+    public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private AttackParent attackParent;
@@ -16,26 +17,39 @@ public class PlayerController : MonoBehaviour
     public GameObject playerGFX;
     public GameObject slashEffect;
     private bool isAttacking = false;
-    public static int maxHealth = 100;
-    private int currentHealth;
-    public static int damage = 15;
-    private bool isKnockback = false;
+
+    [Header("Health")]
+    public float maxHealth = 100;
+    private float currentHealth;
     public TMP_Text healthText;
+    public Image healthBar;
     public int iFrameDuration;
     private bool isIFrame = false;
-    private SpriteRenderer spriteRenderer;
+
+    [Header("Sprint")]
     public float runSpeed = 8f;
-    private bool runPressed = false;
     public Image StaminaBar;
     public GameObject StaminaCanvas;
     public float maxStamina, Stamina;
     public float RunCost;
     public float ChargeRate;
+    private bool runPressed = false;
     private Coroutine recharge;
+
+    [Header("Temp Damage")]
+    public int damage = 15;
+    private bool isKnockback = false;
+    private SpriteRenderer spriteRenderer;
     private CinemachineImpulseSource impulseSource;
+
+    [Header("Ability")]
     public GameObject flameSlash;
-    private bool flameBoost = false;
-    private bool isAbilityUnlock = false;
+    private bool flameBoost = false; //setting bentar
+    public bool isAbilityUnlock = false; //jangan lupa diganti klo mau nyalain
+
+    //animasi
+    private Animator animator;
+
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -45,16 +59,18 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
         currentHealth = maxHealth;
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        UpdateHealthUI();
-        if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth"))
-        {
-            damage = 35;
-        }
-        else SetPlayerSave();
         Stamina = maxStamina;
         StaminaCanvas.SetActive(false);
+        if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth")) //ganti ke logika kalo mencet new game baru reset
+        {
+            damage = 35;
+            maxHealth = 100;
+        }
+        else GetPlayerSave();
+        UpdateHealthUI();
     }
 
     // Update is called once per frame
@@ -83,23 +99,20 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void UpdateHealthUI()
-    {
-        if(healthText == null) return;
-
-        healthText.text = "Health: " + currentHealth;
-        if(currentHealth <= 0)
-        {
-            healthText.text = "Health: 0";
-        }
-    }
-
     public void Move(InputAction.CallbackContext context)
     {
+        animator.SetBool("isWalking", true);
+
+        if(context.canceled)
+        {
+            animator.SetBool("isWalking", false);
+        }
         moveInput = context.ReadValue<Vector2>();
+        animator.SetFloat("InputX", moveInput.x);
+        animator.SetFloat("InputY", moveInput.y);
     }
 
-    public void onRun (InputAction.CallbackContext context)
+    public void OnRun (InputAction.CallbackContext context)
     {
         runPressed =  true;
         if(context.canceled) runPressed = false;
@@ -122,24 +135,25 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
-    public void SetPlayerSave()
+    public void GetPlayerSave()
     {
         damage = PlayerPrefs.GetInt("UpgradedDamage");
-        maxHealth = PlayerPrefs.GetInt("UpgradedHealth");
+        maxHealth = PlayerPrefs.GetFloat("UpgradedHealth");
+        currentHealth = maxHealth;
     }
 
-    public void IncreaseDamage()
+    public int IncreaseDamage()
     {
         damage += 15;
-        PlayerPrefs.SetInt("UpgradedDamage", damage);
+        return damage;
     }
 
-    public void IncreaseMaxHealth()
+    public float IncreaseMaxHealth()
     {
         maxHealth += 15;
-        PlayerPrefs.SetInt("UpgradedHealth", maxHealth);
         currentHealth = maxHealth;
         UpdateHealthUI();
+        return maxHealth;
     }
 
     public void Attack(InputAction.CallbackContext context)
@@ -181,6 +195,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Instantiated Flame");
         Quaternion slashPoint = attackPoint.rotation * Quaternion.Euler(0, 0, 90);
         GameObject fireSlash = Instantiate(flameSlash, attackPoint.position, slashPoint);
+        fireSlash.GetComponent<FlameSlash>().SetFlameDamage(damage);
         Rigidbody2D rb = fireSlash.GetComponent<Rigidbody2D>();
         rb.AddForce(attackPoint.up * 9f, ForceMode2D.Impulse);   
     }
@@ -196,10 +211,11 @@ public class PlayerController : MonoBehaviour
         if (isIFrame) return;
         {
             currentHealth -= damage;
-            UpdateHealthUI();
             StartCoroutine(InvincibilityFrame());
-            // ScreenShakeManager.instance.ScreenShake(impulseSource);
+            ScreenShakeManager.instance.ScreenShake(impulseSource);
             PlayerKnockback(enemyTransform, knockbackForce);
+
+            UpdateHealthUI();
 
             if(currentHealth/maxHealth <= 0.7f)
             {
@@ -212,6 +228,20 @@ public class PlayerController : MonoBehaviour
                 currentHealth = 0;
                 StartCoroutine(Dead());
             }
+        }
+    }
+
+    public void UpdateHealthUI()
+    {
+        Debug.Log("Current: " + currentHealth + " Max: " + maxHealth);
+        
+        if(healthText == null) return;
+        healthText.text = "Health: " + currentHealth;
+        healthBar.fillAmount = currentHealth/maxHealth;
+        if(currentHealth <= 0)
+        {
+            healthText.text = "Health: 0";
+            healthBar.fillAmount = 0;
         }
     }
 
@@ -257,6 +287,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dead()
     {
         yield return new WaitForSeconds(0.5f);
-        GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, true);
+        GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, true, false);
     }
 }

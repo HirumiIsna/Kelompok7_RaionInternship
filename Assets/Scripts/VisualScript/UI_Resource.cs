@@ -20,13 +20,19 @@ public class UI_Resource : MonoBehaviour
 
     private void UpdateResourceText()
     {
-        _bahan1Text.text = "Stick: " + ResourceManager.GetBahan1Amount();
-        _bahan2Text.text = "Iron: " + ResourceManager.GetBahan2Amount();
-        _bahan3Text.text = "Leaf: " + ResourceManager.GetBahan3Amount();
+        _bahan1Text.text = ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan1).ToString();
+        _bahan2Text.text = ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan2).ToString();
+        _bahan3Text.text = ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan3).ToString();
     }
 
     public void PauseMenu()
     {
+        if(Time.timeScale == 0f)
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+            return;
+        }
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
     }

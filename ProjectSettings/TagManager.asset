@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - ObjectiveManager
   - Herbal
   - Boss
+  - BasecampObjective
+  - Bushes
   layers:
   - Default
   - TransparentFX

@@ -499,6 +499,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87eb76e8454ce4e45a9735623b141a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
-  patrolPoints: []
   speed: 2
   pauseDuration: 1.5
+  wanderWidth: 0
+  wanderHeight: 0
+  startingPosition: {x: 0, y: 0}
+  target: {x: 0, y: 0}

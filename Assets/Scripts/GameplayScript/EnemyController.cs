@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;  
+using Unity.Cinemachine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Material flashMaterial;
     private Material originalMaterial;
@@ -22,6 +23,9 @@ public class EnemyController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletPos;
 
+    //animation
+    private Animator animator;
+
     //LootTable
     [Header("Loot)]")]
     public List<LootItem> lootTable = new List<LootItem>();
@@ -36,6 +40,8 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
 
         _rb = GetComponent<Rigidbody2D>();
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -67,9 +73,9 @@ public class EnemyController : MonoBehaviour
     public void DealDamage()
     {
         PlayerController playerController = _player.GetComponent<PlayerController>();
-    
+
         if (playerController != null)
-        {
+        {   
             playerController.TakeDamage(bodyDamage, transform, 7f);
         }
     }
@@ -77,21 +83,21 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-    
+
+        animator.Play("Hurt");
+
         if(currentHealth <= 0)
         {
             currentHealth = 0;
+            StartCoroutine(FlashDamage());
             StartCoroutine(Dead());
             StartCoroutine(HitStop(.01f));   
         }
         else
         {
             StartCoroutine(FlashDamage());
-            StartCoroutine(HitStop(.008f));   
+            StartCoroutine(HitStop(.01f));   
         }
-
-        StartCoroutine(FlashDamage());
-        StartCoroutine(HitStop(0.01f));
     }
 
     private IEnumerator HitStop(float Duration)
@@ -110,6 +116,7 @@ public class EnemyController : MonoBehaviour
 
     public IEnumerator Dead()
     {
+        animator.Play("Dead");
         foreach (LootItem lootItem in lootTable)
         {
            if (Random.Range(0f, 100f) <= lootItem.dropChance) 
@@ -119,7 +126,7 @@ public class EnemyController : MonoBehaviour
                 break; 
             }
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 

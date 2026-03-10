@@ -20,6 +20,8 @@ public class EnemyAI : MonoBehaviour
     private Seeker seeker;
     Rigidbody2D rb;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,11 +32,7 @@ public class EnemyAI : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         InvokeRepeating("UpdatePath", 0f, 1f);
         rangeArea = target.Find("RangeArea");
-        if(rangeArea != null)
-        {
-            Debug.Log("Found the RangeArea: " + rangeArea);
-        }
-
+        animator = GetComponentInChildren<Animator>();
         switch (gameObject.name)
         {
             case "RangeEnemy":
@@ -116,6 +114,16 @@ public class EnemyAI : MonoBehaviour
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
             if(direction.x < 0 && transform.localScale.x > 0 || direction.x > 0 && transform.localScale.x < 0)
             transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
+
+            if (Vector2.Distance(transform.position, player.transform.position) < 1.5f)
+            {
+                animator.Play("Attack");
+            } 
+            else 
+            {
+                animator.Play("Walk");
+            }
+
             rb.linearVelocity = direction * speed * Time.fixedDeltaTime;
         }
 

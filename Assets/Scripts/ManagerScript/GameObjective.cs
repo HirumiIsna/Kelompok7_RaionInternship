@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameObjective : MonoBehaviour, IInteractable
@@ -8,10 +7,32 @@ public class GameObjective : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text _objectiveText;
     public int maxHerb;
     public int currentHerb;
+    private bool isComplete = false;
+    public bool goodEnding = false;
 
     void Start()
     {
-        _objectiveText.text = currentHerb + "/" + maxHerb;
+        switch(GameManager.instance.GetCurrentSceneIndex())
+        {
+            case 2:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 3:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 4:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 5:
+                _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+                break;
+            case 6:
+                _objectiveText.text = " - Find The Doctor";
+                break;
+            case 7:
+                _objectiveText.text = " - Find Your Brother";
+                break;
+        }
     }
 
     public void IncreaseHerb()
@@ -20,28 +41,36 @@ public class GameObjective : MonoBehaviour, IInteractable
         UpdateCounter();
     }
 
-    public void Interact()
+    public bool CanInteract()
     {
-        EnterBasecamp();
+        return isComplete;
     }
 
-    public void EnterBasecamp()
+    public void Interact()
     {
-        if(currentHerb == maxHerb)
-        {
-            Debug.Log("Objective Completed!");
-            currentHerb = 0;
-            UpdateCounter();
-            GameManager.instance.BasecampScene(SceneManager.GetActiveScene().buildIndex, false);
-        }
-        else
-        {
-            Debug.Log("I need to collect more herbs! Current: " + currentHerb + "/" + maxHerb);
-        }
+        if(!CanInteract()) return;
+        EnterBasecamp(goodEnding);
     }
 
     public void UpdateCounter()
     {
-        _objectiveText.text = currentHerb + "/" + maxHerb;
+        _objectiveText.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
+        if (currentHerb == maxHerb) 
+        {
+            ObjectiveFinish();
+        }
+        goodEnding = false;
+    }
+
+    public void ObjectiveFinish()
+    {
+        _objectiveText.text = " - Return to The Cabin";
+        isComplete = true;
+    }
+
+    public void EnterBasecamp(bool goodEnding)
+    {
+        GameManager.instance.BasecampScene(GameManager.instance.GetCurrentSceneIndex(), false, goodEnding);
     }
 }
+
