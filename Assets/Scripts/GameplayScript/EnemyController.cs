@@ -117,19 +117,40 @@ public class EnemyController : MonoBehaviour
     public IEnumerator Dead()
     {
         animator.Play("Dead");
-        foreach (LootItem lootItem in lootTable)
-        {
-           if (Random.Range(0f, 100f) <= lootItem.dropChance) 
-            {
-                Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
-                InstantiateLoot(lootItem.itemPrefab);
-                break; 
-            }
-        }
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        LootItem loot = GetRandomLoot();
+
+    if (loot != null)
+    {
+        InstantiateLoot(loot.itemPrefab);
     }
 
+    yield return new WaitForSeconds(0.5f);
+    Destroy(gameObject);
+    }
+
+    LootItem GetRandomLoot()
+    {
+        float totalWeight = 0f;
+
+        foreach (LootItem item in lootTable)
+        {
+            totalWeight += item.dropChance;
+        }
+
+        float randomNumber = Random.Range(0f, totalWeight);
+
+        foreach (LootItem item in lootTable)
+        {
+            if (randomNumber < item.dropChance)
+            {
+                return item;
+            }
+
+            randomNumber -= item.dropChance;
+        }
+
+        return null;
+    }
     public void Shoot()
     {
         // Debug.Log("Enemy Shoots!");
