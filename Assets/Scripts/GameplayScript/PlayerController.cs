@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = playerGFX.GetComponent<SpriteRenderer>();
-        animator = playerGFX.GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         currentHealth = maxHealth;
         impulseSource = GetComponent<CinemachineImpulseSource>();
         Stamina = maxStamina;

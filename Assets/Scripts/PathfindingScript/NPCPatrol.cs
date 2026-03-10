@@ -18,12 +18,15 @@ public class NPCPatrol : MonoBehaviour
 
     private EnemyAI enemyAI;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         enemyAI = GetComponent<EnemyAI>();
         target = GetRandomTarget();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void GetSpawnArea(Transform spawnArea)
@@ -61,6 +64,7 @@ public class NPCPatrol : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
 
         rb.linearVelocity = direction * speed;
+        animator.Play("Walk");
     }
 
     private Vector2 GetRandomTarget() //ganti buat ngecek boundaries collider

@@ -6,12 +6,17 @@ public class ObjectSpawner : MonoBehaviour
     public class SpawnAreaData
     {
         public GameObject spawnArea;
+
+        [Header("Enemy Sum Spawn Behavior")]
         public int meleeEnemies;
         public int rangeEnemies;
+
+        [Header("Enemy Choosen Type")]
+        public int choosenMeleeType = 0;
     }
 
     public SpawnAreaData[] spawnAreas;
-    public GameObject meleePrefab;
+    public GameObject[] vlobPrefab;
     public GameObject rangePrefab;
     private NPCPatrol npcPatrol;
 
@@ -24,7 +29,7 @@ public class ObjectSpawner : MonoBehaviour
             // Spawn Melee
             for (int i = 0; i < areaData.meleeEnemies; i++)
             {
-                GameObject melee = Instantiate(meleePrefab, box.bounds.center, Quaternion.identity);
+                GameObject melee = Instantiate(vlobPrefab[areaData.choosenMeleeType], box.bounds.center, Quaternion.identity);
                 NPCPatrol npcPatrol = melee.GetComponent<NPCPatrol>();
                 npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
             }

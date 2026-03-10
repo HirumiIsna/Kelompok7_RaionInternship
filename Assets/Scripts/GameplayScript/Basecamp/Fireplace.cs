@@ -12,9 +12,9 @@ public class Fireplace : MonoBehaviour, IInteractable
     public void Interact()
     {
         if(!CanInteract()) return;
-        if(ResourceManager.GetBahan1Amount() >= 1)
+        if(ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan1) >= 1)
         {
-            ResourceManager.DecBahan1Amount();
+            ResourceManager.DecBahanAmount(ResourceManager.ResourceType.Bahan1, 1);
         }
         else Debug.Log("You ran out of sticks!");
     }

@@ -24,9 +24,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        //resource initialize
+        ResourceManager.Init();
+    }
+
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
-        ResourceManager.SetBahanSave();
+        ResourceManager.Init();
     }
 
     public void OnStartClick()
@@ -88,6 +94,7 @@ public class GameManager : MonoBehaviour
         else if (isPlayerDead)
         {
             deadCount++;
+            ResourceManager.Init();
             SceneManager.LoadScene(lastSceneBuildIndex);
         }
         else if (isGoodEnding)

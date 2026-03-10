@@ -62,9 +62,7 @@ public class SleepSaving : MonoBehaviour, IInteractable
         StartCoroutine(FadeSwitchDay());
         doneSleep = true;
 
-        PlayerPrefs.SetInt("bahan1save", ResourceManager.GetBahan1Amount());
-        PlayerPrefs.SetInt("bahan2save", ResourceManager.GetBahan2Amount());
-        PlayerPrefs.SetInt("bahan3save", ResourceManager.GetBahan3Amount());
+        ResourceManager.Save();
         PlayerPrefs.SetInt("UpgradedDamage", playerController.damage);
         PlayerPrefs.SetFloat("UpgradedHealth", playerController.maxHealth);
 
