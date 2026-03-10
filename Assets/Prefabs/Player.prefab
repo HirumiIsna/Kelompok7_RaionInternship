@@ -757,9 +757,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 4
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 2454090170833989752}
   playerGFX: {fileID: 6032711589382770140}
   slashEffect: {fileID: 492279140723911335}
+  maxHealth: 100
   healthText: {fileID: 0}
   healthBar: {fileID: 0}
   iFrameDuration: 1
@@ -770,7 +771,9 @@ MonoBehaviour:
   Stamina: 0
   RunCost: 15
   ChargeRate: 10
-  flameSlash: {fileID: 0}
+  damage: 15
+  flameSlash: {fileID: 2075922579521993048, guid: 851d3b34f40b06a49a846a5e4491b9c4, type: 3}
+  isAbilityUnlock: 0
 --- !u!50 &9075235337508406460
 Rigidbody2D:
   serializedVersion: 5
