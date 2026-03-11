@@ -365,10 +365,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 88, y: 14}
+    - - {x: 93, y: 14}
       - {x: -16, y: 14}
       - {x: -16, y: -18}
-      - {x: 88, y: -18}
+      - {x: 93, y: -18}
   m_UseDelaunayMesh: 1
 --- !u!1 &71432009
 GameObject:
@@ -12659,8 +12659,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: 28, y: 14}
       - {x: -16, y: 14}
-      - {x: -16, y: -24}
-      - {x: 28, y: -24}
+      - {x: -16, y: -29}
+      - {x: 28, y: -29}
   m_UseDelaunayMesh: 1
 --- !u!1 &712988432
 GameObject:
@@ -14538,22 +14538,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
   spawnAreas:
   - spawnArea: {fileID: 208086873}
-    meleeEnemies: 1
+    melee1Enemies: 0
+    melee2Enemies: 0
     rangeEnemies: 1
+    choosenMeleePrefab: {fileID: 0}
+    choosenMelee2Prefab: {fileID: 0}
+    choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 1057964670}
-    meleeEnemies: 2
+    melee1Enemies: 0
+    melee2Enemies: 0
     rangeEnemies: 1
+    choosenMeleePrefab: {fileID: 0}
+    choosenMelee2Prefab: {fileID: 0}
+    choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 253737175}
-    meleeEnemies: 2
+    melee1Enemies: 0
+    melee2Enemies: 0
     rangeEnemies: 2
+    choosenMeleePrefab: {fileID: 0}
+    choosenMelee2Prefab: {fileID: 0}
+    choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 1188979676}
-    meleeEnemies: 3
+    melee1Enemies: 0
+    melee2Enemies: 0
     rangeEnemies: 4
+    choosenMeleePrefab: {fileID: 0}
+    choosenMelee2Prefab: {fileID: 0}
+    choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 1350403215}
-    meleeEnemies: 3
+    melee1Enemies: 0
+    melee2Enemies: 0
     rangeEnemies: 2
-  meleePrefab: {fileID: 7333287796265290939, guid: 870e18f7529ccc347914e6fd9bcc64a0, type: 3}
-  rangePrefab: {fileID: 8484540089151111499, guid: 3a37011c89c56014eb2d3aa31a10df1c, type: 3}
+    choosenMeleePrefab: {fileID: 0}
+    choosenMelee2Prefab: {fileID: 0}
+    choosenRangePrefab: {fileID: 0}
 --- !u!4 &1085958565
 Transform:
   m_ObjectHideFlags: 0
@@ -18133,8 +18151,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 28, y: 18}
-      - {x: -6, y: 18}
+    - - {x: 28, y: 23}
+      - {x: -6, y: 23}
       - {x: -6, y: -24}
       - {x: 28, y: -24}
   m_UseDelaunayMesh: 1

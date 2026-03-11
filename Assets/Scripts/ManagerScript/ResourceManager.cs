@@ -10,6 +10,7 @@ public static class ResourceManager
         Bahan1,
         Bahan2,
         Bahan3,
+        Bahan4,
     }
 
     private static Dictionary<ResourceType, int> resourceAmountDictionary;

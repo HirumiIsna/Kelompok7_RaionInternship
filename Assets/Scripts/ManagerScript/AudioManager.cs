@@ -43,16 +43,31 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch(scene.buildIndex)
+        {
+            case 0:
+                PlayMusic(background3);
+                break;
+            case 1:
+                PlayMusic(background3);
+                break;
+            default:
+                PlayMusic(background1);
+                break;
+        }
+    }
     void Start()
     {
-        PlayMusic();
+        PlayMusic(background3);
     }
 
-    public void PlayMusic()
+    public void PlayMusic(AudioClip clip)
     {
-        musicSource.volume = 0.5f;
-        musicSource.clip = background1;
+        if (musicSource.clip == clip) return;
+        musicSource.Stop();
+        musicSource.clip = clip;
         musicSource.Play();
     }
 

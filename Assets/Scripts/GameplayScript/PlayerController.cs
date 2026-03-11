@@ -44,8 +44,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ability")]
     public GameObject flameSlash;
+    public GameObject abilityCanvas;
+    public GameObject abilityAble;
+    public Image rechargeAbility;
     private bool flameBoost = false; //setting bentar
-    public bool isAbilityUnlock = false; //jangan lupa diganti klo mau nyalain
+    public bool isAbilityUnlock = true; //jangan lupa diganti klo mau nyalain
 
     //animasi
     private Animator animator;
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
         }
         else GetPlayerSave();
         UpdateHealthUI();
+        StartCoroutine(RechargeAbility());
     }
 
     // Update is called once per frame
@@ -95,8 +99,6 @@ public class PlayerController : MonoBehaviour
             }
         rb.linearVelocity = moveInput * currentMoveSpeed;
         }
-
-
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -116,7 +118,22 @@ public class PlayerController : MonoBehaviour
     {
         runPressed =  true;
         if(context.canceled) runPressed = false;
-        Debug.Log("Run Pressed: " + runPressed);
+        // Debug.Log("Run Pressed: " + runPressed);
+    }
+
+    public void FlameOn (InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            if(rechargeAbility.fillAmount >= 1)
+            {
+                StopCoroutine(RechargeAbility());
+                StartCoroutine(DrainAbility());
+
+                flameBoost = true;
+                abilityAble.SetActive(true);
+            }
+        }
     }
 
     private IEnumerator RechargeStamina()
@@ -133,6 +150,33 @@ public class PlayerController : MonoBehaviour
             StaminaBar.fillAmount = Stamina / maxStamina;
             yield return new WaitForSeconds(0.1f); // Interval antara setiap penambahan stamina
         } 
+    }
+
+    private IEnumerator RechargeAbility()
+    {
+        yield return new WaitForSeconds(1f);
+        while(rechargeAbility.fillAmount < 1)
+        {
+            rechargeAbility.fillAmount += 0.05f;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        rechargeAbility.fillAmount = 1;
+
+        abilityAble.SetActive(true);
+    }
+
+    private IEnumerator DrainAbility()
+    {
+        yield return new WaitForSeconds(1f);
+        while(rechargeAbility.fillAmount > 0)
+        {
+            rechargeAbility.fillAmount -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        flameBoost = false;
+        abilityAble.SetActive(false);
+        StartCoroutine(RechargeAbility());
     }
 
     public void GetPlayerSave()
@@ -158,6 +202,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
+        Debug.Log(flameBoost);
         if (!context.started) return;
 
         // Debug.Log("Mouse Position: " + GetMousePosition());
@@ -170,7 +215,7 @@ public class PlayerController : MonoBehaviour
             attackParent.TryAttack(damage);
             if(flameBoost)
             {
-                if(!isAbilityUnlock) return;
+                // if(!isAbilityUnlock) return;
                 FlameSlashs();
             }
         }
@@ -192,7 +237,6 @@ public class PlayerController : MonoBehaviour
 
     public void FlameSlashs()
     {
-        Debug.Log("Instantiated Flame");
         Quaternion slashPoint = attackPoint.rotation * Quaternion.Euler(0, 0, 90);
         GameObject fireSlash = Instantiate(flameSlash, attackPoint.position, slashPoint);
         fireSlash.GetComponent<FlameSlash>().SetFlameDamage(damage);
@@ -217,12 +261,6 @@ public class PlayerController : MonoBehaviour
 
             UpdateHealthUI();
 
-            if(currentHealth/maxHealth <= 0.7f)
-            {
-                Debug.Log("FlameBoost ON!");
-                flameBoost = true;
-            }
-
             if(currentHealth <= 0)
             {
                 currentHealth = 0;
@@ -233,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        Debug.Log("Current: " + currentHealth + " Max: " + maxHealth);
+        // Debug.Log("Current: " + currentHealth + " Max: " + maxHealth);
         
         if(healthText == null) return;
         healthText.text = "Health: " + currentHealth;

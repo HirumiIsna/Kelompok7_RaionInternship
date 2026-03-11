@@ -22,17 +22,20 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    private void OnEnable()
-    {
-        //resource initialize
         ResourceManager.Init();
     }
+
+    // private void OnEnable()
+    // {
+    //     //resource initialize
+    //     Debug.Log("OnEnable nyala");
+    //     ResourceManager.Init();
+    // }
 
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
-        ResourceManager.Init();
+        // ResourceManager.Init();
     }
 
     public void OnStartClick()
@@ -94,7 +97,6 @@ public class GameManager : MonoBehaviour
         else if (isPlayerDead)
         {
             deadCount++;
-            ResourceManager.Init();
             SceneManager.LoadScene(lastSceneBuildIndex);
         }
         else if (isGoodEnding)

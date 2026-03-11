@@ -472,9 +472,9 @@ MonoBehaviour:
   sfxSource: {fileID: 472714779}
   background1: {fileID: 8300000, guid: b18a4a3b01c0d534a9dfd2136350bfbe, type: 3}
   background2: {fileID: 8300000, guid: c96a25d5d9c6e0f429b14e3757d411e5, type: 3}
-  background3: {fileID: 0}
-  slash: {fileID: 8300000, guid: 5c4f605df32947c4ea08ddb8e353e2da, type: 3}
-  deflect: {fileID: 8300000, guid: e4189de8027db2d49831ec8dfeebfacf, type: 3}
+  background3: {fileID: 8300000, guid: c0bb3647ab8a099458e4d319ffbc09d7, type: 3}
+  slash: {fileID: 8300000, guid: d68708ec81980a247bcbf810e29b79be, type: 3}
+  deflect: {fileID: 8300000, guid: a2547193f5296eb4687c5b594f1295ad, type: 3}
   pickup: {fileID: 8300000, guid: afb6adc1de210ce4ebb807b5eb5fbb6b, type: 3}
   bushes: {fileID: 8300000, guid: 0bcbca64a48a8284397345c56e1afbd7, type: 3}
   slimeDeath: {fileID: 8300000, guid: ecb0acfe90af5684a8921e8f9e6fd335, type: 3}
@@ -10974,7 +10974,7 @@ MonoBehaviour:
   startMenu: {fileID: 1471430983}
   noticeScreen: {fileID: 2006996164}
   beforeMenu: {fileID: 940814310}
-  fadeDuration: 3
+  fadeDuration: 2
   canvasGroup: {fileID: 2006996167}
 --- !u!225 &2006996167
 CanvasGroup:
