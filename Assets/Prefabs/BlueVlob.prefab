@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   player: {fileID: 0}
-  speed: 200
+  speed: 300
   nextWaypointDistance: 0.5
   enemyController: {fileID: 0}
   isChasing: 0

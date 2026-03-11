@@ -7,7 +7,7 @@ public class AbilityUnlock : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            playerController.isAbilityUnlock = true;
+            playerController.UnlockAbility();
 
             Destroy(gameObject);
         }

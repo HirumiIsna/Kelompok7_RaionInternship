@@ -43,24 +43,25 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        switch(scene.buildIndex)
-        {
-            case 0:
-                PlayMusic(background3);
-                break;
-            case 1:
-                PlayMusic(background3);
-                break;
-            default:
-                PlayMusic(background1);
-                break;
-        }
-    }
+    // void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     switch(scene.buildIndex)
+    //     {
+    //         case 0:
+    //             PlayMusic(background3);
+    //             break;
+    //         case 1:
+    //             PlayMusic(background3);
+    //             break;
+    //         default:
+    //             PlayMusic(background1);
+    //             break;
+    //     }
+    // }
+
     void Start()
     {
-        PlayMusic(background3);
+        PlayMusic(background1);
     }
 
     public void PlayMusic(AudioClip clip)

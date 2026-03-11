@@ -106,10 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9871b350ce401478aa95a3b744952c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlameSlash
-  rb: {fileID: 1368924377434392647}
-  direction: {x: 0, y: 0}
-  lifeSpawn: 2
-  speed: 3
+  flameDamage: 0
 --- !u!50 &1368924377434392647
 Rigidbody2D:
   serializedVersion: 5
@@ -167,7 +164,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

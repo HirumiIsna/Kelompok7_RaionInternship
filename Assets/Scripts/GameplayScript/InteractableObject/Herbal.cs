@@ -22,6 +22,7 @@ public class Herbal : MonoBehaviour, IInteractable
 
     public void CollectHerb()
     {
+        AudioManager.instance.PlayPickup();
         isPickedUp = true;
         pickHerb.Invoke();
         Destroy(gameObject,.125f); 

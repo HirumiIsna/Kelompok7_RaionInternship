@@ -7,10 +7,10 @@ public class GameObjective : MonoBehaviour, IInteractable
     [SerializeField] private TMP_Text _objectiveText1;
     [SerializeField] private TMP_Text _objectiveText2;
     public int maxHerb;
-    private int currentHerb;
+    public int currentHerb;
 
     public int maxPotion;
-    private int currentPotion;
+    public int currentPotion;
 
     private bool isComplete = false;
     private bool bossDefeated = false;
@@ -33,8 +33,8 @@ public class GameObjective : MonoBehaviour, IInteractable
                 _objectiveText2.text = " - Investigate the New Area";
                 break;
             case 5:
-                _objectiveText1.text = " - Collect Herb: " + currentHerb + "/" + maxHerb;
-                _objectiveText2.text = " - Buy Potion: " + currentPotion + "/" + maxPotion;
+                _objectiveText1.text = " - Buy Potion: " + currentPotion + "/" + maxPotion;
+                _objectiveText2.text = " - Go to The Doctor";
                 break;
             case 6:
                 _objectiveText1.text = " - Find The Doctor";
@@ -76,9 +76,10 @@ public class GameObjective : MonoBehaviour, IInteractable
         ObjectiveFinish();
     }
 
-    public void ChangeObjective()
+    public void ChangeObjective(string inputObjectiveText1, string inputObjectiveText2)
     {
-        _objectiveText2.text = " - Buy Potion: " + currentPotion + "/" + maxPotion;
+        if(inputObjectiveText1 != "") _objectiveText1.text = inputObjectiveText1;
+        if(inputObjectiveText2 != "") _objectiveText2.text = inputObjectiveText2;
     }
 
     public void IncreasePotion()

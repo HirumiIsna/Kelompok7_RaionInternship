@@ -7,6 +7,14 @@ public class DoctorShop : MonoBehaviour, IInteractable
 
     public UnityEvent onBuyPotion;
 
+    public GameObject objectiveGameObject;
+    private GameObjective objective;
+
+    void Start()
+    {
+        objective = objectiveGameObject.GetComponent<GameObjective>();        
+    }
+
     public bool CanInteract()
     {
         return true;
@@ -19,10 +27,10 @@ public class DoctorShop : MonoBehaviour, IInteractable
 
     public void BuyPotion()
     {
-        // if(ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan4) >= 0)
-        // {
-            // ResourceManager.DecBahanAmount(ResourceManager.ResourceType.Bahan4, 2);
-            onBuyPotion.Invoke();
-        // }
+        if(ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan4) >= 2 && objective.currentPotion < objective.maxPotion)
+        {
+            ResourceManager.DecBahanAmount(ResourceManager.ResourceType.Bahan4, 2);
+            objective.IncreasePotion();
+        }
     }
 }

@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     public GameObject abilityAble;
     public Image rechargeAbility;
     private bool flameBoost = false; //setting bentar
-    public bool isAbilityUnlock = true; //jangan lupa diganti klo mau nyalain
+    public bool isAbilityUnlock = false; //jangan lupa diganti klo mau nyalain
 
     //animasi
     private Animator animator;
@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         Stamina = maxStamina;
         StaminaCanvas.SetActive(false);
+        abilityCanvas.SetActive(false);
         if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth")) //ganti ke logika kalo mencet new game baru reset
         {
             damage = 35;
@@ -202,20 +203,19 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        // Debug.Log(flameBoost);
         if (!context.started) return;
 
         // Debug.Log("Mouse Position: " + GetMousePosition());
         if (isAttacking) return;
         else
         {
-            // AudioManager.instance.PlaySlash();
+            AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
             attackParent.TryAttack(damage);
             if(flameBoost)
             {
-                // if(!isAbilityUnlock) return;
+                if(!isAbilityUnlock) return;
                 FlameSlashs();
             }
         }
@@ -228,17 +228,23 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
     }
 
-    private IEnumerator SlashEffect()
+    private IEnumerator SlashEffect() // ganti animasi klo dah jadi
     {
         slashEffect.SetActive(true);
         yield return new WaitForSeconds(0.2f); 
         slashEffect.SetActive(false);
     }
 
+    public void UnlockAbility()
+    {
+        isAbilityUnlock = true;
+        abilityCanvas.SetActive(true);
+    }
+
     public void FlameSlashs()
     {
         Quaternion slashPoint = attackPoint.rotation * Quaternion.Euler(0, 0, 90);
-        GameObject fireSlash = Instantiate(flameSlash, attackPoint.position, slashPoint);
+        GameObject fireSlash = Instantiate(flameSlash, attackPoint.position + attackPoint.up * 0.7f, slashPoint);
         fireSlash.GetComponent<FlameSlash>().SetFlameDamage(damage);
         Rigidbody2D rb = fireSlash.GetComponent<Rigidbody2D>();
         rb.AddForce(attackPoint.up * 9f, ForceMode2D.Impulse);   

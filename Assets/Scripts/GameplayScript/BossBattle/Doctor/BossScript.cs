@@ -11,6 +11,8 @@ public class BossScript : MonoBehaviour, IInteractable
     public GameObject dialogueObject;
     public GameObject bossGFX;
     private SpriteRenderer _spriteRenderer;
+    public Sprite normalSprite;
+    public Sprite battleSprite;
     [SerializeField] private Material flashMaterial;
     private Material originalMaterial;
 
@@ -34,6 +36,7 @@ public class BossScript : MonoBehaviour, IInteractable
     private bool hitPlayer;
     private bool bossStart = false;
     private bool canInteract = false;
+    private bool isBossDead = false;
 
     public GameObject potion;
 
@@ -42,8 +45,9 @@ public class BossScript : MonoBehaviour, IInteractable
         currentHealth = maxHealth;
         _spriteRenderer = bossGFX.GetComponent<SpriteRenderer>();
         originalMaterial = _spriteRenderer.material;
+        _spriteRenderer.sprite = normalSprite;
         animator = GetComponentInChildren<Animator>();
-        animator.Play("Idle");
+        animator.enabled = false;
     }
 
     public bool CanInteract()
@@ -72,6 +76,9 @@ public class BossScript : MonoBehaviour, IInteractable
         bossStart = true;
         bossHealthCanvas.SetActive(true);
         StartCoroutine(StateLoop());
+        _spriteRenderer.sprite = battleSprite;
+        animator.enabled = true;
+        animator.Play("Idle");
     }
 
     IEnumerator StateLoop()
@@ -106,6 +113,8 @@ public class BossScript : MonoBehaviour, IInteractable
         
         if(currentHealth <= 0)
         {
+            if(isBossDead) return;
+            isBossDead = true;
             currentHealth = 0;
             BossDead();
             StartCoroutine(HitStop(0.05f));   

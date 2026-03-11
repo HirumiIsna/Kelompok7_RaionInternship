@@ -32,6 +32,8 @@ public class AttackParent : MonoBehaviour
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
             BulletController bulletController = enemy.GetComponent<BulletController>();
             BossScript bossScript = enemy.GetComponent<BossScript>();
+            JesterScript jesterScript = enemy.GetComponent<JesterScript>();
+            BossBullet bossBullet = enemy.GetComponent<BossBullet>();
 
             if (enemyController != null && !enemy.isTrigger)
             {
@@ -39,15 +41,17 @@ public class AttackParent : MonoBehaviour
                 enemyController.Knockback(transform, knockbackForce); 
                 // enemyController.Particle(transform);
             }
-            else if (bulletController)
+            else if (bulletController || bossBullet)
             {
-                // AudioManager.instance.PlayDeflect();
-                bulletController.DeflectArrow();
+                AudioManager.instance.PlayDeflect();
+                if(bulletController) bulletController.DeflectArrow();
+                if(bossBullet) bossBullet.DeflectBullet();
                 StartCoroutine(DeflectFlash());
             }
-            else if (bossScript)
+            else if (bossScript || jesterScript)
             {
-                bossScript.TakeDamage(damage);
+                if(bossScript) bossScript.TakeDamage(damage);
+                if(jesterScript) jesterScript.TakeDamage(damage);
             }
         }
     }
