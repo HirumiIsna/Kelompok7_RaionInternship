@@ -15,7 +15,12 @@ public class UI_Resource : MonoBehaviour
         {
             UpdateResourceText();
         };
+    }
+
+    private void Start()
+    {
         UpdateResourceText();
+
     }
 
     private void UpdateResourceText()

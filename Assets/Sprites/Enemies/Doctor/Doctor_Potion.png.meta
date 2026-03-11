@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 1a1bad9eb4346b64ab1ce5b895097eb2
+guid: 3c65d02d3f85a9449ae32035f67586b3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7718039570895845247
-    second: Apayah_Walk_0
-  - first:
-      213: 8067418176720475241
-    second: Apayah_Walk_1
-  - first:
-      213: -4281935022201200122
-    second: Apayah_Walk_2
-  - first:
-      213: -6452464064899297575
-    second: Apayah_Walk_3
+      213: -7737357474787610900
+    second: Doctor_Potion_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Apayah_Walk_0
+      name: Doctor_Potion_0
       rect:
         serializedVersion: 2
-        x: 160
-        y: 93
-        width: 773
-        height: 753
+        x: 170
+        y: 138
+        width: 592
+        height: 691
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,74 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f77b7a9091cfb1b60800000000000000
-      internalID: 7718039570895845247
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_1
-      rect:
-        serializedVersion: 2
-        x: 1145
-        y: 76
-        width: 773
-        height: 770
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 96414f5b61a35ff60800000000000000
-      internalID: 8067418176720475241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_2
-      rect:
-        serializedVersion: 2
-        x: 2192
-        y: 48
-        width: 773
-        height: 798
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 602a462b8c28394c0800000000000000
-      internalID: -4281935022201200122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_3
-      rect:
-        serializedVersion: 2
-        x: 3463
-        y: 76
-        width: 773
-        height: 770
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9de44bd9e1e3476a0800000000000000
-      internalID: -6452464064899297575
+      spriteID: cee2217fe526f9490800000000000000
+      internalID: -7737357474787610900
       vertices: []
       indices: 
       edges: []
@@ -236,10 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Apayah_Walk_0: 7718039570895845247
-      Apayah_Walk_1: 8067418176720475241
-      Apayah_Walk_2: -4281935022201200122
-      Apayah_Walk_3: -6452464064899297575
+      Doctor_Potion_0: -7737357474787610900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 1a1bad9eb4346b64ab1ce5b895097eb2
+guid: 2965a0092cdeebe4bb65ffe527325445
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7718039570895845247
-    second: Apayah_Walk_0
-  - first:
-      213: 8067418176720475241
-    second: Apayah_Walk_1
-  - first:
-      213: -4281935022201200122
-    second: Apayah_Walk_2
-  - first:
-      213: -6452464064899297575
-    second: Apayah_Walk_3
+      213: 8555709430579543480
+    second: Doctor_Splash_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,89 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Apayah_Walk_0
+      name: Doctor_Splash_0
       rect:
         serializedVersion: 2
-        x: 160
-        y: 93
-        width: 773
-        height: 753
+        x: 0
+        y: 0
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f77b7a9091cfb1b60800000000000000
-      internalID: 7718039570895845247
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_1
-      rect:
-        serializedVersion: 2
-        x: 1145
-        y: 76
-        width: 773
-        height: 770
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 96414f5b61a35ff60800000000000000
-      internalID: 8067418176720475241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_2
-      rect:
-        serializedVersion: 2
-        x: 2192
-        y: 48
-        width: 773
-        height: 798
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 602a462b8c28394c0800000000000000
-      internalID: -4281935022201200122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Apayah_Walk_3
-      rect:
-        serializedVersion: 2
-        x: 3463
-        y: 76
-        width: 773
-        height: 770
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9de44bd9e1e3476a0800000000000000
-      internalID: -6452464064899297575
+      spriteID: 8bd3723a56cfbb670800000000000000
+      internalID: 8555709430579543480
       vertices: []
       indices: 
       edges: []
@@ -226,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 470155ba56daba149bcc64f0e93be510
     internalID: 0
     vertices: []
     indices: 
@@ -234,12 +159,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1000.0,"y":1000.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Apayah_Walk_0: 7718039570895845247
-      Apayah_Walk_1: 8067418176720475241
-      Apayah_Walk_2: -4281935022201200122
-      Apayah_Walk_3: -6452464064899297575
+      Doctor_Splash_0: 8555709430579543480
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

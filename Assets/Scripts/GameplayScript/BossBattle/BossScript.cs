@@ -28,6 +28,8 @@ public class BossScript : MonoBehaviour, IInteractable
 
     public GameObject bulletPrefab;
 
+    private Animator animator;
+
     private bool isDashing;
     private bool hitPlayer;
     private bool bossStart = false;
@@ -40,6 +42,8 @@ public class BossScript : MonoBehaviour, IInteractable
         currentHealth = maxHealth;
         _spriteRenderer = bossGFX.GetComponent<SpriteRenderer>();
         originalMaterial = _spriteRenderer.material;
+        animator = GetComponentInChildren<Animator>();
+        animator.Play("Idle");
     }
 
     public bool CanInteract()
@@ -98,6 +102,8 @@ public class BossScript : MonoBehaviour, IInteractable
         Debug.Log("Current Health: " + currentHealth);
         UpdateHealthUI();
 
+        StartCoroutine(FlashDamage());
+        
         if(currentHealth <= 0)
         {
             currentHealth = 0;
@@ -106,7 +112,6 @@ public class BossScript : MonoBehaviour, IInteractable
         }
         else
         {
-            StartCoroutine(FlashDamage());
             StartCoroutine(HitStop(0.01f));   
         }
     }
@@ -135,8 +140,9 @@ public class BossScript : MonoBehaviour, IInteractable
     {
         Debug.Log("Boss Defeated!");
         bossHealthCanvas.SetActive(false);
+        animator.Play("Dead");
         Instantiate(potion, transform.position, Quaternion.identity);
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
     }
 
     IEnumerator ChaseAttack()
@@ -149,13 +155,16 @@ public class BossScript : MonoBehaviour, IInteractable
 
         while (timer < dashDuration && !hitPlayer)
         {
+            Vector2 direction = (player.position - transform.position).normalized;
+            if(direction.x < 0 && transform.localScale.x > 0 || direction.x > 0 && transform.localScale.x < 0)
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
             transform.position = Vector2.MoveTowards(
                 transform.position,
                 player.position,
                 moveSpeed * Time.deltaTime
             );
-
             timer += Time.deltaTime;
+            animator.Play("Walk");
             yield return null;
         }
 
@@ -167,7 +176,7 @@ public class BossScript : MonoBehaviour, IInteractable
 
     IEnumerator ReturnToCenter()
     {
-        Debug.Log("Returning to Center");
+        animator.Play("Idle");
         while (Vector2.Distance(transform.position, centerPoint.position) > 0.1f)
         {
             transform.position = Vector2.MoveTowards(

@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 1a1bad9eb4346b64ab1ce5b895097eb2
+guid: b682d5e4432624e4096199ea8298c6bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7718039570895845247
-    second: Apayah_Walk_0
+      213: -581456828890165275
+    second: Apayah_Attack_0
   - first:
-      213: 8067418176720475241
-    second: Apayah_Walk_1
+      213: 1939601137005039749
+    second: Apayah_Attack_1
   - first:
-      213: -4281935022201200122
-    second: Apayah_Walk_2
+      213: 180840507257040666
+    second: Apayah_Attack_2
   - first:
-      213: -6452464064899297575
-    second: Apayah_Walk_3
+      213: 4768825965342827922
+    second: Apayah_Attack_3
+  - first:
+      213: 7335753118551170310
+    second: Apayah_Attack_4
+  - first:
+      213: -7999618223405025616
+    second: Apayah_Attack_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,7 +141,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Apayah_Walk_0
+      name: Apayah_Attack_0
       rect:
         serializedVersion: 2
         x: 160
@@ -150,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f77b7a9091cfb1b60800000000000000
-      internalID: 7718039570895845247
+      spriteID: 5efc6c548104ee7f0800000000000000
+      internalID: -581456828890165275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apayah_Walk_1
+      name: Apayah_Attack_1
       rect:
         serializedVersion: 2
         x: 1145
@@ -172,19 +178,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96414f5b61a35ff60800000000000000
-      internalID: 8067418176720475241
+      spriteID: 580112925f8daea10800000000000000
+      internalID: 1939601137005039749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apayah_Walk_2
+      name: Apayah_Attack_2
       rect:
         serializedVersion: 2
         x: 2192
         y: 48
-        width: 773
+        width: 925
         height: 798
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -194,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 602a462b8c28394c0800000000000000
-      internalID: -4281935022201200122
+      spriteID: a1fae04bb79728200800000000000000
+      internalID: 180840507257040666
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apayah_Walk_3
+      name: Apayah_Attack_3
       rect:
         serializedVersion: 2
-        x: 3463
-        y: 76
-        width: 773
-        height: 770
+        x: 3105
+        y: 337
+        width: 200
+        height: 371
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,8 +222,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9de44bd9e1e3476a0800000000000000
-      internalID: -6452464064899297575
+      spriteID: 2952bebf2f54e2240800000000000000
+      internalID: 4768825965342827922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Apayah_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 3418
+        y: 48
+        width: 925
+        height: 798
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60dd4374894ddc560800000000000000
+      internalID: 7335753118551170310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Apayah_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 4229
+        y: 124
+        width: 464
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b6b33f0c95abf090800000000000000
+      internalID: -7999618223405025616
       vertices: []
       indices: 
       edges: []
@@ -236,10 +286,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Apayah_Walk_0: 7718039570895845247
-      Apayah_Walk_1: 8067418176720475241
-      Apayah_Walk_2: -4281935022201200122
-      Apayah_Walk_3: -6452464064899297575
+      Apayah_Attack_0: -581456828890165275
+      Apayah_Attack_1: 1939601137005039749
+      Apayah_Attack_2: 180840507257040666
+      Apayah_Attack_3: 4768825965342827922
+      Apayah_Attack_4: 7335753118551170310
+      Apayah_Attack_5: -7999618223405025616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

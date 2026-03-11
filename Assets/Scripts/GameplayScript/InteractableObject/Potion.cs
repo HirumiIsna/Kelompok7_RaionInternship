@@ -15,6 +15,7 @@ public class Potion : MonoBehaviour, IInteractable
     public void Interact()
     {
         if(!CanInteract()) return;
+        Debug.Log("Interacted!");
         isPicked = true;
         objectiveFinished.Invoke();
         Destroy(gameObject, .125f);

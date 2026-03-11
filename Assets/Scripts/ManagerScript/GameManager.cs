@@ -22,20 +22,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         ResourceManager.Init();
     }
 
-    // private void OnEnable()
-    // {
-    //     //resource initialize
-    //     Debug.Log("OnEnable nyala");
-    //     ResourceManager.Init();
-    // }
-
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
-        // ResourceManager.Init();
     }
 
     public void OnStartClick()

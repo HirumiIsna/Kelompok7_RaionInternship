@@ -1059,9 +1059,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707173f2da8031449804775e14692694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameObjective
-  _objectiveText: {fileID: 4161956250340366740}
+  _objectiveText1: {fileID: 4161956250340366740}
+  _objectiveText2: {fileID: 1138492582}
   maxHerb: 5
-  currentHerb: 0
+  maxPotion: 0
   goodEnding: 0
 --- !u!212 &256834694
 SpriteRenderer:

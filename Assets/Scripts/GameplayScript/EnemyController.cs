@@ -83,19 +83,19 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
+        
         animator.Play("Hurt");
+
+        StartCoroutine(FlashDamage());
 
         if(currentHealth <= 0)
         {
             currentHealth = 0;
-            StartCoroutine(FlashDamage());
             StartCoroutine(Dead());
             StartCoroutine(HitStop(.01f));   
         }
         else
         {
-            StartCoroutine(FlashDamage());
             StartCoroutine(HitStop(.01f));   
         }
     }

@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while(rechargeAbility.fillAmount < 1)
         {
-            rechargeAbility.fillAmount += 0.05f;
+            rechargeAbility.fillAmount += 0.005f;
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while(rechargeAbility.fillAmount > 0)
         {
-            rechargeAbility.fillAmount -= 0.1f;
+            rechargeAbility.fillAmount -= 0.05f;
             yield return new WaitForSeconds(0.1f);
         }
         flameBoost = false;
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        Debug.Log(flameBoost);
+        // Debug.Log(flameBoost);
         if (!context.started) return;
 
         // Debug.Log("Mouse Position: " + GetMousePosition());
