@@ -70,6 +70,12 @@ public class GameObjective : MonoBehaviour, IInteractable
         ObjectiveFinish();
     }
 
+    public void SecretNoteCollected()
+    {
+        goodEnding = true;
+        ObjectiveFinish();
+    }
+
     public void ChangeObjective()
     {
         _objectiveText2.text = " - Buy Potion: " + currentPotion + "/" + maxPotion;
@@ -95,7 +101,14 @@ public class GameObjective : MonoBehaviour, IInteractable
             _objectiveText1.text = " - Return to The Cabin";
             _objectiveText2.text = "";
             isComplete = true;
-        }else if(bossDefeated)
+        }
+        else if(bossDefeated)
+        {
+            _objectiveText1.text = " - Return to The Cabin";
+            _objectiveText2.text = "";
+            isComplete = true;
+        }
+        else if(goodEnding)
         {
             _objectiveText1.text = " - Return to The Cabin";
             _objectiveText2.text = "";
