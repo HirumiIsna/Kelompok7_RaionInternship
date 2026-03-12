@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public void BasecampScene(int lastSceneIndex, bool respawn, bool goodEnding)
     {
         SceneManager.LoadScene("Basecamp");
+        ResourceManager.Init();
         SaveDay(lastSceneIndex);
         lastSceneBuildIndex = lastSceneIndex;
         isPlayerDead = respawn;

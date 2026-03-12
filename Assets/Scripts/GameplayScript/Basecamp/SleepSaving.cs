@@ -49,7 +49,8 @@ public class SleepSaving : MonoBehaviour, IInteractable
         ResourceManager.Save();
         PlayerPrefs.SetInt("UpgradedDamage", playerController.damage);
         PlayerPrefs.SetFloat("UpgradedHealth", playerController.maxHealth);
-        LastObjectiveCompleted();
+        // PlayerPrefs.SetBool("ObjectiveFinished", true);
+        HasSleep();
 
     }
 
@@ -70,6 +71,7 @@ public class SleepSaving : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(2f);
         objectives.UpdateText(objectiveText);
+        onObjectiveCompleted.Invoke();
 
         // Fade Out
         t = 2;
@@ -87,7 +89,7 @@ public class SleepSaving : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1f);
     }
 
-    public void LastObjectiveCompleted()
+    public void HasSleep()
     {
         doneSleep = false;
     }

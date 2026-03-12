@@ -4,6 +4,7 @@ public class Note : MonoBehaviour, IInteractable
 {
     public GameObject noteUI;
     private bool isOpened = false;
+    public GameObject dialogueObject;
 
     public void OpenNote()
     {
@@ -26,6 +27,7 @@ public class Note : MonoBehaviour, IInteractable
     public void Interact()
     {
         if(!CanInteract()) return;
+        dialogueObject.SetActive(true);
         OpenNote();
     }
 }

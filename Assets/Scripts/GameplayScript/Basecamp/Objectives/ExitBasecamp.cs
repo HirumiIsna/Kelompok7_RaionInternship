@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ExitBasecamp : MonoBehaviour, IInteractable
 {
-    public bool canExit = true;
+    public bool canExit = false;
     public string objectiveText;
     private BasecampObjectives objectives;
     
