@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class DoctorShop : MonoBehaviour, IInteractable
 {
     public GameObject shopPanel;
 
-    public UnityEvent onBuyPotion;
-
     public GameObject objectiveGameObject;
+
     private GameObjective objective;
 
     void Start()
