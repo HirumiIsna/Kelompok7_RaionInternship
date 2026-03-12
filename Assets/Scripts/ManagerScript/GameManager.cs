@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int lastSceneBuildIndex = 0;
-    private bool isPlayerDead = false;
+    public bool isPlayerDead = false;
     private GameObject _player;
     private bool isGoodEnding = false;
     private int deadCount = 1;
@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
         else
         {
             deadCount = 0;
+            isPlayerDead = false;
             if(lastSceneBuildIndex + 1 == 7)
             {
                 SceneManager.LoadScene("NormalEnding");

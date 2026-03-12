@@ -15,11 +15,22 @@ public class BasecampObjectives : MonoBehaviour
 
     void LoadObjectives()
     {
-        lastIndex = GameManager.instance.lastSceneBuildIndex;
+        if(GameManager.instance.isPlayerDead)
+        {
+            lastIndex = GameManager.instance.lastSceneBuildIndex - 1;
+        }
+        else
+        {
+            lastIndex = GameManager.instance.lastSceneBuildIndex;
+        }
         Debug.Log("Scene index sebelumnya: " + lastIndex);
         switch(lastIndex)
         {
             case 0:
+                objectiveDays[0].SetActive(true);    
+                break;
+            case 1:
+                UpdateText(" - Check your brother room");
                 objectiveDays[0].SetActive(true);    
                 break;
             case 2:

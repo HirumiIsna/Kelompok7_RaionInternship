@@ -43,39 +43,13 @@ public class SleepSaving : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(!CanInteract()) return;
-        
-        switch (GameManager.instance.lastSceneBuildIndex)
-        {
-            case 0: 
-                Debug.Log("Build index 0 di menu cik ngapain tidur");
-                break;
-            case 1:
-                Debug.Log("Build index 1 itu basecamp");
-                break;
-            case 2:
-                _dayText.text = "Day 2";
-                break;
-            case 3:
-                _dayText.text = "Day 3";
-                break;
-            case 4:
-                _dayText.text = "Day 4";
-                break;
-            case 5:
-                _dayText.text = "Day 5";
-                break;
-            case 6:
-                _dayText.text = "Day 6";
-                break;
-        }
-
         StartCoroutine(FadeSwitchDay());
         doneSleep = true;
 
         ResourceManager.Save();
         PlayerPrefs.SetInt("UpgradedDamage", playerController.damage);
         PlayerPrefs.SetFloat("UpgradedHealth", playerController.maxHealth);
+        LastObjectiveCompleted();
 
     }
 
@@ -95,6 +69,7 @@ public class SleepSaving : MonoBehaviour, IInteractable
         canvasGroup.alpha = 1;
 
         yield return new WaitForSeconds(2f);
+        objectives.UpdateText(objectiveText);
 
         // Fade Out
         t = 2;
@@ -115,6 +90,5 @@ public class SleepSaving : MonoBehaviour, IInteractable
     public void LastObjectiveCompleted()
     {
         doneSleep = false;
-        objectives.UpdateText(objectiveText);
     }
 }
