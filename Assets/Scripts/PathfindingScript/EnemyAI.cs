@@ -109,7 +109,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        if (enemyController.isKnockback == false && isChasing)
+        if (enemyController.isKnockback == false && isChasing && enemyController.isDead == false)
         {
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
             if(direction.x < 0 && transform.localScale.x > 0 || direction.x > 0 && transform.localScale.x < 0)

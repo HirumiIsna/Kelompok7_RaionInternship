@@ -10,6 +10,7 @@ public static class ResourceManager
         Bahan1,
         Bahan2,
         Bahan3,
+        Bahan4,
     }
 
     private static Dictionary<ResourceType, int> resourceAmountDictionary;
@@ -59,37 +60,4 @@ public static class ResourceManager
         if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
     }
 
-    // public static void AddBahan2Amount()
-    // {
-    //     resourceAmountDictionary[ResourceType.Bahan2]++;
-    //     if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
-    // }
-
-    // public static void DecBahan2Amount(int sum)
-    // {
-    //     resourceAmountDictionary[ResourceType.Bahan2]-=sum;
-    //     if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
-    // }
-
-    // public static int GetBahan2Amount()
-    // {
-    //     return resourceAmountDictionary[ResourceType.Bahan2];
-    // }
-
-    // public static void AddBahan3Amount()
-    // {
-    //     resourceAmountDictionary[ResourceType.Bahan3]++;
-    //     if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
-    // }
-
-    // public static void DecBahan3Amount()
-    // {
-    //     resourceAmountDictionary[ResourceType.Bahan3]--;
-    //     if (OnBahanAmountChange != null) OnBahanAmountChange(null, EventArgs.Empty); 
-    // }
-
-    // public static int GetBahan3Amount()
-    // {
-    //     return resourceAmountDictionary[ResourceType.Bahan3];
-    // }
 }

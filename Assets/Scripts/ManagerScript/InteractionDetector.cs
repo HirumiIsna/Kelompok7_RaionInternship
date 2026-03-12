@@ -35,7 +35,7 @@ public class InteractionDetector : MonoBehaviour
         if (other.CompareTag("Bushes"))
         {
             Debug.Log("Player entered rumput area");
-             // Play the sound effect here
+            AudioManager.instance.PlayBush();
         }
     }
 

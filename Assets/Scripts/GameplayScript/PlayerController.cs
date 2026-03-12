@@ -44,11 +44,16 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ability")]
     public GameObject flameSlash;
+    public GameObject abilityCanvas;
+    public GameObject abilityAble;
+    public Image rechargeAbility;
     private bool flameBoost = false; //setting bentar
     public bool isAbilityUnlock = false; //jangan lupa diganti klo mau nyalain
 
     //animasi
     private Animator animator;
+
+    public bool cutsceneEnding = false;
 
     void Awake()
     {
@@ -64,6 +69,8 @@ public class PlayerController : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         Stamina = maxStamina;
         StaminaCanvas.SetActive(false);
+        if(isAbilityUnlock) abilityCanvas.SetActive(true);
+        else abilityCanvas.SetActive(false);
         if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth")) //ganti ke logika kalo mencet new game baru reset
         {
             damage = 35;
@@ -71,6 +78,7 @@ public class PlayerController : MonoBehaviour
         }
         else GetPlayerSave();
         UpdateHealthUI();
+        StartCoroutine(RechargeAbility());
     }
 
     // Update is called once per frame
@@ -95,12 +103,12 @@ public class PlayerController : MonoBehaviour
             }
         rb.linearVelocity = moveInput * currentMoveSpeed;
         }
-
-
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        if(cutsceneEnding) return; //buat ngelock pas bad ending
+
         animator.SetBool("isWalking", true);
 
         if(context.canceled)
@@ -112,11 +120,31 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("InputY", moveInput.y);
     }
 
+    public void LockPlayer()
+    {
+        cutsceneEnding = true;
+        rb.linearVelocity = Vector2.zero;
+    }
+
     public void OnRun (InputAction.CallbackContext context)
     {
         runPressed =  true;
         if(context.canceled) runPressed = false;
-        Debug.Log("Run Pressed: " + runPressed);
+    }
+
+    public void FlameOn (InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            if(rechargeAbility.fillAmount >= 1)
+            {
+                StopCoroutine(RechargeAbility());
+                StartCoroutine(DrainAbility());
+
+                flameBoost = true;
+                abilityAble.SetActive(true);
+            }
+        }
     }
 
     private IEnumerator RechargeStamina()
@@ -133,6 +161,33 @@ public class PlayerController : MonoBehaviour
             StaminaBar.fillAmount = Stamina / maxStamina;
             yield return new WaitForSeconds(0.1f); // Interval antara setiap penambahan stamina
         } 
+    }
+
+    private IEnumerator RechargeAbility()
+    {
+        yield return new WaitForSeconds(1f);
+        while(rechargeAbility.fillAmount < 1)
+        {
+            rechargeAbility.fillAmount += 0.005f;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        rechargeAbility.fillAmount = 1;
+
+        abilityAble.SetActive(true);
+    }
+
+    private IEnumerator DrainAbility()
+    {
+        yield return new WaitForSeconds(1f);
+        while(rechargeAbility.fillAmount > 0)
+        {
+            rechargeAbility.fillAmount -= 0.05f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        flameBoost = false;
+        abilityAble.SetActive(false);
+        StartCoroutine(RechargeAbility());
     }
 
     public void GetPlayerSave()
@@ -164,7 +219,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking) return;
         else
         {
-            // AudioManager.instance.PlaySlash();
+            AudioManager.instance.PlaySlash();
             StartCoroutine(AttackDebounce());
             StartCoroutine(SlashEffect()); // Ganti ke animasi kalo udah ada
             attackParent.TryAttack(damage);
@@ -183,18 +238,23 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
     }
 
-    private IEnumerator SlashEffect()
+    private IEnumerator SlashEffect() // ganti animasi klo dah jadi
     {
         slashEffect.SetActive(true);
         yield return new WaitForSeconds(0.2f); 
         slashEffect.SetActive(false);
     }
 
+    public void UnlockAbility()
+    {
+        isAbilityUnlock = true;
+        abilityCanvas.SetActive(true);
+    }
+
     public void FlameSlashs()
     {
-        Debug.Log("Instantiated Flame");
         Quaternion slashPoint = attackPoint.rotation * Quaternion.Euler(0, 0, 90);
-        GameObject fireSlash = Instantiate(flameSlash, attackPoint.position, slashPoint);
+        GameObject fireSlash = Instantiate(flameSlash, attackPoint.position + attackPoint.up * 0.7f, slashPoint);
         fireSlash.GetComponent<FlameSlash>().SetFlameDamage(damage);
         Rigidbody2D rb = fireSlash.GetComponent<Rigidbody2D>();
         rb.AddForce(attackPoint.up * 9f, ForceMode2D.Impulse);   
@@ -217,12 +277,6 @@ public class PlayerController : MonoBehaviour
 
             UpdateHealthUI();
 
-            if(currentHealth/maxHealth <= 0.7f)
-            {
-                Debug.Log("FlameBoost ON!");
-                flameBoost = true;
-            }
-
             if(currentHealth <= 0)
             {
                 currentHealth = 0;
@@ -233,7 +287,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateHealthUI()
     {
-        Debug.Log("Current: " + currentHealth + " Max: " + maxHealth);
+        // Debug.Log("Current: " + currentHealth + " Max: " + maxHealth);
         
         if(healthText == null) return;
         healthText.text = "Health: " + currentHealth;

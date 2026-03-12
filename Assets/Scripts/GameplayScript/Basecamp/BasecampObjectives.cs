@@ -5,48 +5,62 @@ public class BasecampObjectives : MonoBehaviour
 {
     [SerializeField] private TMP_Text _objectiveText;
     private int lastIndex;
-
-    void OnEnable()
+    public GameObject[] objectiveDays;
+    
+    void Start()
     {
-        lastIndex = GameManager.instance.lastSceneBuildIndex;
-        Debug.Log("Scene index sebelumnya: " + lastIndex);
+        LoadObjectives();
+        Debug.Log("Start");
+    }
 
+    void LoadObjectives()
+    {
+        if(GameManager.instance.isPlayerDead)
+        {
+            lastIndex = GameManager.instance.lastSceneBuildIndex - 1;
+        }
+        else
+        {
+            lastIndex = GameManager.instance.lastSceneBuildIndex;
+        }
+        Debug.Log("Scene index sebelumnya: " + lastIndex);
         switch(lastIndex)
         {
             case 0:
-                _objectiveText.text = "Check on your brother";
-                if(ObjectiveChecker.instance.CheckObjective())
-                {
-                    _objectiveText.text = "Pick up the Dagger inside your room";
-                    if(ObjectiveChecker.instance.CheckObjective())
-                    {
-                        _objectiveText.text = "Investigate the picture";
-                        if(ObjectiveChecker.instance.CheckObjective())
-                        {
-                            _objectiveText.text = "Go outside";
-                        }
-                    }
-                }
-            
+                objectiveDays[0].SetActive(true);    
                 break;
             case 1:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Check your brother room");
+                objectiveDays[0].SetActive(true);    
                 break;
             case 2:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Mix herbs");
+                objectiveDays[1].SetActive(true);    
                 break;
             case 3:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Mix herbs");
+                objectiveDays[2].SetActive(true);    
                 break;
             case 4:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Mix herbs");
+                objectiveDays[3].SetActive(true);    
                 break;
             case 5:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Mix herbs");
+                objectiveDays[4].SetActive(true);    
                 break;
             case 6:
-                _objectiveText.text = "Langsung tidur aja blom ku tambahin objectivenya";
+                UpdateText(" - Mix herbs");
+                objectiveDays[5].SetActive(true);    
+                break;
+            case 7:
+                objectiveDays[6].SetActive(true);    
                 break;
         }
+    }
+
+    public void UpdateText(string text)
+    {
+        _objectiveText.text = text;
     }
 }

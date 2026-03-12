@@ -8,16 +8,17 @@ public class ObjectSpawner : MonoBehaviour
         public GameObject spawnArea;
 
         [Header("Enemy Sum Spawn Behavior")]
-        public int meleeEnemies;
+        public int melee1Enemies;
+        public int melee2Enemies;
         public int rangeEnemies;
 
-        [Header("Enemy Choosen Type")]
-        public int choosenMeleeType = 0;
+        [Header("Enemies Prefab")]
+        public GameObject choosenMeleePrefab;
+        public GameObject choosenMelee2Prefab;
+        public GameObject choosenRangePrefab;
     }
 
     public SpawnAreaData[] spawnAreas;
-    public GameObject[] vlobPrefab;
-    public GameObject rangePrefab;
     private NPCPatrol npcPatrol;
 
     void Start()
@@ -27,17 +28,27 @@ public class ObjectSpawner : MonoBehaviour
             BoxCollider2D box = areaData.spawnArea.GetComponent<BoxCollider2D>();
 
             // Spawn Melee
-            for (int i = 0; i < areaData.meleeEnemies; i++)
+            for (int i = 0; i < areaData.melee1Enemies; i++)
             {
-                GameObject melee = Instantiate(vlobPrefab[areaData.choosenMeleeType], box.bounds.center, Quaternion.identity);
+                if(areaData.choosenMeleePrefab == null) continue;
+                GameObject melee = Instantiate(areaData.choosenMeleePrefab, box.bounds.center, Quaternion.identity);
                 NPCPatrol npcPatrol = melee.GetComponent<NPCPatrol>();
+                npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
+            }
+
+            for (int i = 0; i < areaData.melee2Enemies; i++)
+            {
+                if(areaData.choosenMelee2Prefab == null) continue;
+                GameObject melee2 = Instantiate(areaData.choosenMelee2Prefab, box.bounds.center, Quaternion.identity);
+                NPCPatrol npcPatrol = melee2.GetComponent<NPCPatrol>();
                 npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
             }
 
             // Spawn Range
             for (int i = 0; i < areaData.rangeEnemies; i++)
             {
-                GameObject range = Instantiate(rangePrefab, box.bounds.center, Quaternion.identity);
+                if(areaData.choosenRangePrefab == null) continue;
+                GameObject range = Instantiate(areaData.choosenRangePrefab, box.bounds.center, Quaternion.identity);
                 NPCPatrol npcPatrol = range.GetComponent<NPCPatrol>();
                 npcPatrol.GetSpawnArea(areaData.spawnArea.transform);
             }

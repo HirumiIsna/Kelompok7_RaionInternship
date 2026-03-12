@@ -1,9 +1,24 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickupDagger : MonoBehaviour, IInteractable
 {
     public GameObject dialogueObject;
-    private bool isFinished = false;
+    public string objectiveText;
+    private bool isFinished = true;
+
+    public UnityEvent onObjectiveCompleted;
+
+    private BasecampObjectives objectives;
+    
+    void Start()
+    {
+        GameObject obj = GameObject.FindGameObjectWithTag("BasecampObjective");
+        if(obj != null)
+        {
+            objectives = obj.GetComponent<BasecampObjectives>();
+        }
+    }
 
     public bool CanInteract()
     {
@@ -21,5 +36,12 @@ public class PickupDagger : MonoBehaviour, IInteractable
         Destroy(gameObject,.125f); 
         if(!dialogueObject) return;
         dialogueObject.SetActive(true);
+        onObjectiveCompleted.Invoke();
+    }
+
+    public void LastObjectiveCompleted()
+    {
+        isFinished = false;
+        objectives.UpdateText(objectiveText);
     }
 }

@@ -7,7 +7,7 @@ public class AttackParent : MonoBehaviour
     public Transform castOrigin;
     public Vector2 mousePosition;
     public LayerMask enemyLayer;
-    public float knockbackForce; // knockback bug, kalo pathfindingnya udah bener baru kubenerin
+    public float knockbackForce; 
     public GameObject screenFlash;
 
     // Update is called once per frame
@@ -27,11 +27,16 @@ public class AttackParent : MonoBehaviour
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(castOrigin.position, attackRadius, enemyLayer);
         if(hitEnemies.Length == 0) return; // Kalo ga kena enemy, gak kenapa-napa
-        foreach (Collider2D enemy in hitEnemies) // Ubah menggunakan Unity Event System kalo udah di testing, ntar pas pulang kuliah
+        foreach (Collider2D enemy in hitEnemies)
         {
+
+            //sumpah cik gak efficient banget harus satu satu (pengen ku revisi tapi gak ada waktunya)
             EnemyController enemyController = enemy.GetComponent<EnemyController>();
             BulletController bulletController = enemy.GetComponent<BulletController>();
             BossScript bossScript = enemy.GetComponent<BossScript>();
+            JesterScript jesterScript = enemy.GetComponent<JesterScript>();
+            BossBullet bossBullet = enemy.GetComponent<BossBullet>();
+            CardScript cardScript = enemy.GetComponent<CardScript>();
 
             if (enemyController != null && !enemy.isTrigger)
             {
@@ -39,15 +44,18 @@ public class AttackParent : MonoBehaviour
                 enemyController.Knockback(transform, knockbackForce); 
                 // enemyController.Particle(transform);
             }
-            else if (bulletController)
+            else if (bulletController || bossBullet || cardScript)
             {
-                // AudioManager.instance.PlayDeflect();
-                bulletController.DeflectArrow();
+                AudioManager.instance.PlayDeflect();
+                if(bulletController) bulletController.DeflectArrow();
+                if(bossBullet) bossBullet.DeflectBullet();
+                if(cardScript) cardScript.DeflectBullet();
                 StartCoroutine(DeflectFlash());
             }
-            else if (bossScript)
+            else if (bossScript || jesterScript)
             {
-                bossScript.TakeDamage(damage);
+                if(bossScript) bossScript.TakeDamage(damage);
+                if(jesterScript) jesterScript.TakeDamage(damage);
             }
         }
     }

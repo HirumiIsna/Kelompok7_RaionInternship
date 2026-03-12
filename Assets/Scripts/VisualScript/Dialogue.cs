@@ -21,6 +21,7 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         StartDialogue();
         StartCoroutine(EnableSkip());
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
@@ -53,7 +54,7 @@ public class Dialogue : MonoBehaviour
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed);
         }
     }
 
@@ -69,12 +70,13 @@ public class Dialogue : MonoBehaviour
         {
             gameObject.SetActive(false);
             dialogueEnd.Invoke();
+            Time.timeScale = 1;
         }
     }
 
     IEnumerator EnableSkip()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSecondsRealtime(0.25f);
         canSkip = true;
     }
 }

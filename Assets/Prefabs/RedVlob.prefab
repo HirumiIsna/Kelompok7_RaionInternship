@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e632c00d2e3a64d98b6d742a2d34f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  maxHealth: 45
+  maxHealth: 35
   currentHealth: 0
   flashMaterial: {fileID: 2100000, guid: 35c7787dcf4fdbe4da271e65ec608273, type: 2}
   enemyGFX: {fileID: 4530382804274811611}
@@ -385,13 +385,14 @@ MonoBehaviour:
   bodyDamage: 10
   bulletPrefab: {fileID: 0}
   bulletPos: {fileID: 0}
+  isDead: 0
   lootTable:
   - itemPrefab: {fileID: 3458554690301475673, guid: 4516c1573e955724cbe0378f4459b47b, type: 3}
-    dropChance: 70
+    dropChance: 60
   - itemPrefab: {fileID: 2680987266454792317, guid: b425e88e0e96eb341a5159637b4a0b87, type: 3}
     dropChance: 40
   - itemPrefab: {fileID: 417148131777694487, guid: 5e3f756c2e191e1408f88e5dae3c6573, type: 3}
-    dropChance: 60
+    dropChance: 50
 --- !u!114 &3762999070768817099
 MonoBehaviour:
   m_ObjectHideFlags: 0
