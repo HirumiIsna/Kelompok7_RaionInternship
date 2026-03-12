@@ -3,7 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class ExitBasecamp : MonoBehaviour, IInteractable
 {
-    private bool canExit = false;
+    private bool canExit = true;
+    public string objectiveText;
+    private BasecampObjectives objectives;
+    
+    void Start()
+    {
+        canExit = true;
+        GameObject obj = GameObject.FindGameObjectWithTag("BasecampObjective");
+        if(obj != null)
+        {
+            objectives = obj.GetComponent<BasecampObjectives>();
+        }
+    }
 
     public bool CanInteract()
     {
@@ -14,5 +26,11 @@ public class ExitBasecamp : MonoBehaviour, IInteractable
     {
         if(!CanInteract()) return;
         GameManager.instance.NextDay();
+    }
+
+    public void LastObjectiveCompleted()
+    {
+        canExit = false;
+        objectives.UpdateText(objectiveText);
     }
 }

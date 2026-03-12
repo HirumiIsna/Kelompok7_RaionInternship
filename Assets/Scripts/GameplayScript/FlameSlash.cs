@@ -6,7 +6,7 @@ public class FlameSlash : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 2f);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -15,8 +15,15 @@ public class FlameSlash : MonoBehaviour
 
         if(other.gameObject.CompareTag("Boss"))
         {
-            BossScript boss = other.gameObject.GetComponent<BossScript>();
-            boss.TakeDamage(flameDamage); //ubah biar nyesuaiin scaling damagenya
+            if(other.TryGetComponent(out BossScript boss))
+            {
+                boss.TakeDamage(flameDamage);
+            }
+            else if(other.TryGetComponent(out JesterScript jester))
+            {
+                jester.TakeDamage(flameDamage);
+            }
+
         }else if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();

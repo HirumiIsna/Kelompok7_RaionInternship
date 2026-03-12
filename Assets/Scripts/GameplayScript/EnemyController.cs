@@ -26,6 +26,8 @@ public class EnemyController : MonoBehaviour
     //animation
     private Animator animator;
 
+    public bool isDead;
+
     //LootTable
     [Header("Loot)]")]
     public List<LootItem> lootTable = new List<LootItem>();
@@ -82,6 +84,7 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(isDead) return;
         currentHealth -= damage;
         
         animator.Play("Hurt");
@@ -91,19 +94,20 @@ public class EnemyController : MonoBehaviour
         if(currentHealth <= 0)
         {
             currentHealth = 0;
+            isDead = true;
             StartCoroutine(Dead());
-            StartCoroutine(HitStop(.01f));   
+            StartCoroutine(HitStop(.25f));   
         }
         else
         {
-            StartCoroutine(HitStop(.01f));   
+            StartCoroutine(HitStop(.1f));   
         }
     }
 
     private IEnumerator HitStop(float Duration)
     {
         Time.timeScale = 0.1f;
-        yield return new WaitForSeconds(Duration);
+        yield return new WaitForSecondsRealtime(Duration);
         Time.timeScale = 1f;
     }
 
@@ -119,13 +123,13 @@ public class EnemyController : MonoBehaviour
         animator.Play("Dead");
         LootItem loot = GetRandomLoot();
 
-    if (loot != null)
-    {
-        InstantiateLoot(loot.itemPrefab);
-    }
+        if (loot != null)
+        {
+            InstantiateLoot(loot.itemPrefab);
+        }
 
-    yield return new WaitForSeconds(0.5f);
-    Destroy(gameObject);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 
     LootItem GetRandomLoot()

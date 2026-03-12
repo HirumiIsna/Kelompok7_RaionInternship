@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class JesterScript : MonoBehaviour, IInteractable
 {
@@ -32,6 +33,8 @@ public class JesterScript : MonoBehaviour, IInteractable
 
     public GameObject cardPrefab;
     public GameObject summonPrefab;
+
+    public UnityEvent OnBossDefeated;
 
     void Start()
     {
@@ -100,19 +103,18 @@ public class JesterScript : MonoBehaviour, IInteractable
         UpdateHealthUI();
 
         StartCoroutine(FlashDamage());
-         // Jika boss sedang counter
+       
         if (isCountering)
         {
             Debug.Log("Counter Activated!");
 
-            // damage player
             if(player != null)
             {
                 player.GetComponent<PlayerController>()
-                .TakeDamage(contactDamage, transform, 5f);
+                .TakeDamage(contactDamage * 2, transform, 5f);
             }
 
-            return; // boss tidak menerima damage
+            return;
         }
         if(currentHealth <= 0)
         {
@@ -120,11 +122,11 @@ public class JesterScript : MonoBehaviour, IInteractable
             isBossDead = true;
             currentHealth = 0;
             BossDead();
-            StartCoroutine(HitStop(0.05f));   
+            StartCoroutine(HitStop(2f));   
         }
         else
         {
-            StartCoroutine(HitStop(0.01f));   
+            StartCoroutine(HitStop(0.1f));   
         }
     }
 
@@ -137,7 +139,7 @@ public class JesterScript : MonoBehaviour, IInteractable
     private IEnumerator HitStop(float Duration)
     {
         Time.timeScale = 0.1f;
-        yield return new WaitForSeconds(Duration);
+        yield return new WaitForSecondsRealtime(Duration);
         Time.timeScale = 1f;
     }
 
@@ -152,6 +154,7 @@ public class JesterScript : MonoBehaviour, IInteractable
     {
         Debug.Log("Boss Defeated!");
         bossHealthCanvas.SetActive(false);
+        OnBossDefeated.Invoke();
         Destroy(gameObject, 0.5f);
     }
 
@@ -181,7 +184,6 @@ public class JesterScript : MonoBehaviour, IInteractable
 
         isDashing = false;
 
-        // Selalu balik ke tengah
         yield return StartCoroutine(ReturnToCenter());
     }
 
@@ -236,13 +238,13 @@ public class JesterScript : MonoBehaviour, IInteractable
 
                 Vector2 dir = Quaternion.Euler(0,0,angle) * baseDirection;
 
-                GameObject card = Instantiate(cardPrefab, transform.position, Quaternion.identity);
+                GameObject card = Instantiate(cardPrefab, transform.position, Quaternion.Euler(0,0,angle));
 
                 Rigidbody2D rb = card.GetComponent<Rigidbody2D>();
                 rb.linearVelocity = dir * cardSpeed;
             }
 
-            yield return new WaitForSeconds(0.6f);
+            yield return new WaitForSeconds(2f);
         }
 
         yield return new WaitForSeconds(1f);

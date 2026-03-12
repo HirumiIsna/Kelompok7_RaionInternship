@@ -117,11 +117,11 @@ public class BossScript : MonoBehaviour, IInteractable
             isBossDead = true;
             currentHealth = 0;
             BossDead();
-            StartCoroutine(HitStop(0.05f));   
+            StartCoroutine(HitStop(2f));   
         }
         else
         {
-            StartCoroutine(HitStop(0.01f));   
+            StartCoroutine(HitStop(0.1f));   
         }
     }
 
@@ -134,7 +134,7 @@ public class BossScript : MonoBehaviour, IInteractable
     private IEnumerator HitStop(float Duration)
     {
         Time.timeScale = 0.1f;
-        yield return new WaitForSeconds(Duration);
+        yield return new WaitForSecondsRealtime(Duration);
         Time.timeScale = 1f;
     }
 

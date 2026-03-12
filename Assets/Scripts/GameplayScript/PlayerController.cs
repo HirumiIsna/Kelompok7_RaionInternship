@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     //animasi
     private Animator animator;
 
+    public bool cutsceneEnding = false;
+
     void Awake()
     {
         attackParent = GetComponentInChildren<AttackParent>();
@@ -67,7 +69,8 @@ public class PlayerController : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
         Stamina = maxStamina;
         StaminaCanvas.SetActive(false);
-        abilityCanvas.SetActive(false);
+        if(isAbilityUnlock) abilityCanvas.SetActive(true);
+        else abilityCanvas.SetActive(false);
         if (!PlayerPrefs.HasKey("UpgradedDamage") && !PlayerPrefs.HasKey("UpgradedHealth")) //ganti ke logika kalo mencet new game baru reset
         {
             damage = 35;
@@ -104,6 +107,8 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
+        if(cutsceneEnding) return; //buat ngelock pas bad ending
+
         animator.SetBool("isWalking", true);
 
         if(context.canceled)
@@ -115,11 +120,16 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("InputY", moveInput.y);
     }
 
+    public void LockPlayer()
+    {
+        cutsceneEnding = true;
+        rb.linearVelocity = Vector2.zero;
+    }
+
     public void OnRun (InputAction.CallbackContext context)
     {
         runPressed =  true;
         if(context.canceled) runPressed = false;
-        // Debug.Log("Run Pressed: " + runPressed);
     }
 
     public void FlameOn (InputAction.CallbackContext context)

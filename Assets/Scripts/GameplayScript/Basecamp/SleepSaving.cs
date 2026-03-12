@@ -1,15 +1,20 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.Events;
 
 public class SleepSaving : MonoBehaviour, IInteractable
 {
-    public bool doneSleep = false;
+    public bool doneSleep = true;
     public GameObject switchDayUI;
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] TMP_Text _dayText;
     public GameObject player;
     private PlayerController playerController;
+    public string objectiveText;
+    private BasecampObjectives objectives;
+
+    public UnityEvent onObjectiveCompleted;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,11 +23,17 @@ public class SleepSaving : MonoBehaviour, IInteractable
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         _dayText.text = "Day 1";
+
+        GameObject obj = GameObject.FindGameObjectWithTag("BasecampObjective");
+        if(obj != null)
+        {
+            objectives = obj.GetComponent<BasecampObjectives>();
+        }
+
         if(GameManager.instance.lastSceneBuildIndex == 0)
         {
             doneSleep = true;
         } 
-        else doneSleep = false;
     }
 
     public bool CanInteract()
@@ -99,5 +110,11 @@ public class SleepSaving : MonoBehaviour, IInteractable
         switchDayUI.SetActive(false);
 
         yield return new WaitForSeconds(1f);
+    }
+
+    public void LastObjectiveCompleted()
+    {
+        doneSleep = false;
+        objectives.UpdateText(objectiveText);
     }
 }

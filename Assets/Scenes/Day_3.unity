@@ -1527,7 +1527,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1905,7 +1905,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -14133,7 +14133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: AstarPathfindingProject::AstarPath
   version: 1
   data:
-    dataString: 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
+    dataString: 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
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -16697,7 +16697,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -16911,14 +16911,14 @@ MonoBehaviour:
     choosenMelee2Prefab: {fileID: 0}
     choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 1188979676}
-    melee1Enemies: 3
+    melee1Enemies: 1
     melee2Enemies: 0
     rangeEnemies: 0
     choosenMeleePrefab: {fileID: 7333287796265290939, guid: 206a72f6c0fe00b49bb4776b99b8e952, type: 3}
     choosenMelee2Prefab: {fileID: 0}
     choosenRangePrefab: {fileID: 0}
   - spawnArea: {fileID: 1350403215}
-    melee1Enemies: 3
+    melee1Enemies: 1
     melee2Enemies: 0
     rangeEnemies: 0
     choosenMeleePrefab: {fileID: 7333287796265290939, guid: 206a72f6c0fe00b49bb4776b99b8e952, type: 3}
@@ -18013,7 +18013,7 @@ MonoBehaviour:
   _objectiveText2: {fileID: 1034571721}
   maxHerb: 5
   currentHerb: 0
-  maxPotion: 3
+  maxPotion: 1
   currentPotion: 0
   goodEnding: 0
 --- !u!212 &1145233772
@@ -18066,7 +18066,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.43867922, g: 0.9619708, b: 1, a: 0.101960786}
+  m_Color: {r: 0.43867922, g: 0.9619708, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18350,7 +18350,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18936,7 +18936,7 @@ SpriteRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85949,6 +85949,10 @@ PrefabInstance:
     - target: {fileID: 6962216976033914412, guid: b698bab2cf8cf9d46a20b7adf19b9311, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471127835757034412, guid: b698bab2cf8cf9d46a20b7adf19b9311, type: 3}
+      propertyPath: damage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8471127835757034412, guid: b698bab2cf8cf9d46a20b7adf19b9311, type: 3}
       propertyPath: healthBar
