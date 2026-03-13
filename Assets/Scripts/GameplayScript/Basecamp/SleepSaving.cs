@@ -28,22 +28,28 @@ public class SleepSaving : MonoBehaviour, IInteractable
             case 0:
                 break;
             case 1:
-                _dayText.text = "Day 1";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 1";
+                else _dayText.text = "Day 1";
                 break;
             case 2:
-                _dayText.text = "Day 2";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 1";
+                else _dayText.text = "Day 2";
                 break;
             case 3:
-                _dayText.text = "Day 3";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 2";
+                else _dayText.text = "Day 3";
                 break;
             case 4:
-                _dayText.text = "Day 4";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 3";
+                else _dayText.text = "Day 4";
                 break;
             case 5:
-                _dayText.text = "Day 5";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 4";
+                else _dayText.text = "Day 5";
                 break;
             case 6:
-                _dayText.text = "Day 6";
+                if(GameManager.instance.isPlayerDead) _dayText.text = "Day 5";
+                else _dayText.text = "Day 6";
                 break;
             default:
                 _dayText.text = "Error";

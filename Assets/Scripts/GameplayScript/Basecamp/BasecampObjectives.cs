@@ -67,12 +67,12 @@ public class BasecampObjectives : MonoBehaviour
                     PlayerPrefs.SetInt("ObjectiveFinished", 0);
                     break;
                 case 5:
-                    UpdateText(" - Give Potion to Brother");
+                    UpdateText(" - Prepare the Potion");
                     objectiveDays[4].SetActive(true);    
                     PlayerPrefs.SetInt("ObjectiveFinished", 0);
                     break;
                 case 6:
-                    UpdateText(" - Give Potion to Brother");
+                    UpdateText(" - Prepare the Potion");
                     objectiveDays[5].SetActive(true);    
                     PlayerPrefs.SetInt("ObjectiveFinished", 0);
                     break;
