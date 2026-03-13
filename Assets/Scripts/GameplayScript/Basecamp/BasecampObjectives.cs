@@ -28,33 +28,41 @@ public class BasecampObjectives : MonoBehaviour
         {
             case 0:
                 objectiveDays[0].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 1:
                 UpdateText(" - Check your brother room");
-                objectiveDays[0].SetActive(true);    
+                objectiveDays[0].SetActive(true);
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 2:
                 UpdateText(" - Mix herbs");
                 objectiveDays[1].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 3:
                 UpdateText(" - Mix herbs");
                 objectiveDays[2].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 4:
                 UpdateText(" - Mix herbs");
                 objectiveDays[3].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 5:
                 UpdateText(" - Mix herbs");
                 objectiveDays[4].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 6:
                 UpdateText(" - Mix herbs");
                 objectiveDays[5].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
             case 7:
                 objectiveDays[6].SetActive(true);    
+                PlayerPrefs.SetInt("ObjectiveFinished", 0);
                 break;
         }
     }

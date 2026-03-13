@@ -61,6 +61,7 @@ public class GameObjective : MonoBehaviour, IInteractable
     public void Interact()
     {
         if(!CanInteract()) return;
+        ResourceManager.Save();
         EnterBasecamp(goodEnding);
     }
 

@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        PlayMusic(background1);
+        // PlayMusic(background1);
     }
 
     public void PlayMusic(AudioClip clip)

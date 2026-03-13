@@ -9,9 +9,12 @@ public class CheckBrother : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        dialogueObject.SetActive(true);
-        Destroy(gameObject,1f);
-        onObjectiveCompleted.Invoke();
+        if(other.CompareTag("Player"))
+        {
+            dialogueObject.SetActive(true);
+            Destroy(gameObject,1f);
+            onObjectiveCompleted.Invoke();      
+        }
     }
    
 }
