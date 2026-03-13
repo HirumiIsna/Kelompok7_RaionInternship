@@ -5,7 +5,6 @@ public class ScreenFader : MonoBehaviour
 {
     public GameObject startMenu;
     public GameObject noticeScreen;
-    public GameObject beforeMenu;
     public float fadeDuration;
 
     [SerializeField] CanvasGroup canvasGroup;
@@ -14,11 +13,6 @@ public class ScreenFader : MonoBehaviour
     {
         canvasGroup.alpha = 0;
         StartCoroutine(FadeScreen());
-    }
-
-    public void ShowNotice()
-    {
-        noticeScreen.SetActive(true);
     }
 
     IEnumerator FadeScreen()
@@ -52,7 +46,6 @@ public class ScreenFader : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         startMenu.SetActive(true);
-        beforeMenu.SetActive(false);
         noticeScreen.SetActive(false);
     }
 }
