@@ -12,7 +12,7 @@ public class CheckBrother : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             dialogueObject.SetActive(true);
-            Destroy(gameObject,.25f);
+            Destroy(gameObject,.125f);
             onObjectiveCompleted.Invoke();      
         }
     }
