@@ -33800,7 +33800,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 90}
+  m_SizeDelta: {x: 90, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630461341
 MonoBehaviour:
@@ -33822,7 +33822,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -306787472437928336, guid: 63db7d41b90376549bef1720b418a2e2, type: 3}
+  m_Sprite: {fileID: -2067898546876541913, guid: 790afc6b7d7fff543912ddc14fcad9e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34038,7 +34038,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.09638786, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.09638786, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -34874,7 +34874,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 80, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &848799087
 MonoBehaviour:
@@ -34896,7 +34896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6659447077290792336, guid: c982078c15b06664397774ea5a07b167, type: 3}
+  m_Sprite: {fileID: -8638448890813730969, guid: c2c35438b96403b4686010fa610b8b74, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37327,7 +37327,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7647298288565211277, guid: 1e1688cbc14846249997e2c2d8b48c2d, type: 3}
+  m_Sprite: {fileID: -9148697464351666247, guid: c66561c10affcb243996eac1b9e93e44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -37347,7 +37347,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.67499995, z: 0.9}
+  m_LocalScale: {x: 0.4, y: 0.3, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1134925113}
@@ -37935,7 +37935,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.09638786, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.09638786, a: 0.15686275}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -51084,7 +51084,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 100}
+  m_SizeDelta: {x: 60, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372597608
 MonoBehaviour:
@@ -51106,7 +51106,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5781445747943558089, guid: 639ae2cc2ba8b1d4bb6945af0caef85d, type: 3}
+  m_Sprite: {fileID: 7647240639167449756, guid: cf4d9541d032fba43acea91761dcc2b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -60760,6 +60760,7 @@ MonoBehaviour:
   deflect: {fileID: 8300000, guid: a2547193f5296eb4687c5b594f1295ad, type: 3}
   pickup: {fileID: 8300000, guid: afb6adc1de210ce4ebb807b5eb5fbb6b, type: 3}
   bushes: {fileID: 8300000, guid: 0bcbca64a48a8284397345c56e1afbd7, type: 3}
+  flame: {fileID: 0}
   slimeDeath: {fileID: 8300000, guid: ecb0acfe90af5684a8921e8f9e6fd335, type: 3}
   police: {fileID: 8300000, guid: 714f996864b84ba418afc1b2b733cc04, type: 3}
   rain: {fileID: 8300000, guid: f12e4df60b5ce6a488360b2cae7466e4, type: 3}
@@ -68468,7 +68469,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7065411309860052907, guid: 2e423ff449a2d3544a4e6301992dc3f5, type: 3}
+  m_Sprite: {fileID: -3338749442709606003, guid: 40676207f72bf394eb280f3a26129272, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

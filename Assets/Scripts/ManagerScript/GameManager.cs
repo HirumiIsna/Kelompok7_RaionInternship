@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
+        AudioManager.instance.PlayBGM2();
     }
 
     public void OnStartClick()

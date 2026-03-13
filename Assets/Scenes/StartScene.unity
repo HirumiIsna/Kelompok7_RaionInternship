@@ -552,6 +552,7 @@ MonoBehaviour:
   deflect: {fileID: 8300000, guid: a2547193f5296eb4687c5b594f1295ad, type: 3}
   pickup: {fileID: 8300000, guid: afb6adc1de210ce4ebb807b5eb5fbb6b, type: 3}
   bushes: {fileID: 8300000, guid: 0bcbca64a48a8284397345c56e1afbd7, type: 3}
+  flame: {fileID: 8300000, guid: 6835faf4a94e6614f8cd9df4ead1ed90, type: 3}
   slimeDeath: {fileID: 8300000, guid: ecb0acfe90af5684a8921e8f9e6fd335, type: 3}
   police: {fileID: 8300000, guid: 714f996864b84ba418afc1b2b733cc04, type: 3}
   rain: {fileID: 8300000, guid: f12e4df60b5ce6a488360b2cae7466e4, type: 3}

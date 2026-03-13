@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip deflect;
     public AudioClip pickup;
     public AudioClip bushes;
+    public AudioClip flame;
 
     [Header("Monster")]
     public AudioClip slimeDeath;
@@ -61,7 +62,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        // PlayMusic(background1);
+        PlayMusic(background2);
     }
 
     public void PlayMusic(AudioClip clip)
@@ -69,6 +70,13 @@ public class AudioManager : MonoBehaviour
         if (musicSource.clip == clip) return;
         musicSource.Stop();
         musicSource.clip = clip;
+        musicSource.Play();
+    }
+
+    public void PlayBGM2 ()
+    {
+        musicSource.Stop();
+        musicSource.clip = background3;
         musicSource.Play();
     }
 
@@ -110,6 +118,11 @@ public class AudioManager : MonoBehaviour
     public void PlayRain()
     {
         sfxSource.PlayOneShot(rain);
+    
+    }
+    public void PlayFlame()
+    {
+        sfxSource.PlayOneShot(flame);
     }
 
     public void PlaySFX()

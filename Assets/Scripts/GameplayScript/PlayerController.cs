@@ -227,6 +227,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(!isAbilityUnlock) return;
                 FlameSlashs();
+                AudioManager.instance.PlayFlame();
             }
         }
     }
