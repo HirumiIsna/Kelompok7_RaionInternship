@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int lastSceneBuildIndex = 1;
-    private bool isPlayerDead = false;
+    public int lastSceneBuildIndex = 0;
+    public bool isPlayerDead = false;
     private GameObject _player;
+    private bool isGoodEnding = false;
+    private int deadCount = 1;
 
     private void Awake()
     {
@@ -20,26 +22,27 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        ResourceManager.Init();
     }
 
     private void Start() {
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
-        ResourceManager.SetBahanSave();
+        AudioManager.instance.PlayBGM2();
     }
 
     public void OnStartClick()
     {
-        AudioManager.instance.PlaySFX();
+        // AudioManager.instance.PlaySFX();
         SceneManager.LoadScene("Basecamp");
         PlayerPrefs.DeleteAll();
         ResourceManager.NewGameReset();
-        lastSceneBuildIndex = 1;
+        lastSceneBuildIndex = 0;
     }
 
     public void Continue()
     {
-        AudioManager.instance.PlaySFX();
-        if(lastSceneBuildIndex == 1) return;
+        // AudioManager.instance.PlaySFX();
+        if(lastSceneBuildIndex == 0) return;
         SceneManager.LoadScene("Basecamp");
         lastSceneBuildIndex = PlayerPrefs.GetInt("LastSceneIndex");
     }
@@ -52,12 +55,16 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void BasecampScene(int lastSceneIndex, bool respawn)
+    public void BasecampScene(int lastSceneIndex, bool respawn, bool goodEnding)
     {
+        SceneManager.LoadScene("Basecamp");
+        ResourceManager.Init();
         SaveDay(lastSceneIndex);
         lastSceneBuildIndex = lastSceneIndex;
         isPlayerDead = respawn;
-        SceneManager.LoadScene("Basecamp");
+        Debug.Log(goodEnding);
+        Debug.Log(deadCount);
+        isGoodEnding = goodEnding;
     }
 
     public void SaveDay(int lastSceneIndex)
@@ -65,22 +72,37 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("LastSceneIndex", lastSceneIndex);
     }
 
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
     public void NextDay()
     {
-        if(lastSceneBuildIndex == 0)
+        if(deadCount>=3)
+        {
+            SceneManager.LoadScene("BadEnding");
+        }
+        else if(lastSceneBuildIndex == 0)
         {
             SceneManager.LoadScene("Day_1");
         }
         else if (isPlayerDead)
         {
+            deadCount++;
             SceneManager.LoadScene(lastSceneBuildIndex);
+        }
+        else if (isGoodEnding)
+        {
+            SceneManager.LoadScene("GoodEnding");
         }
         else
         {
-            if(lastSceneBuildIndex + 1 == 6)
+            deadCount = 0;
+            isPlayerDead = false;
+            if(lastSceneBuildIndex + 1 == 7)
             {
-                AudioManager.instance.PlaySewage();
-                AudioManager.instance.PlayPolice();
+                SceneManager.LoadScene("NormalEnding");
             }
             SceneManager.LoadScene(lastSceneBuildIndex + 1);
         }
@@ -88,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        AudioManager.instance.StopSFX();
+        // AudioManager.instance.StopSFX();
         SceneManager.LoadScene("StartScene");
     }
 }

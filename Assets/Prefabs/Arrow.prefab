@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2650420091508415157}
   - component: {fileID: 7349192203675627907}
   - component: {fileID: 2165663685103358341}
-  - component: {fileID: 8024258640117755011}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
@@ -183,18 +182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletScript
   bulletSpeed: 5
   bulletDamage: 5
---- !u!114 &8024258640117755011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868840185954588162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af11699d6205d224a8d36df602824aca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arrow
 --- !u!1 &8094007946072845486
 GameObject:
   m_ObjectHideFlags: 0

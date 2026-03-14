@@ -3,18 +3,37 @@ using UnityEngine;
 public class Upgrade : MonoBehaviour, IInteractable
 {
     public GameObject upgradeCanvas;
+    private bool isUpgraded = false;
+
+    public bool CanInteract()
+    {
+        return !isUpgraded;
+    }
 
     public void Interact()
     {
+        if(!CanInteract()) return;
         upgradeCanvas.SetActive(true);
     }
 
-    public static bool TrySpendResource()
+    public static bool TrySpendResourceDamage(int sum)
     {
-        if(ResourceManager.GetBahan1Amount() >= 1 && ResourceManager.GetBahan2Amount() >= 1)
+        if(ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan2) >= 2)
         {
-            ResourceManager.DecBahan1Amount();
-            ResourceManager.DecBahan2Amount();
+            ResourceManager.DecBahanAmount(ResourceManager.ResourceType.Bahan2, sum);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool TrySpendResourceHealth()
+    {
+        if(ResourceManager.GetBahanAmount(ResourceManager.ResourceType.Bahan3) >= 1)
+        {
+            ResourceManager.DecBahanAmount(ResourceManager.ResourceType.Bahan3, 1);
             return true;
         }
         else

@@ -1,0 +1,572 @@
+fileFormatVersion: 2
+guid: d1c7492ec0b01874796c8bc66a85c594
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4849695510059271957
+    second: Doctor_Dead_0
+  - first:
+      213: 6713738472306119763
+    second: Doctor_Dead_1
+  - first:
+      213: 4614764931413397533
+    second: Doctor_Dead_2
+  - first:
+      213: -6814281198496007749
+    second: Doctor_Dead_3
+  - first:
+      213: -7862390646589574140
+    second: Doctor_Dead_4
+  - first:
+      213: -5698576633403175700
+    second: Doctor_Dead_5
+  - first:
+      213: 2208862019715963096
+    second: Doctor_Dead_6
+  - first:
+      213: -2163544366565338208
+    second: Doctor_Dead_7
+  - first:
+      213: -8868123972985887449
+    second: Doctor_Dead_8
+  - first:
+      213: 4025024051100498907
+    second: Doctor_Dead_9
+  - first:
+      213: -1322700564640364639
+    second: Doctor_Dead_10
+  - first:
+      213: -1680760829584128620
+    second: Doctor_Dead_11
+  - first:
+      213: 1809353609069557003
+    second: Doctor_Dead_12
+  - first:
+      213: -2931221014461835897
+    second: Doctor_Dead_13
+  - first:
+      213: -8451734891332468232
+    second: Doctor_Dead_14
+  - first:
+      213: -8551343979704611361
+    second: Doctor_Dead_15
+  - first:
+      213: -4175796134507881061
+    second: Doctor_Dead_16
+  - first:
+      213: -874301855595184431
+    second: Doctor_Dead_17
+  - first:
+      213: 120710137285986310
+    second: Doctor_Dead_18
+  - first:
+      213: 2107741555288902031
+    second: Doctor_Dead_19
+  - first:
+      213: 7348083502641603268
+    second: Doctor_Dead_20
+  - first:
+      213: 5209739895444802706
+    second: Doctor_Dead_21
+  - first:
+      213: 4880184348810782947
+    second: Doctor_Dead_22
+  - first:
+      213: 1523104398294724057
+    second: Doctor_Dead_23
+  - first:
+      213: -2717850907093204646
+    second: Doctor_Dead_24
+  - first:
+      213: 3761668854134145390
+    second: Doctor_Dead_25
+  - first:
+      213: -2782972570377813266
+    second: Doctor_Dead_26
+  - first:
+      213: 5930561892509893023
+    second: Doctor_Dead_27
+  - first:
+      213: -8825752125431611354
+    second: Doctor_Dead_28
+  - first:
+      213: -4399171007669988836
+    second: Doctor_Dead_29
+  - first:
+      213: 1165228664967378262
+    second: Doctor_Dead_30
+  - first:
+      213: 8801076682503346341
+    second: Doctor_Dead_31
+  - first:
+      213: 8927865373163491374
+    second: Doctor_Dead_32
+  - first:
+      213: -4503736113356766196
+    second: Doctor_Dead_33
+  - first:
+      213: 9025013282113016081
+    second: Doctor_Dead_34
+  - first:
+      213: 8617486834788929542
+    second: Doctor_Dead_35
+  - first:
+      213: 18375667575822829
+    second: Doctor_Dead_36
+  - first:
+      213: 5631712580645727587
+    second: Doctor_Dead_37
+  - first:
+      213: 874773082611274395
+    second: Doctor_Dead_38
+  - first:
+      213: 4204972807232220851
+    second: Doctor_Dead_39
+  - first:
+      213: 4362716216910001681
+    second: Doctor_Dead_40
+  - first:
+      213: 7827941314210445808
+    second: Doctor_Dead_41
+  - first:
+      213: -7174356981334437944
+    second: Doctor_Dead_42
+  - first:
+      213: 1531773088574632428
+    second: Doctor_Dead_43
+  - first:
+      213: 3020312452875233150
+    second: Doctor_Dead_44
+  - first:
+      213: 499211123647114130
+    second: Doctor_Dead_45
+  - first:
+      213: 1450956166016047234
+    second: Doctor_Dead_46
+  - first:
+      213: 4448796255724278120
+    second: Doctor_Dead_47
+  - first:
+      213: 6033256602240332339
+    second: Doctor_Dead_48
+  - first:
+      213: 3972913472846094311
+    second: Doctor_Dead_49
+  - first:
+      213: 3007497301588263985
+    second: Doctor_Dead_50
+  - first:
+      213: 677813499361034022
+    second: Doctor_Dead_51
+  - first:
+      213: -2023992458937300273
+    second: Doctor_Dead_52
+  - first:
+      213: -2059550331892711614
+    second: Doctor_Dead_53
+  - first:
+      213: 3550128198490497675
+    second: Doctor_Dead_54
+  - first:
+      213: 769463383867362474
+    second: Doctor_Dead_55
+  - first:
+      213: -2870850252822993053
+    second: Doctor_Dead_56
+  - first:
+      213: 4700374504915975981
+    second: Doctor_Dead_57
+  - first:
+      213: -970479600529814310
+    second: Doctor_Dead_58
+  - first:
+      213: 8869598453636866171
+    second: Doctor_Dead_59
+  - first:
+      213: -8797769660871301515
+    second: Doctor_Dead_60
+  - first:
+      213: -3549777554655353475
+    second: Doctor_Dead_61
+  - first:
+      213: -2963064925458321587
+    second: Doctor_Dead_62
+  - first:
+      213: -2928507014722973417
+    second: Doctor_Dead_63
+  - first:
+      213: 2244440496567572135
+    second: Doctor_Dead_64
+  - first:
+      213: -2873794202926579336
+    second: Doctor_Dead_65
+  - first:
+      213: -5101206320928163548
+    second: Doctor_Dead_66
+  - first:
+      213: -5535624689541897633
+    second: Doctor_Dead_67
+  - first:
+      213: -1895777367057498455
+    second: Doctor_Dead_68
+  - first:
+      213: 2622225586995022516
+    second: Doctor_Dead_69
+  - first:
+      213: 2559823922345824062
+    second: Doctor_Dead_70
+  - first:
+      213: 676792498316643492
+    second: Doctor_Dead_71
+  - first:
+      213: -1250695214818998469
+    second: Doctor_Dead_72
+  - first:
+      213: 9106535667267822928
+    second: Doctor_Dead_73
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Doctor_Dead_0
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 33
+        width: 345
+        height: 401
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be83c1ed0ab62bcb0800000000000000
+      internalID: -4849695510059271957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Dead_1
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 32
+        width: 363
+        height: 401
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3541ea4d19dfb2d50800000000000000
+      internalID: 6713738472306119763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Dead_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 41
+        width: 360
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 404bca81d5d23e290800000000000000
+      internalID: -7862390646589574140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Dead_5
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 36
+        width: 345
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddc44e9790a23af4182e0895a327ebc2
+      internalID: -5698576633403175700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Dead_6
+      rect:
+        serializedVersion: 2
+        x: 783
+        y: 38
+        width: 345
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1216847e8a38ba4793fcd977b315192
+      internalID: 2208862019715963096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Doctor_Dead_58
+      rect:
+        serializedVersion: 2
+        x: 1901
+        y: 27
+        width: 395
+        height: 396
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdaaa4cc0d94d4e4782b549bb8a9c46e
+      internalID: -970479600529814310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fa57272d2b3b36849b3de05e8f534160
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":464.0,"y":464.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Doctor_Dead_0: -4849695510059271957
+      Doctor_Dead_1: 6713738472306119763
+      Doctor_Dead_10: 647304511
+      Doctor_Dead_11: 1288090152
+      Doctor_Dead_12: -72930491
+      Doctor_Dead_13: 1278516404
+      Doctor_Dead_14: -1319460834
+      Doctor_Dead_15: -1048814869
+      Doctor_Dead_16: 1324953636
+      Doctor_Dead_17: -1172537903
+      Doctor_Dead_18: -35685110
+      Doctor_Dead_19: 1026118127
+      Doctor_Dead_2: 4614764931413397533
+      Doctor_Dead_20: -2075153930
+      Doctor_Dead_21: -63009212
+      Doctor_Dead_22: -236956710
+      Doctor_Dead_23: -1055069627
+      Doctor_Dead_24: 1795053009
+      Doctor_Dead_25: -599090177
+      Doctor_Dead_26: -978724306
+      Doctor_Dead_27: -470206293
+      Doctor_Dead_28: -474758631
+      Doctor_Dead_29: -420659646
+      Doctor_Dead_3: -6814281198496007749
+      Doctor_Dead_30: -378859451
+      Doctor_Dead_31: -78953945
+      Doctor_Dead_32: -808605508
+      Doctor_Dead_33: -1475935691
+      Doctor_Dead_34: 937603525
+      Doctor_Dead_35: 1004989256
+      Doctor_Dead_36: -1319449492
+      Doctor_Dead_37: -2048938802
+      Doctor_Dead_38: 419102450
+      Doctor_Dead_39: -1525628307
+      Doctor_Dead_4: -7862390646589574140
+      Doctor_Dead_40: -1523635387
+      Doctor_Dead_41: 1910338873
+      Doctor_Dead_42: -102163698
+      Doctor_Dead_43: 1212127285
+      Doctor_Dead_44: -1169392195
+      Doctor_Dead_45: -2013849795
+      Doctor_Dead_46: -182354344
+      Doctor_Dead_47: 470476765
+      Doctor_Dead_48: 1413179682
+      Doctor_Dead_49: 1644582805
+      Doctor_Dead_5: -5698576633403175700
+      Doctor_Dead_50: 833034060
+      Doctor_Dead_51: 897272943
+      Doctor_Dead_52: -509104064
+      Doctor_Dead_53: -1736348788
+      Doctor_Dead_54: -1347802923
+      Doctor_Dead_55: -931973265
+      Doctor_Dead_56: 1059578014
+      Doctor_Dead_57: -1221596150
+      Doctor_Dead_58: -970479600529814310
+      Doctor_Dead_59: -96820319
+      Doctor_Dead_6: 2208862019715963096
+      Doctor_Dead_60: 950911995
+      Doctor_Dead_61: -182737999
+      Doctor_Dead_62: 371818163
+      Doctor_Dead_63: -720740244
+      Doctor_Dead_64: -708672204
+      Doctor_Dead_65: -156600844
+      Doctor_Dead_66: -1274885052
+      Doctor_Dead_67: 540708580
+      Doctor_Dead_68: 387723081
+      Doctor_Dead_69: -1330482186
+      Doctor_Dead_7: -2028560091
+      Doctor_Dead_70: 1380863239
+      Doctor_Dead_71: 2097895937
+      Doctor_Dead_72: 418849921
+      Doctor_Dead_8: -1821464713
+      Doctor_Dead_9: 889378105
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

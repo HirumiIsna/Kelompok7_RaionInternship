@@ -13,18 +13,29 @@ public class InteractionDetector : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && interactableRange != null)
         {
-            interactableRange?.Interact();
+            interactableRange.Interact();
+
+            if (!interactableRange.CanInteract())
+            {
+                interactIcon.SetActive(false);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent(out IInteractable interactable))
+        if(other.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
         {
             interactableRange = interactable;
             interactIcon.SetActive(true);
+        }
+
+        if (other.CompareTag("Bushes"))
+        {
+            Debug.Log("Player entered rumput area");
+            AudioManager.instance.PlayBush();
         }
     }
 

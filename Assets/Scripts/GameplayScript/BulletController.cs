@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BulletScript : MonoBehaviour
+public class BulletController : MonoBehaviour
 {
     private GameObject _player;
     public float bulletSpeed;
@@ -36,7 +36,7 @@ public class BulletScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player got hit by a Bullet");
+            // Debug.Log("Player got hit by a Bullet");
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(bulletDamage, emptyTransform, 0f); // Damage yang diterima player
             Destroy(gameObject);
         }
@@ -49,9 +49,9 @@ public class BulletScript : MonoBehaviour
 
     private IEnumerator Deflect()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0f;
         Destroy(gameObject.GetComponent<BoxCollider2D>());
-        yield return new WaitForSeconds(.125f);
+        yield return new WaitForSecondsRealtime(.25f);
         Time.timeScale = 1f;
         Destroy(gameObject);
     }

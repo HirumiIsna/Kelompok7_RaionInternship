@@ -1,25 +1,32 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;  
+using Unity.Cinemachine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int currentHealth;
+    public float maxHealth = 100;
+    public float currentHealth;
     private SpriteRenderer _spriteRenderer;
-    private Color _baseColor;
+    [SerializeField] private Material flashMaterial;
+    private Material originalMaterial;
     private GameObject _player;
     public GameObject enemyGFX;
     private Rigidbody2D _rb;
     public bool isKnockback = false;
+    public GameObject particle;
 
-    // Melee Enemy
     public int bodyDamage = 10;
 
     // Range Enemy
     private float _shootTimer;
     public GameObject bulletPrefab;
     public Transform bulletPos;
+
+    //animation
+    private Animator animator;
+
+    public bool isDead;
 
     //LootTable
     [Header("Loot)]")]
@@ -30,11 +37,13 @@ public class EnemyController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
 
         _spriteRenderer = enemyGFX.GetComponent<SpriteRenderer>();
-        _baseColor = _spriteRenderer.color;
+        originalMaterial = _spriteRenderer.material;
 
         currentHealth = maxHealth;
 
         _rb = GetComponent<Rigidbody2D>();
+
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -54,79 +63,111 @@ public class EnemyController : MonoBehaviour
                 Shoot();
             }
         }
-
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+    private void OnCollisionStay2D(Collision2D other) {
+      if (other.gameObject.name == "Player")
         {
             DealDamage();
-        }
+        }  
     }
 
     public void DealDamage()
     {
         PlayerController playerController = _player.GetComponent<PlayerController>();
+
         if (playerController != null)
-        {
+        {   
             playerController.TakeDamage(bodyDamage, transform, 7f);
         }
     }
 
     public void TakeDamage(int damage)
     {
+        if(isDead) return;
         currentHealth -= damage;
+        
+        animator.Play("Hurt");
+
+        StartCoroutine(FlashDamage());
+
         if(currentHealth <= 0)
         {
             currentHealth = 0;
+            isDead = true;
             StartCoroutine(Dead());
-            StartCoroutine(HitStop(.01f));   
+            StartCoroutine(HitStop(.25f));   
         }
         else
         {
-            StartCoroutine(FlashDamage());
-            StartCoroutine(HitStop(.009f));   
+            StartCoroutine(HitStop(.1f));   
         }
-
-        StartCoroutine(FlashDamage());
-        StartCoroutine(HitStop(0.01f));
-
     }
 
     private IEnumerator HitStop(float Duration)
     {
         Time.timeScale = 0.1f;
-        yield return new WaitForSeconds(Duration);
+        yield return new WaitForSecondsRealtime(Duration);
         Time.timeScale = 1f;
     }
 
     public IEnumerator FlashDamage()
     {
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.material = flashMaterial;
         yield return new WaitForSeconds(0.1f); 
-        _spriteRenderer.color = _baseColor; 
+        _spriteRenderer.material = originalMaterial; 
     }
 
     public IEnumerator Dead()
     {
-        foreach (LootItem lootItem in lootTable)
+        animator.Play("Dead");
+        LootItem loot = GetRandomLoot();
+
+        if (loot != null)
         {
-           if (Random.Range(0f, 100f) <= lootItem.dropChance) 
-            {
-                Debug.Log("Dropping loot: " + lootItem.itemPrefab.name);    
-                InstantiateLoot(lootItem.itemPrefab);
-                break; 
-            }
+            InstantiateLoot(loot.itemPrefab);
         }
-        yield return new WaitForSeconds(0.2f);
+
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 
+    LootItem GetRandomLoot()
+    {
+        float totalWeight = 0f;
+
+        foreach (LootItem item in lootTable)
+        {
+            totalWeight += item.dropChance;
+        }
+
+        float randomNumber = Random.Range(0f, totalWeight);
+
+        foreach (LootItem item in lootTable)
+        {
+            if (randomNumber < item.dropChance)
+            {
+                return item;
+            }
+
+            randomNumber -= item.dropChance;
+        }
+
+        return null;
+    }
     public void Shoot()
     {
         // Debug.Log("Enemy Shoots!");
         GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
+    }
+
+    public void Particle(Transform playerTransform)
+    {
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, direction);
+
+        Instantiate(particle, transform.position, rotation);
     }
 
     public void Knockback(Transform playerTransform, float knockbackForce) 

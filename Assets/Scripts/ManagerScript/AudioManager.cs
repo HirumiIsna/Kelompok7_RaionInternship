@@ -11,10 +11,23 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource sfxSource;
 
     [Header("Audio Clip")]
-    public AudioClip background;
+    [Header("Music")]
+    public AudioClip background1;
+    public AudioClip background2;
+    public AudioClip background3;
+
+    [Header("Sound Effect")]
+    [Header("Character")]
     public AudioClip slash;
     public AudioClip deflect;
-    public AudioClip sewage;
+    public AudioClip pickup;
+    public AudioClip bushes;
+    public AudioClip flame;
+
+    [Header("Monster")]
+    public AudioClip slimeDeath;
+
+    [Header("Misc")]
     public AudioClip police;
     public AudioClip rain;
 
@@ -31,17 +44,45 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     switch(scene.buildIndex)
+    //     {
+    //         case 0:
+    //             PlayMusic(background3);
+    //             break;
+    //         case 1:
+    //             PlayMusic(background3);
+    //             break;
+    //         default:
+    //             PlayMusic(background1);
+    //             break;
+    //     }
+    // }
 
     void Start()
     {
-        PlayMusic();
+        PlayMusic(background2);
     }
 
-    public void PlayMusic()
+    public void PlayMusic(AudioClip clip)
     {
-        musicSource.volume = 0.5f;
-        musicSource.clip = background;
+        if (musicSource.clip == clip) return;
+        musicSource.Stop();
+        musicSource.clip = clip;
         musicSource.Play();
+    }
+
+    public void PlayBGM2 ()
+    {
+        musicSource.Stop();
+        musicSource.clip = background3;
+        musicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 
     public void PlaySlash()
@@ -54,10 +95,19 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(deflect);
     }
 
-    public void PlaySewage()
+    public void PlayPickup()
     {
-        musicSource.Pause();
-        sfxSource.PlayOneShot(sewage);
+        sfxSource.PlayOneShot(pickup);
+    }
+
+    public void PlayBush()
+    {
+        sfxSource.PlayOneShot(bushes);
+    }
+
+    public void PlaySlimeDeath()
+    {
+        sfxSource.PlayOneShot(slimeDeath);
     }
 
     public void PlayPolice()
@@ -68,6 +118,11 @@ public class AudioManager : MonoBehaviour
     public void PlayRain()
     {
         sfxSource.PlayOneShot(rain);
+    
+    }
+    public void PlayFlame()
+    {
+        sfxSource.PlayOneShot(flame);
     }
 
     public void PlaySFX()
